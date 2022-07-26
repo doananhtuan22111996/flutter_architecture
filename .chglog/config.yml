@@ -1,0 +1,18 @@
+style: gitlab
+template: CHANGELOG.tpl.md
+info:
+  title: CHANGELOG
+  repository_url: https://gitlab.geekup.io/gu_mobile/flutter/skeleton
+options:
+  commits:
+    # filters:
+    #   Type: []
+  commit_groups:
+    # title_maps: []
+  header:
+    pattern: "^(.*)$"
+    pattern_maps:
+      - Subject
+  notes:
+    keywords:
+      - BREAKING CHANGE
