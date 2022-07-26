@@ -1,26 +1,29 @@
-style: gitlab
+style: github
 template: CHANGELOG.tpl.md
 info:
   title: CHANGELOG
   repository_url: https://gitlab.geekup.io/gu_mobile/flutter/skeleton
 options:
   commits:
-    # filters:
-    #   Type:
-    #     - feat
-    #     - fix
-    #     - perf
-    #     - refactor
+    filters:
+      Type:
+        - feat
+        - fix
+        - perf
+        - refactor
+        - chore
   commit_groups:
-    # title_maps:
-    #   feat: Features
-    #   fix: Bug Fixes
-    #   perf: Performance Improvements
-    #   refactor: Code Refactoring
+    title_maps:
+      feat: Features
+      fix: Bug Fixes
+      perf: Performance Improvements
+      refactor: Code Refactoring
+      chore: Chores
   header:
-    pattern: "^(\\w*)\\:\\s(.*)$"
+    pattern: "^(\\w*)(?:\\(([\\w\\$\\.\\-\\*\\s]*)\\))?\\:\\s(.*)$"
     pattern_maps:
       - Type
+      - Scope
       - Subject
   notes:
     keywords:
