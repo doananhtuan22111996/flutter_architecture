@@ -61,9 +61,8 @@ class NetworkService extends GetxService {
       switch (response.statusCode) {
         case 200:
           return AppResult.success(AppResponse.fromJson(response.body is String
-                  ? jsonDecode(response.body)
-                  : response.body)
-              .data);
+              ? jsonDecode(response.body)
+              : response.body));
 
         case 400:
           return AppResult.failure(
