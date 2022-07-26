@@ -6,12 +6,22 @@ info:
 options:
   commits:
     # filters:
-    #   Type: []
+    #   Type:
+    #     - feat
+    #     - fix
+    #     - perf
+    #     - refactor
   commit_groups:
-    # title_maps: []
+    # title_maps:
+    #   feat: Features
+    #   fix: Bug Fixes
+    #   perf: Performance Improvements
+    #   refactor: Code Refactoring
   header:
-    pattern: "^(.*)$"
+    pattern: "^(\\w*)(?:\\(([\\w\\$\\.\\-\\*\\s]*)\\))?\\:\\s(.*)$"
     pattern_maps:
+      - Type
+      - Scope
       - Subject
   notes:
     keywords:
