@@ -1,3 +1,52 @@
-# skeleton
+# flutter_skeleton
 
-Skeleton Flutter created by Product Mobile
+Flutter Skeleton
+
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [GetX](https://pub.dev/packages/get)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
+
+### Android
+    - Target Version: SDK 32
+    - Min Version: SDK 23
+### IOS
+    - Target Version: ...
+    - Min Version: ...
+### Env Config
+    - Dev
+    - Prod
+### Clean Architecture Pattern
+    - App Module
+    - Data Module
+    - Domain Module 
+### Dependency Injection
+    - GetX
+#### UI Layer
+    - GetX
+    - Localization: vi, en
+    - Theme: Light, Dark
+    - AppMainWidget
+    - AppTextWidget
+    - AppButtonWidget
+    - AppSnackBarWidget
+    - AppLoadingWidget
+    - AppDialogWidget
+#### Data Layer
+    - Network: GetConnect
+    - Database: Hive
+    - Local storage: GetStorage, EncriptSharePreference
+
+#### What do next!
+    - Refresh Token
+    - Customize Component
+
