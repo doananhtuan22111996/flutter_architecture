@@ -3,6 +3,19 @@
 ## [Unreleased]
 
 
+<a name="v1.0.2"></a>
+
+## [v1.0.2] - 2022-07-27
+
+### Bug Fixes
+
+- writing content changelog v1.0.1
+  
+  ### Features
+
+- customize AppListWidget: fetchList, onRefresh, onLoadmore...
+  
+  
 <a name="v1.0.1"></a>
 
 ## [v1.0.1] - 2022-07-27
@@ -26,5 +39,6 @@
 - init changelog v1.0.0
   
   
-[Unreleased]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.1...HEAD
+[Unreleased]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.2...HEAD
+[v1.0.2]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.1...v1.0.2
 [v1.0.1]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.0...v1.0.1
