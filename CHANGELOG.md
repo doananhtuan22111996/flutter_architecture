@@ -13,7 +13,8 @@
   
   ### Features
 
-- init changelog v1.0.0
+- release changelog v1.0.1
+  - init changelog v1.0.0
   
   
 <a name="v1.0.0"></a>
