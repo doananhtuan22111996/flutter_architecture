@@ -2,7 +2,16 @@
 
 ## [Unreleased]
 
-### Features
+
+<a name="v1.0.1"></a>
+
+## [v1.0.1] - 2022-07-27
+
+### Code Refactoring
+
+- template changelog v1.0.1
+  
+  ### Features
 
 - init changelog v1.0.0
   
@@ -16,4 +25,5 @@
 - init changelog v1.0.0
   
   
-[Unreleased]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.0...HEAD
+[Unreleased]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.1...HEAD
+[v1.0.1]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.0...v1.0.1
