@@ -7,13 +7,13 @@ class UserRepositoryImpl extends UserRepository {
   UserRepositoryImpl(this._networkService, this._db);
 
   @override
-  Future<AppResult<List<TravelUserVo>>> users() async {
+  Future<AppResult<List<TravelUserVo>>> users(int page) async {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
         url: ApiProvider.travelUser,
         method: HTTPMethod.get,
         query: {
-          'page': 1.toString(),
+          'page': page.toString(),
           'current_per_page': 25.toString(),
         },
       ),
@@ -25,7 +25,7 @@ class UserRepositoryImpl extends UserRepository {
 
   @override
   Future<List<TravelUserVo>> dbUsers() async {
-    return await _db.getBoxAll();
+    return _db.getBoxAll();
   }
 
   @override

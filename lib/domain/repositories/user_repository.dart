@@ -7,7 +7,7 @@ import '../../data/network/network_service.dart';
 part '../../data/repositories/use_repository_impl.dart';
 
 abstract class UserRepository {
-  Future<AppResult<List<TravelUserVo>>> users();
+  Future<AppResult<List<TravelUserVo>>> users(int page);
 
   Future<List<TravelUserVo>> dbUsers();
 

@@ -5,29 +5,15 @@ class UserView extends GetView<UserController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBarWidget(text: Strings.users.tr),
-      body: Column(
-        children: [
-          const SizedBox(height: 16),
-          Obx(
-            () => (controller.users.value?.length ?? 0) > 0
-                ? Expanded(
-                    child: ListView.builder(
-                      itemCount: controller.users.value?.length ?? 0,
-                      itemBuilder: (ctx, index) {
-                        return Column(children: [
-                          Text(controller.users.value?[index].userName ?? ''),
-                          Text(controller.users.value?[index].id.toString() ??
-                              (-1).toString()),
-                        ]);
-                      },
-                    ),
-                  )
-                : Text(controller.appException.value?.message ??
-                    Strings.noError.tr),
-          ),
-        ],
+    return AppMainWidget(
+      textAppBar: Strings.users.tr,
+      body: AppListWidget<TravelUserModel>(
+        childWidget: (ctx, model) => Column(
+          children: [
+            Text(model?.userName ?? ''),
+            Text(model?.id.toString() ?? (-1).toString()),
+          ],
+        ),
       ),
     );
   }

@@ -6,8 +6,8 @@ class UserUseCaseImpl extends UserUseCase {
   UserUseCaseImpl(this._repo);
 
   @override
-  Future<AppResult<List<TravelUserModel>>> users() async {
-    final response = await _repo.users();
+  Future<AppResult<List<TravelUserModel>>> users(int page) async {
+    final response = await _repo.users(page);
     if (response is AppResultSuccess<List<TravelUserVo>>) {
       await _repo.saveUsers(response.netData ?? []);
       return AppResult.success(

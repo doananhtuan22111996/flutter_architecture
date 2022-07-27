@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../pages/controllers/home_controller.dart';
 import '../pages/controllers/user_controller.dart';
+import '../pages/controllers/db_user_controller.dart';
 
 part 'app_routes.dart';
 
@@ -11,7 +12,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: Routes.home,
-      page: () => HomeView(),
+      page: () => const HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -22,7 +23,7 @@ class AppPages {
     GetPage(
       name: Routes.dbUsers,
       page: () => const DbUserView(),
-      binding: UserBinding(),
+      binding: DbUserBinding(),
     ),
   ];
 }

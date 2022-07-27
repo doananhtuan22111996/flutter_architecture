@@ -6,6 +6,7 @@ import '../repositories/user_repository.dart';
 part '../../data/usecases/user_use_case_impl.dart';
 
 abstract class UserUseCase {
-  Future<AppResult<List<TravelUserModel>>> users();
+  Future<AppResult<List<TravelUserModel>>> users(int page);
+
   Future<List<TravelUserModel>> dbUsers();
 }

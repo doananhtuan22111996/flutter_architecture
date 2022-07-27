@@ -11,6 +11,7 @@ class AppSharedPref extends GetxService {
 
   AndroidOptions _getAndroidOptions() => const AndroidOptions(
         encryptedSharedPreferences: true,
+        resetOnError: true
       );
 
   Future<String> getValue(String key, String defaultValue) async {
