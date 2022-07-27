@@ -12,6 +12,7 @@ A few resources to get you started if this is your first Flutter project:
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 - [GetX](https://pub.dev/packages/get)
 - [Firebase](https://console.firebase.google.com/u/0/project/flutterskeleton-c0812/overview)
+- [Setup Flavor](hhttps://medium.com/@animeshjain/build-flavors-in-flutter-android-and-ios-with-different-firebase-projects-per-flavor-27c5c5dac10b)
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
