@@ -2,7 +2,16 @@
 
 ## [Unreleased]
 
+### Code Refactoring
 
+- update content README - setup Flavor
+  - update content README
+  
+  ### Features
+
+- changelog release v1.0.2
+  
+  
 <a name="v1.0.2"></a>
 
 ## [v1.0.2] - 2022-07-27
