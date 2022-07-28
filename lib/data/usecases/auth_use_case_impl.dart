@@ -10,7 +10,9 @@ class AuthUseCaseImpl implements AuthUseCase {
     final AppResult<TokenVo> resultVo = await _repo.login(
         username: params?.userName ?? '', password: params?.password ?? '');
     if (resultVo is AppResultSuccess<TokenVo>) {
-      await _repo.saveToken(token: resultVo.netData?.token ?? '');
+      await _repo.saveToken(
+          token: resultVo.netData?.token ?? '',
+          refreshToken: resultVo.netData?.refreshToken ?? '');
       return AppResult.success(resultVo.netData?.vo2Model());
     }
     return AppResult.failure((resultVo as AppResultFailure).exception);

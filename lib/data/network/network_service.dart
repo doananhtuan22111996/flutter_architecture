@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 import '../../services/environment_service.dart';
+import '../entities/base_vo.dart';
 import '../local/app_pref_key.dart';
 import '../local/app_shared_pref.dart';
 import 'nets/app_exception.dart';
@@ -69,7 +70,13 @@ class NetworkService extends GetxService {
               BadRequestException(response.body.toString()));
         case 401:
         case 403:
-          return AppResult.failure(UnAuthorException(response.body.toString()));
+          final result = await _requestRefreshToken();
+          if (result is AppResultSuccess) {
+            return request(clientRequest: clientRequest);
+          } else {
+            return AppResult.failure(FetchDataException(
+                (result as AppResultFailure).exception?.details));
+          }
         case 404:
           return AppResult.failure(
               BadRequestException(response.body.toString()));
@@ -89,6 +96,44 @@ class NetworkService extends GetxService {
       _logger.e('Some things wrong: ${e.toString()}');
       return AppResult.failure(
           FetchDataException('Some things wrong: ${e.toString()}'));
+    }
+  }
+
+  Future<AppResult<dynamic>> _requestRefreshToken() async {
+    try {
+      final refreshToken = await _pref.getValue(AppPrefKey.refreshToken, '');
+      _logger
+          .i('Request Token Service: ${_client.baseUrl} - header: $_headers');
+      final response = await _client.request(
+        "users-refresh-token",
+        HTTPMethod.get.value,
+        headers: {'Authorizationrefresh': 'Bearer $refreshToken'},
+      );
+      _logger.i(
+          'Request Refresh Token Network Service: ${response.statusCode} - ${response.statusText} - Response Body: ${response.body}');
+      switch (response.statusCode) {
+        case 200:
+          final appResponse = AppResponse.fromJson(response.body is String
+              ? jsonDecode(response.body)
+              : response.body);
+          final tokenVo = TokenVo.fromJson(appResponse.data);
+          _pref.setValue(AppPrefKey.token, tokenVo.token ?? '');
+          _pref.setValue(AppPrefKey.refreshToken, tokenVo.refreshToken ?? '');
+          return AppResult.success(response);
+        default:
+          return AppResult.failure(AppException(
+              code: 999.toString(),
+              message: 'UnAuthenticator Exception',
+              details: 'Request Refresh Token Network Failure'));
+      }
+    } catch (e) {
+      _logger
+          .i('Request Refresh Token Network Service Failure: ${e.toString()}');
+      return AppResult.failure(AppException(
+          code: 999.toString(),
+          message: 'UnAuthenticator Exception',
+          details: e.toString()));
+      ;
     }
   }
 }

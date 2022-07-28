@@ -6,6 +6,7 @@ import 'package:pull_to_refresh_plus/pull_to_refresh_plus.dart';
 import '../../../../data/network/nets/app_exception.dart';
 import '../../../../data/network/nets/app_result.dart';
 import '../../../../domain/models/base_model.dart';
+import '../app_text_widget.dart';
 
 part 'app_list_widget.dart';
 

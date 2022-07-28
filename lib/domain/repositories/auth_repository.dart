@@ -17,7 +17,7 @@ abstract class AuthRepository {
   Future<AppResult<TokenVo>> login(
       {required String username, required String password});
 
-  Future<void> saveToken({required String token});
+  Future<void> saveToken({required String token, required String refreshToken});
 
   String languageCode();
 

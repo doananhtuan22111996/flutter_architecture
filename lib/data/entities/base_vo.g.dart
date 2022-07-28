@@ -18,15 +18,18 @@ class TokenVoAdapter extends TypeAdapter<TokenVo> {
     };
     return TokenVo(
       token: fields[0] as String?,
+      refreshToken: fields[1] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TokenVo obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.token);
+      ..write(obj.token)
+      ..writeByte(1)
+      ..write(obj.refreshToken);
   }
 
   @override

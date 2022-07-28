@@ -25,28 +25,30 @@ class AppListWidget<BM extends BaseModel>
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => SmartRefresher(
-        enablePullDown: true,
-        enablePullUp: true,
-        header: const MaterialClassicHeader(),
-        footer: const ClassicFooter(
-          loadStyle: LoadStyle.ShowWhenLoading,
-        ),
-        controller: _refreshController,
-        onRefresh: _onRefresh,
-        onLoading: _onLoadMore,
-        child: ListView.builder(
-          controller: scrollController,
-          scrollDirection: scrollDirection,
-          reverse: reverse,
-          physics: physics,
-          padding: padding ??
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          itemCount: controller.data.value?.length ?? 0,
-          itemBuilder: (ctx, index) =>
-              childWidget.call(ctx, controller.data.value?[index]),
-        ),
-      ),
+      () => controller.appException.value != null
+          ? AppTextWidget(text: controller.appException.value?.details ?? '')
+          : SmartRefresher(
+              enablePullDown: true,
+              enablePullUp: true,
+              header: const MaterialClassicHeader(),
+              footer: const ClassicFooter(
+                loadStyle: LoadStyle.ShowWhenLoading,
+              ),
+              controller: _refreshController,
+              onRefresh: _onRefresh,
+              onLoading: _onLoadMore,
+              child: ListView.builder(
+                controller: scrollController,
+                scrollDirection: scrollDirection,
+                reverse: reverse,
+                physics: physics,
+                padding: padding ??
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                itemCount: controller.data.value?.length ?? 0,
+                itemBuilder: (ctx, index) =>
+                    childWidget.call(ctx, controller.data.value?[index]),
+              ),
+            ),
     );
   }
 

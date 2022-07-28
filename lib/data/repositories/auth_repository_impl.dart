@@ -29,8 +29,10 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> saveToken({required String token}) async {
+  Future<void> saveToken(
+      {required String token, required String refreshToken}) async {
     _pref.setValue(AppPrefKey.token, token);
+    _pref.setValue(AppPrefKey.refreshToken, refreshToken);
   }
 
   @override
