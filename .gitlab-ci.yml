@@ -1,0 +1,74 @@
+# This file is a template, and might need editing before it works on your project.
+# To contribute improvements to CI/CD templates, please follow the Development guide at:
+# https://docs.gitlab.com/ee/development/cicd/templates.html
+# This specific template is located at:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Android.gitlab-ci.yml
+
+# Read more about this script on this blog post https://about.gitlab.com/2018/10/24/setting-up-gitlab-ci-for-android-projects/, by Jason Lenny
+# If you are interested in using Android with FastLane for publishing take a look at the Android-Fastlane template.
+
+stages:
+  - sonarqube
+  - android
+  - ios
+
+# Make Android Project
+assembleReleaseAndroid:
+  image: "cirrusci/flutter:latest"
+  variables:
+    ANDROID_KEYSTORE: $ANDROID_KEYSTORE
+  interruptible: true
+  stage: android
+  tags:
+    - sflutter-runner
+  script:
+    - cd android
+    - echo -n ${ANDROID_KEYSTORE} | base64 -d > skeleton-key-store.jks
+    - cd ..
+    - flutter build apk --release --flavor dev --no-shrink
+  artifacts:
+    paths:
+      - build/app/outputs/flutter-apk/app-dev-release.apk
+  after_script:
+    - echo "Execute android assembleRelease completed!!!"
+  only:
+    - merge_request
+    - main
+
+# Make IOS Project
+assembleReleaseIos:
+  interruptible: true
+  stage: ios
+  tags:
+    - sflutter-ios-runner
+  script:
+    - flutter clean
+    - flutter pub get
+    - cd ios
+    - pod install
+    - xcodebuild clean archive -workspace Runner.xcworkspace -scheme dev -archivePath RunnerArchive
+    - xcodebuild -exportArchive -archivePath RunnerArchive.xcarchive -exportOptionsPlist RunnerArchive.xcarchive/info.plist -exportPath ./build
+  artifacts:
+    paths:
+      - ios/build/flutter_skeleton.ipa
+  after_script:
+    - echo "Execute ios assembleRelease completed!!!"
+  only:
+    - merge_request
+    - main
+
+# Sonarqube
+sonarqubeRelease:
+  stage: sonarqube
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  tags:
+    - sflutter-runner
+  script:
+    - sonar-scanner
+  after_script:
+    - echo "Execute sonarqubeRelease completed!!!"
+  only:
+    - merge_request
+    - main
