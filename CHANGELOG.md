@@ -2,7 +2,11 @@
 
 ## [Unreleased]
 
+### Code Refactoring
 
+- fix issue sonar scanner
+  
+  
 <a name="v1.0.4"></a>
 
 ## [v1.0.4] - 2022-09-16

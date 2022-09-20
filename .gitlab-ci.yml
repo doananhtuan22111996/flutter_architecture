@@ -9,8 +9,7 @@
 
 stages:
   - sonarqube
-  - android
-  - ios
+  - build
 
 # Make Android Project
 assembleReleaseAndroid:
@@ -18,7 +17,7 @@ assembleReleaseAndroid:
   variables:
     ANDROID_KEYSTORE: $ANDROID_KEYSTORE
   interruptible: true
-  stage: android
+  stage: build
   tags:
     - sflutter-runner
   script:
@@ -38,7 +37,7 @@ assembleReleaseAndroid:
 # Make IOS Project
 assembleReleaseIos:
   interruptible: true
-  stage: ios
+  stage: build
   tags:
     - sflutter-ios-runner
   script:
