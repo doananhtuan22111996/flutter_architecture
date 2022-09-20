@@ -19,7 +19,7 @@ assembleReleaseAndroid:
   interruptible: true
   stage: build
   tags:
-    - sflutter-runner
+    - sflutter-docker
   script:
     - cd android
     - echo -n ${ANDROID_KEYSTORE} | base64 -d > skeleton-key-store.jks
@@ -39,7 +39,7 @@ assembleReleaseIos:
   interruptible: true
   stage: build
   tags:
-    - sflutter-ios-runner
+    - sflutter-shell
   script:
     - flutter clean
     - flutter pub get
@@ -60,7 +60,7 @@ assembleReleaseIos:
 sonarqubeRelease:
   stage: sonarqube
   tags:
-    - sflutter-ios-runner
+    - sflutter-shell
   script:
     - sonar-scanner
   after_script:
