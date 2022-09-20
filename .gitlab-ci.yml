@@ -60,7 +60,7 @@ assembleReleaseIos:
 sonarqubeRelease:
   stage: sonarqube
   image:
-    name: sonarsource/sonar-scanner-cli:latest
+    name: anandarh/flutter-sonar-scanner-cli:latest
     entrypoint: [""]
   tags:
     - sflutter-runner
