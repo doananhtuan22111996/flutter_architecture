@@ -2,9 +2,14 @@
 
 ## [Unreleased]
 
+
+<a name="v1.0.5"></a>
+
+## [v1.0.5] - 2022-09-25
+
 ### Code Refactoring
 
-- fix issue sonar scanner
+- using runner-shell, remove runner-docker
   
   
 <a name="v1.0.4"></a>
@@ -67,7 +72,8 @@
 - init changelog v1.0.0
   
   
-[Unreleased]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.4...HEAD
+[Unreleased]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.5...HEAD
+[v1.0.5]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.4...v1.0.5
 [v1.0.4]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.3...v1.0.4
 [v1.0.3]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.2...v1.0.3
 [v1.0.2]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.1...v1.0.2

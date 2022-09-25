@@ -13,13 +13,12 @@ stages:
 
 # Make Android Project
 assembleReleaseAndroid:
-  image: "cirrusci/flutter:latest"
   variables:
     ANDROID_KEYSTORE: $ANDROID_KEYSTORE
   interruptible: true
   stage: build
   tags:
-    - sflutter-docker
+    - sflutter-shell
   script:
     - cd android
     - echo -n ${ANDROID_KEYSTORE} | base64 -d > skeleton-key-store.jks
