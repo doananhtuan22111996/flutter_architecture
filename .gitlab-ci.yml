@@ -9,14 +9,15 @@
 
 stages:
   - sonarqube
-  - build
+  - apk
+  - ipa
 
 # Make Android Project
 assembleReleaseAndroid:
   variables:
     ANDROID_KEYSTORE: $ANDROID_KEYSTORE
   interruptible: true
-  stage: build
+  stage: apk
   tags:
     - sflutter-shell
   script:
@@ -36,15 +37,14 @@ assembleReleaseAndroid:
 # Make IOS Project
 assembleReleaseIos:
   interruptible: true
-  stage: build
+  stage: ipa
   tags:
     - sflutter-shell
   script:
-    - flutter clean
     - flutter pub get
     - cd ios
     - pod install
-    - xcodebuild clean archive -workspace Runner.xcworkspace -scheme dev -archivePath RunnerArchive
+    - xcodebuild archive -workspace Runner.xcworkspace -scheme dev -archivePath RunnerArchive
     - xcodebuild -exportArchive -archivePath RunnerArchive.xcarchive -exportOptionsPlist RunnerArchive.xcarchive/info.plist -exportPath ./build
   artifacts:
     paths:
