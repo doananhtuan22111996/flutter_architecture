@@ -1,4 +1,3 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -21,30 +20,21 @@ class EnvironmentService extends GetxService {
 
   @override
   void onInit() async {
-    _logger = Logger(printer: PrettyPrinter());
-    await loadEnvironment();
-    await loadFlavor();
-    _logger
-        .d('FLAVOR: ${dotenv.env['ENV']} - APP_URL: ${dotenv.env['APP_URL']}');
     super.onInit();
+    _logger = Logger(printer: PrettyPrinter(methodCount: 0));
+    await loadEnvironment();
+    _logger.d('Environment: ${current.env} - APP_URL: ${await apiDomain()}');
   }
 
   Future<String> apiDomain() async {
-    if (!dotenv.isInitialized) return '';
-    return dotenv.env['APP_URL'] ?? '';
+    return current == EnvironmentType.prod
+        ? 'http://string-api.vinova.sg/api/'
+        : 'http://string-api.vinova.sg/api/';
   }
 
   Future<void> loadEnvironment() async {
     final packageInfo = await PackageInfo.fromPlatform();
-    await dotenv.load(
-        fileName: packageInfo.packageName.contains('.prod')
-            ? '.env.prod'
-            : '.env.dev');
-  }
-
-  Future<void> loadFlavor() async {
-    if (!dotenv.isInitialized) return;
-    if (dotenv.env['ENV'] == EnvironmentType.prod.env) {
+    if (packageInfo.packageName.contains('.prod')) {
       current = EnvironmentType.prod;
     } else {
       current = EnvironmentType.dev;
