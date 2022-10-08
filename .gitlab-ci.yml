@@ -17,15 +17,11 @@ assembleReleaseAndroid:
   variables:
     ANDROID_KEYSTORE: $ANDROID_KEYSTORE
     ANDROID_KEY_DEV_PROPERTIES: $ANDROID_KEY_DEV_PROPERTIES
-    FLUTTER_ENV_DEV: $FLUTTER_ENV_DEV
-    FLUTTER_ENV_PROD: $FLUTTER_ENV_PROD
   interruptible: true
   stage: apk
   tags:
     - sflutter-shell
   script:
-    - echo -n ${FLUTTER_ENV_DEV} | base64 -d > .env.dev
-    - echo -n ${FLUTTER_ENV_PROD} | base64 -d > .env.prod
     - cd android
     - echo -n ${ANDROID_KEYSTORE} | base64 -d > skeleton-key-store.jks
     - echo -n ${ANDROID_KEY_DEV_PROPERTIES} | base64 -d > key.dev.properties
@@ -42,17 +38,12 @@ assembleReleaseAndroid:
 
 # Make IOS Project
 assembleReleaseIos:
-  variables:
-    FLUTTER_ENV_DEV: $FLUTTER_ENV_DEV
-    FLUTTER_ENV_PROD: $FLUTTER_ENV_PROD
   interruptible: true
   stage: ipa
   tags:
     - sflutter-shell
   script:
     - flutter pub get
-    - echo -n ${FLUTTER_ENV_DEV} | base64 -d > .env.dev
-    - echo -n ${FLUTTER_ENV_PROD} | base64 -d > .env.prod
     - cd ios
     - pod install
     - xcodebuild archive -workspace Runner.xcworkspace -scheme dev -archivePath RunnerArchive
