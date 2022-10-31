@@ -6,9 +6,11 @@ class UserView extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     return AppMainWidget(
-      textAppBar: Strings.users.tr,
+      appBarWidget: AppBarWidget(text: Strings.users.tr),
       body: AppListWidget<TravelUserModel>(
-        childWidget: (ctx, model) => Column(
+        mainController: Get.find<UserController>(),
+        mainTag: 'UserController',
+        childWidget: (ctx, model, index) => Column(
           children: [
             Text(model?.userName ?? ''),
             Text(model?.id.toString() ?? (-1).toString()),

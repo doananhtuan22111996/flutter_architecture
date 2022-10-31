@@ -6,7 +6,7 @@ class DbUserView extends GetView<DbUserController> {
   @override
   Widget build(BuildContext context) {
     return AppMainWidget(
-      textAppBar: Strings.dbUsers.tr,
+      appBarWidget: AppBarWidget(text: Strings.dbUsers.tr),
       body: Obx(
         () => (controller.dbUsers.value?.length ?? 0) > 0
             ? ListView.builder(

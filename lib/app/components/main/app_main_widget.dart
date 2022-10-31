@@ -1,40 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:loader_overlay/loader_overlay.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../../data/network/nets/app_exception.dart';
-import 'app_bar_widget.dart';
-import 'app_loading_widget.dart';
 
 class AppMainWidget extends StatelessWidget {
   const AppMainWidget({
-    required this.textAppBar,
     required this.body,
-    this.isGoBack = true,
     Key? key,
+    this.scaffoldKey,
+    this.appBarWidget,
     this.loadingWidget,
+    this.endDrawer,
     this.errorWidget,
-    this.emptyWidget,
     this.onSnackBar,
+    this.backgroundColor,
+    this.onEndDrawerChanged,
   }) : super(key: key);
 
-  final String textAppBar;
   final Widget body;
-  final bool isGoBack;
-  final Widget? loadingWidget;
+  final PreferredSizeWidget? appBarWidget;
+  final Color? backgroundColor;
+  final Widget? loadingWidget, endDrawer;
   final Widget Function(AppException? exception)? errorWidget;
-  final Widget Function()? emptyWidget;
   final Widget Function(String? message)? onSnackBar;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final Function(bool)? onEndDrawerChanged;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBarWidget(
-        text: textAppBar,
-        isGoBack: isGoBack,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: context.theme.backgroundColor,
+        appBar: appBarWidget,
+        endDrawer: endDrawer,
+        // EndDrawer for Filter
+        endDrawerEnableOpenDragGesture: false,
+        onEndDrawerChanged: onEndDrawerChanged,
+        body: Stack(
+          children: [
+            SafeArea(child: body),
+            SvgPicture.asset(
+              'assets/vectors/appbar_border_left_bottom.svg',
+              color: context.theme.primaryColor,
+            ),
+          ],
+        ),
       ),
-      body: LoaderOverlay(
-          overlayWidget: loadingWidget ?? const AppLoadingWidget(),
-          child: body),
     );
   }
 }

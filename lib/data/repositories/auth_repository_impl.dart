@@ -3,8 +3,7 @@ part of '../../domain/repositories/auth_repository.dart';
 class AuthRepositoryImpl implements AuthRepository {
   late final NetworkService _networkService;
   late final AppSharedPref _pref;
-  final LocalizationService _localizationService = Get.find();
-  final ThemeService _themeService = Get.find();
+  final AppService _appService = Get.find();
 
   AuthRepositoryImpl(this._networkService, this._pref);
 
@@ -13,7 +12,7 @@ class AuthRepositoryImpl implements AuthRepository {
       {required String username, required String password}) async {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
-        url: ApiProvider.auth,
+        url: ApiProvider.login,
         method: HTTPMethod.post,
         query: {
           'username': username,
@@ -37,26 +36,28 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   String languageCode() {
-    return _localizationService.defaultLanguage?.languageCode ?? 'en';
+    return _appService.localization.defaultLanguage?.languageCode ?? 'en';
   }
 
   @override
   void saveLanguageCode(String code) {
-    _localizationService.saveLocalization(code);
-    _localizationService.changeLocalization(code);
+    _appService.localization.saveLocalization(code);
+    _appService.localization.changeLocalization(code);
   }
 
   @override
   bool isDarkTheme() {
-    return _themeService.theme == ThemeMode.dark;
+    return _appService.theme.themeMode == ThemeMode.dark;
   }
 
   @override
   void changeThemeMode(ThemeMode themeMode) {
-    _themeService.saveTheme(themeMode == ThemeMode.dark);
-    _themeService.changeThemeMode(themeMode);
-    _themeService.changeTheme(themeMode == ThemeMode.dark
-        ? AppThemeData.dartTheme
-        : AppThemeData.lightTheme);
+    _appService.theme.saveTheme(themeMode == ThemeMode.dark);
+    _appService.theme.changeThemeMode(themeMode);
+    _appService.theme.changeTheme(
+      themeMode == ThemeMode.dark
+          ? AppThemeData.darkThemeData
+          : AppThemeData.lightThemeData,
+    );
   }
 }

@@ -6,38 +6,33 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return AppMainWidget(
-      textAppBar: Strings.homeView.tr,
-      isGoBack: true,
+      appBarWidget: AppBarWidget(
+        text: Strings.homeView.tr,
+        goBackEnabled: false,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              AppButtonWidget(
-                  onPressed: () async {
-                    await controller.executeLogin();
-                  },
-                  text: Strings.login.tr),
+              AppFilledButtonWidget(onPressed: () async {
+                await controller.executeLogin();
+              }, Strings.login.tr),
               Obx(() => Expanded(
-                    child: AppTextWidget(
-                        text: controller.tokenModel.value?.token ??
-                            controller.appException.value?.details ??
-                            Strings.notLogin.tr),
+                    child: AppTextWidget(controller.tokenModel.value?.token ??
+                        controller.appException.value?.details ??
+                        Strings.notLogin.tr),
                   )),
             ],
           ),
-          AppButtonWidget(
-              onPressed: () {
-                Get.rootDelegate.toNamed(Routes.users);
-              },
-              text: Strings.getListNetwork.tr),
-          AppButtonWidget(
-              onPressed: () {
-                Get.rootDelegate.toNamed(Routes.dbUsers);
-              },
-              text: Strings.getListDb.tr),
-          AppButtonWidget(
-            text: Strings.disableButton.tr,
+          AppFilledButtonWidget(onPressed: () {
+            Get.rootDelegate.toNamed(Routes.users);
+          }, Strings.getListNetwork.tr),
+          AppFilledButtonWidget(onPressed: () {
+            Get.rootDelegate.toNamed(Routes.dbUsers);
+          }, Strings.getListDb.tr),
+          AppFilledButtonWidget(
+            Strings.disableButton.tr,
             isEnable: false,
           ),
           Obx(() => ToggleButtons(
@@ -50,8 +45,8 @@ class HomeView extends GetView<HomeController> {
                   controller.executeUpdateLanguage(code);
                 },
                 children: [
-                  AppTextWidget(text: Strings.vietNamLanguage.tr),
-                  AppTextWidget(text: Strings.englishLanguage.tr),
+                  AppTextWidget(Strings.vietNamLanguage.tr),
+                  AppTextWidget(Strings.englishLanguage.tr),
                 ],
               )),
           const SizedBox(height: 16),

@@ -8,8 +8,7 @@ import '../../data/local/app_shared_pref.dart';
 import '../../data/network/nets/app_response.dart';
 import '../../data/network/nets/app_result.dart';
 import '../../data/network/network_service.dart';
-import '../../services/localization_service.dart';
-import '../../services/theme_service.dart';
+import '../../services/app_service.dart';
 
 part '../../data/repositories/auth_repository_impl.dart';
 

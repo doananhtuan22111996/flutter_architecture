@@ -1,44 +1,50 @@
 class Metadata {
-  int? totalCount;
-  int? totalPages;
-  int? nextPage;
-  int? prevPages;
-  int? currentPage;
-  String? currentPerPage;
+  final bool status;
+  final String? errorCode;
+  final String? message;
 
-  Metadata(
-      {this.totalCount,
-      this.totalPages,
-      this.nextPage,
-      this.prevPages,
-      this.currentPage,
-      this.currentPerPage});
+  Metadata({
+    this.status = false,
+    this.errorCode,
+    this.message,
+  });
 
   factory Metadata.fromJson(Map<String, dynamic>? json) => Metadata(
-        totalCount: json?["total_count"] ?? -1,
-        totalPages: json?["total_pages"] ?? -1,
-        nextPage: json?["next_page"] ?? -1,
-        prevPages: json?["prev_pages"] ?? -1,
-        currentPage: json?["current_page"] ?? -1,
-        currentPerPage: json?["current_per_page"] ?? '',
+        status: json?["status"] ?? false,
+        errorCode: json?["errorCode"] ?? '',
+        message: json?["message"] ?? '',
       );
 }
 
 class AppResponse {
-  int? code;
-  String? message;
-  bool? status;
-  Metadata? metadata;
-  dynamic data;
+  final Metadata? meta;
+  final dynamic data;
+  final int page;
+  final int limit;
+  final bool hasMore;
+  final int total;
 
-  AppResponse({this.code, this.message, this.status, this.metadata, this.data});
+  AppResponse({
+    this.meta,
+    this.data,
+    this.page = 1,
+    this.total = 0,
+    this.hasMore = false,
+    this.limit = 25,
+  });
 
   factory AppResponse.fromJson(Map<String, dynamic>? json) {
     return AppResponse(
-        code: json?['code'] ?? -1,
-        message: json?['message'] ?? '',
-        status: json?['status'] ?? false,
-        metadata: Metadata.fromJson(json?['metadata']),
-        data: json?['data']);
+        meta: Metadata.fromJson(json?['meta']), data: json?['data']);
+  }
+
+  static AppResponse fromJsonToList(Map<String, dynamic>? json) {
+    return AppResponse(
+        meta: Metadata.fromJson(json?['meta']),
+        data: json?['data']['items'] ?? List.empty(),
+        page: json?['data']['page'] ?? 0,
+        limit: json?['data']['limit'] ?? 25,
+        hasMore: json?['data']['hasMore'] ?? false,
+        total: json?['data']['total'] ?? 0);
   }
 }

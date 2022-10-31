@@ -1,19 +1,23 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+part of 'app_service.dart';
 
-import '../app/config/translations/strings_enum.dart';
-import '../data/local/app_pref_key.dart';
-
-class LocalizationService extends GetxController implements Translations {
-  final _box = GetStorage();
-
-  LocalizationService();
-  // supported languages
+abstract class LocalizationService extends GetxService implements Translations {
   static Map<String, Locale> supportedLanguages = {
     'en': const Locale('en', 'US'),
     'vi': const Locale('vi', 'VN'),
   };
+
+  Locale? get defaultLanguage;
+  Locale? get fallbackLocale;
+  void saveLocalization(String code);
+  void changeLocalization(String code);
+}
+
+class _LocalizationServiceImpl extends LocalizationService
+    implements Translations {
+  final _box = GetStorage();
+
+  _LocalizationServiceImpl();
+  // supported languages
 
   @override
   Map<String, Map<String, String>> get keys => {
@@ -21,13 +25,19 @@ class LocalizationService extends GetxController implements Translations {
         'vi_VN': viVN,
       };
 
-  Locale? get defaultLanguage => supportedLanguages[_loadLanguage()];
-  Locale? get fallbackLocale => supportedLanguages['vi'];
+  @override
+  Locale? get defaultLanguage =>
+      LocalizationService.supportedLanguages[_loadLanguage()];
 
-  String _loadLanguage() => _box.read(AppPrefKey.language) ?? 'en';
+  @override
+  Locale? get fallbackLocale => LocalizationService.supportedLanguages['vi'];
 
+  String _loadLanguage() => _box.read(AppPrefKey.language) ?? 'vi';
+
+  @override
   void saveLocalization(String code) => _box.write(AppPrefKey.language, code);
 
+  @override
   void changeLocalization(String code) => Get.updateLocale(
       LocalizationService.supportedLanguages[code] ?? defaultLanguage!);
 }

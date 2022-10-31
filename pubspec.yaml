@@ -29,19 +29,30 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  package_info_plus: ^1.4.2
   get: ^4.6.5
   get_storage: ^2.0.3
   logger: ^1.1.0
+  rxdart: ^0.27.5
+  intl: ^0.17.0
   # flutter_secure_storage: Need to setup Firebase Auth
   flutter_secure_storage: ^5.0.2
-  package_info_plus: ^1.4.2
+  flutter_slidable: ^2.0.0
+  flutter_form_builder: ^7.7.0
+  flutter_datetime_picker: ^1.5.1
+  flutter_pdfview: ^1.2.5
+  flutter_native_splash: ^2.2.12
+  flutter_loadingindicator: ^1.0.1
+  flutter_svg: ^1.1.5
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  firebase_core: ^1.19.2
-  firebase_auth: ^3.4.2
-  loader_overlay: ^2.0.7
+  firebase_core: ^2.1.1
+  firebase_auth: ^4.1.0
   # package original: pull_to_refresh -> must to follow for upgrade version pull_to_refresh resolve flutter warnings
   pull_to_refresh_plus: ^2.0.3
+  dropdown_button2: ^1.8.2
+  email_validator: ^2.1.17
+  path_provider: ^2.0.11
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -93,23 +104,23 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: Poppins
-      fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
-          weight: 300
-        - asset: assets/fonts/Poppins-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Poppins-SemiBold.ttf
-          weight: 700
-    - family: Cairo
-      fonts:
-        - asset: assets/fonts/Cairo-Regular.ttf
-          weight: 300
-        - asset: assets/fonts/Cairo-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Cairo-SemiBold.ttf
-          weight: 900
+  # fonts:
+  #   - family: Poppins
+  #     fonts:
+  #       - asset: assets/fonts/Poppins-Regular.ttf
+  #         weight: 300
+  #       - asset: assets/fonts/Poppins-Medium.ttf
+  #         weight: 500
+  #       - asset: assets/fonts/Poppins-SemiBold.ttf
+  #         weight: 700
+  #   - family: Cairo
+  #     fonts:
+  #       - asset: assets/fonts/Cairo-Regular.ttf
+  #         weight: 300
+  #       - asset: assets/fonts/Cairo-Medium.ttf
+  #         weight: 500
+  #       - asset: assets/fonts/Cairo-SemiBold.ttf
+  #         weight: 900
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

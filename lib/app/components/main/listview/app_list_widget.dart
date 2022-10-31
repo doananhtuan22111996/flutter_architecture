@@ -1,19 +1,21 @@
 part of 'app_list_controller.dart';
 
-// [AppListWidget] must to child of AppMainWidget
-class AppListWidget<BM extends BaseModel>
-    extends GetView<AppListController<BM>> {
+// [AppListWidget] must to child of AppMainNavigateWidget
+class AppListWidget<BM extends BaseModel> extends StatelessWidget {
   AppListWidget(
       {required this.childWidget,
-      this.padding,
+      required this.mainController,
+      required this.mainTag,
       this.scrollDirection = Axis.vertical,
       this.reverse = false,
       this.scrollController,
       this.physics = const AlwaysScrollableScrollPhysics(),
       Key? key})
       : super(key: key);
-  final EdgeInsets? padding;
-  final Widget Function(BuildContext, BM? model) childWidget;
+
+  final AppListController<BM> mainController;
+  final String mainTag;
+  final Widget Function(BuildContext, BM? model, int index) childWidget;
   final Axis scrollDirection;
   final bool reverse;
   final ScrollController? scrollController;
@@ -24,41 +26,72 @@ class AppListWidget<BM extends BaseModel>
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => controller.appException.value != null
-          ? AppTextWidget(text: controller.appException.value?.details ?? '')
-          : SmartRefresher(
+    return GetBuilder<AppListController<BM>>(
+        init: mainController,
+        tag: mainTag,
+        builder: (controller) {
+          return Obx(
+            () => SmartRefresher(
               enablePullDown: true,
-              enablePullUp: true,
+              enablePullUp: controller.hasMore.value == true,
               header: const MaterialClassicHeader(),
               footer: const ClassicFooter(
                 loadStyle: LoadStyle.ShowWhenLoading,
               ),
               controller: _refreshController,
-              onRefresh: _onRefresh,
-              onLoading: _onLoadMore,
-              child: ListView.builder(
-                controller: scrollController,
-                scrollDirection: scrollDirection,
-                reverse: reverse,
-                physics: physics,
-                padding: padding ??
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                itemCount: controller.data.value?.length ?? 0,
-                itemBuilder: (ctx, index) =>
-                    childWidget.call(ctx, controller.data.value?[index]),
-              ),
+              onRefresh: () => _onRefresh(controller),
+              onLoading: () => _onLoadMore(controller),
+              child: controller.appException.value != null
+                  ? _retry(context, controller)
+                  : (controller.data.value?.isEmpty == true
+                      ? Center(
+                          child: AppTextWidget(Strings.emptyMessage.tr,
+                              textStyle: context.textTheme.headline6,
+                              textAlign: TextAlign.center),
+                        )
+                      : ListView.builder(
+                          controller: scrollController,
+                          scrollDirection: scrollDirection,
+                          reverse: reverse,
+                          physics: physics,
+                          itemCount: controller.data.value?.length ?? 0,
+                          itemBuilder: (ctx, index) => childWidget.call(
+                              ctx, controller.data.value?[index], index),
+                        )),
             ),
+          );
+        });
+  }
+
+  Widget _retry(BuildContext context, AppListController<BM> controller) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          child: AppTextWidget(
+            Strings.serverError.tr,
+            textStyle: context.textTheme.headline6,
+          ),
+        ),
+        SizedBox(
+          width: 120,
+          child: AppOutlinedButtonWidget(
+            Strings.retry.tr,
+            onPressed: () => controller.initFetch(),
+          ),
+        )
+      ],
     );
   }
 
-  void _onRefresh() async {
+  void _onRefresh(AppListController<BM> controller) async {
     await controller.onRefreshCall();
     // Always allow pull to refresh
     _refreshController.refreshToIdle();
   }
 
-  void _onLoadMore() async {
+  void _onLoadMore(AppListController<BM> controller) async {
     await controller.onLoadMoreCall();
     _refreshController.loadComplete();
   }
