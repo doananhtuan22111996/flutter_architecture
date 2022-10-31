@@ -24,4 +24,12 @@ class Strings {
   static const String users = 'Users';
   static const String dbUsers = 'Users DB';
   static const String disableButton = 'Disable button';
+  static const String emptyMessage = 'No Data!';
+  static const String retry = 'Retry';
+  static const String dateDefaultFormat = 'dd/mm/yyyy';
+  static const String close = 'Close';
+  static const String confirm = 'Confirm';
+  static const String limitMessage = 'limitMessage';
+  static const String requiredMessage = 'requiredMessage';
+  static const String emailInvalidMessage = 'emailInvalidMessage';
 }

@@ -10,7 +10,7 @@ part 'boxs/travel_user_box.dart';
 abstract class AppHiveDb<BV extends BaseVo> extends GetxService {
   late final Box<BV> box;
 
-  final Logger _logger = Logger(printer: PrettyPrinter());
+  final Logger _logger = Logger(printer: PrettyPrinter(methodCount: 0));
 
   @override
   void onInit() async {

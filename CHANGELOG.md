@@ -3,6 +3,28 @@
 ## [Unreleased]
 
 
+<a name="v1.1.0"></a>
+
+## [v1.1.0] - 2022-11-01
+
+### Features
+
+- Add Components + Theme colors + Utils
+  
+  
+<a name="v1.0.6"></a>
+
+## [v1.0.6] - 2022-10-11
+
+### Code Refactoring
+
+- Sonar version v1.0.6 for review
+  
+  ### Features
+
+- Add Components
+  
+  
 <a name="v1.0.5"></a>
 
 ## [v1.0.5] - 2022-09-25
@@ -72,7 +94,9 @@
 - init changelog v1.0.0
   
   
-[Unreleased]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.5...HEAD
+[Unreleased]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.1.0...HEAD
+[v1.1.0]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.6...v1.1.0
+[v1.0.6]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.5...v1.0.6
 [v1.0.5]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.4...v1.0.5
 [v1.0.4]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.3...v1.0.4
 [v1.0.3]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.2...v1.0.3

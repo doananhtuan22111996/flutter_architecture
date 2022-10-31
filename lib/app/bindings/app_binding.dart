@@ -3,9 +3,8 @@ part of '../../main.dart';
 class AppBinding implements Bindings {
   @override
   void dependencies() async {
-    Get.put<AppSharedPref>(AppSharedPref());
-    Get.put<EnvironmentService>(EnvironmentService());
-    Get.put(NetworkService(Get.find(), Get.find()));
+    Get.put<EnvironmentService>(EnvironmentServiceImpl());
+    Get.put<NetworkService>(NetworkServiceImpl());
 
     Get.put<AppHiveDb<TravelUserVo>>(TravelUserBox());
 

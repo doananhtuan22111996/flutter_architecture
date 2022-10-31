@@ -1,21 +1,28 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+part of 'app_service.dart';
 
-import '../data/local/app_pref_key.dart';
+abstract class ThemeService extends GetxService {
+  ThemeMode get themeMode;
+  void saveTheme(bool isDarkMode);
+  void changeTheme(ThemeData theme);
+  void changeThemeMode(ThemeMode themeMode);
+}
 
-class ThemeService extends GetxController {
+class ThemeServiceImpl extends ThemeService {
   final _box = GetStorage();
 
-  ThemeService();
+  ThemeServiceImpl();
 
-  ThemeMode get theme => _loadTheme() ? ThemeMode.dark : ThemeMode.light;
+  @override
+  ThemeMode get themeMode => _loadTheme() ? ThemeMode.dark : ThemeMode.light;
 
-  bool _loadTheme() => _box.read(AppPrefKey.theme) ?? false;
-
+  @override
   void saveTheme(bool isDarkMode) => _box.write(AppPrefKey.theme, isDarkMode);
 
+  @override
   void changeTheme(ThemeData theme) => Get.changeTheme(theme);
 
+  @override
   void changeThemeMode(ThemeMode themeMode) => Get.changeThemeMode(themeMode);
+
+  bool _loadTheme() => _box.read(AppPrefKey.theme) ?? false;
 }

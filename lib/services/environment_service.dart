@@ -13,7 +13,11 @@ extension EnvironmentTypeExtension on EnvironmentType {
   }
 }
 
-class EnvironmentService extends GetxService {
+abstract class EnvironmentService extends GetxService {
+  String apiDomain();
+}
+
+class EnvironmentServiceImpl extends EnvironmentService {
   late final Logger _logger;
 
   late EnvironmentType current = EnvironmentType.dev;
@@ -22,17 +26,17 @@ class EnvironmentService extends GetxService {
   void onInit() async {
     super.onInit();
     _logger = Logger(printer: PrettyPrinter(methodCount: 0));
-    await loadEnvironment();
-    _logger.d('Environment: ${current.env} - APP_URL: ${await apiDomain()}');
+    _loadEnvironment();
+    _logger.d('Environment: ${current.env} - APP_URL: ${apiDomain()}');
   }
 
-  Future<String> apiDomain() async {
-    return current == EnvironmentType.prod
-        ? 'http://string-api.vinova.sg/api/'
-        : 'http://string-api.vinova.sg/api/';
-  }
+  // TODO change PROD domain
+  @override
+  String apiDomain() => current == EnvironmentType.prod
+      ? 'https://alia-backend.alia-dev.geekup.io/'
+      : 'https://alia-backend.alia-dev.geekup.io/';
 
-  Future<void> loadEnvironment() async {
+  void _loadEnvironment() async {
     final packageInfo = await PackageInfo.fromPlatform();
     if (packageInfo.packageName.contains('.prod')) {
       current = EnvironmentType.prod;

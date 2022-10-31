@@ -1,215 +1,191 @@
 part of 'app_theme.dart';
 
 abstract class AppColors extends Colors {
-  factory AppColors(AppTheme theme) {
-    if (theme == AppTheme.lightTheme) {
-      return AppCollection1Colors();
+  factory AppColors(Brightness brightness) {
+    if (brightness == Brightness.light) {
+      return AppLightColors();
     }
-    if (theme == AppTheme.dartTheme) {
-      return AppCollection2Colors();
+    if (brightness == Brightness.dark) {
+      return AppDarkColors();
     }
-    throw 'Can\'t create $theme.';
+
+    // Default
+    return AppLightColors();
   }
+
+  static AppColors get() {
+    return AppColors(Get.theme.brightness);
+  }
+
+  Brightness get brightness;
 
   Color get primaryColor;
 
-  Color get neutralColor;
+  Color get secondaryColor;
 
-  Color get backgroundColor;
+  Color get tertiaryColor;
 
-  Color get buttonColor;
+  MaterialColor get errorColor;
 
-  Color get disableColor;
+  MaterialColor get waringColor;
 
-  Color get dialogColor;
+  MaterialColor get successColor;
 
-  Color get errorColor;
+  MaterialColor get infoColor;
 
-  // MaterialColor get neutral;
-
-  // MaterialColor get yellow;
-
-  // MaterialColor get red;
-
-  // MaterialColor get blue;
-
-  // MaterialColor get green;
+  MaterialColor get neutralColor;
 }
 
-class AppCollection1Colors implements AppColors {
-  static const int _primaryValue = 0xFF1164E4;
-  static const int _secondaryValue = 0xFFF63B3B;
-  static const int _neutralValue = 0xFF101010;
-  static const int _backgroundValue = 0xFFEFEFEF;
-  static const int _buttonValue = 0xFFE52013;
-  static const int _blueValue = 0xFF1164E4;
-  static const int _greenValue = 0xFF1CC174;
-  static const int _disableValue = 0xFFFFABAB;
-  static const int _dialogValue = 0xFFFDF050;
-  static const int _errorValue = 0xFFF85F5F;
+class AppLightColors implements AppColors {
+  static const int _primaryValue = 0xFF1D842E;
+  static const int _secondaryValue = 0xFFFFCC00;
+  static const int _tertiaryValue = 0xFFF26F23;
+  static const int _errorValue = 0xFFFF0000;
+  static const int _waringValue = 0xFFFBA51D;
+  static const int _successValue = 0xFF1AAF32;
+  static const int _infoValue = 0xFF0085FF;
+  static const int _neutralValue = 0xFF1A1C19;
+
+  @override
+  Brightness get brightness => Brightness.light;
 
   @override
   Color get primaryColor => const Color(_primaryValue);
 
   @override
-  Color get neutralColor => const Color(_neutralValue);
+  Color get secondaryColor => const Color(_secondaryValue);
 
   @override
-  Color get backgroundColor => const Color(_backgroundValue);
+  Color get tertiaryColor => const Color(_tertiaryValue);
 
   @override
-  Color get buttonColor => const Color(_buttonValue);
+  MaterialColor get errorColor => const MaterialColor(
+        _errorValue,
+        <int, Color>{
+          100: Color(_errorValue),
+          60: Color(0xFFDE3730),
+          40: Color(0xFFFF5449),
+          10: Color(0xFFFFDAD6),
+        },
+      );
 
   @override
-  Color get disableColor => const Color(_disableValue);
+  MaterialColor get waringColor => const MaterialColor(
+        _waringValue,
+        <int, Color>{
+          100: Color(_waringValue),
+          40: Color(0xFFFDDBA5),
+          10: Color(0xFFFFF6E8),
+        },
+      );
 
   @override
-  Color get dialogColor => const Color(_dialogValue);
+  MaterialColor get successColor => const MaterialColor(
+        _successValue,
+        <int, Color>{
+          100: Color(_successValue),
+          5: Color(0xFFE3F6DD),
+        },
+      );
 
   @override
-  Color get errorColor => const Color(_errorValue);
+  MaterialColor get infoColor => const MaterialColor(
+        _infoValue,
+        <int, Color>{
+          100: Color(_infoValue),
+          5: Color(0xFFF0F8FF),
+        },
+      );
 
-  // @override
-  // MaterialColor get neutral => const MaterialColor(
-  //       _neutralValue,
-  //       <int, Color>{
-  //         100: Color(0xFFFFFFFF),
-  //         200: Color(0xFFF2F2F2),
-  //         300: Color(0xFFE9E9E9),
-  //         310: Color(0xFFD9D9D9),
-  //         400: Color(0xFFDCDCDC),
-  //         500: Color(0xFF9F9F9D),
-  //         600: Color(0xFF7C7C79),
-  //         700: Color(0xFF454442),
-  //         800: Color(0xFF222220),
-  //         900: Color(_neutralValue),
-  //       },
-  //     );
-
-  // @override
-  // MaterialColor get yellow => const MaterialColor(_primaryValue, <int, Color>{
-  //       100: Color(0xFFFFFDDE),
-  //       300: Color(0xFFFFFAC2),
-  //       400: Color(0xFFF1C143),
-  //       700: Color(0xFFFCF27C),
-  //       800: Color(0xFFFDF050),
-  //       900: Color(0xFFF5CE00),
-  //     });
-
-  // @override
-  // MaterialColor get red => const MaterialColor(_secondaryValue, <int, Color>{
-  //       100: Color(0xFFFFE9E9),
-  //       300: Color(0xFFFFABAB),
-  //       700: Color(0xFFF85F5F),
-  //       800: Color(0xFFF63B3B),
-  //       900: Color(0xFFE52013),
-  //       // 600: Color(0xFFE83126),
-  //     });
-
-  // @override
-  // MaterialColor get blue => const MaterialColor(_blueValue, <int, Color>{
-  //       200: Color(0xFFDFECFF),
-  //       600: Color(0xFF69A4FF),
-  //       700: Color(0xFF2E7CF6),
-  //       800: Color(0xFF1164E4),
-  //       900: Color(0xFF0350C7),
-  //     });
-
-  // @override
-  // MaterialColor get green => const MaterialColor(_greenValue, <int, Color>{
-  //       200: Color(0xFFCCF9DC),
-  //       300: Color(0xFFADF6C8),
-  //       700: Color(0xFF39D673),
-  //       800: Color(0xFF1CC174),
-  //       900: Color(0xFF09A35B),
-  //     });
+  @override
+  MaterialColor get neutralColor => const MaterialColor(
+        _neutralValue,
+        <int, Color>{
+          100: Color(_neutralValue),
+          80: Color(0xFF454743),
+          60: Color(0xFF767873),
+          40: Color(0xFFAAACA6),
+          30: Color(0xFFC6C7C1),
+          20: Color(0xFFE2E3DD),
+          10: Color(0xFFF0F1EB),
+          0: Color(0xFFFFFFFF),
+        },
+      );
 }
 
-class AppCollection2Colors implements AppColors {
-  static const int _primaryValue = 0xFFE52013;
-  static const int _secondaryValue = 0xFFF63B3B;
-  static const int _neutralValue = 0xFFE9E9E9;
-  static const int _backgroundValue = 0xFF1CC174;
-  static const int _buttonValue = 0xFF1164E4;
-  static const int _blueValue = 0xFF1164E4;
-  static const int _greenValue = 0xFF1CC174;
-  static const int _disableValue = 0xFFDFECFF;
-  static const int _dialogValue = 0xFF0350C7;
-  static const int _errorValue = 0xFFF85F5F;
+class AppDarkColors implements AppColors {
+  static const int _primaryValue = 0xFF1D842E;
+  static const int _secondaryValue = 0xFFFFCC00;
+  static const int _tertiaryValue = 0xFFF26F23;
+  static const int _errorValue = 0xFFFF0000;
+  static const int _waringValue = 0xFFFBA51D;
+  static const int _successValue = 0xFF1AAF32;
+  static const int _infoValue = 0xFF0085FF;
+  static const int _neutralValue = 0xFF1A1C19;
+
+  @override
+  Brightness get brightness => Brightness.dark;
 
   @override
   Color get primaryColor => const Color(_primaryValue);
 
   @override
-  Color get neutralColor => const Color(_neutralValue);
+  Color get secondaryColor => const Color(_secondaryValue);
 
   @override
-  Color get backgroundColor => const Color(_backgroundValue);
+  Color get tertiaryColor => const Color(_tertiaryValue);
 
   @override
-  Color get buttonColor => const Color(_buttonValue);
+  MaterialColor get errorColor => const MaterialColor(
+        _errorValue,
+        <int, Color>{
+          100: Color(_errorValue),
+          60: Color(0xFFDE3730),
+          40: Color(0xFFFF5449),
+          10: Color(0xFFFFDAD6),
+        },
+      );
 
   @override
-  Color get disableColor => const Color(_disableValue);
+  MaterialColor get waringColor => const MaterialColor(
+        _waringValue,
+        <int, Color>{
+          100: Color(_waringValue),
+          40: Color(0xFFFDDBA5),
+          10: Color(0xFFFFF6E8),
+        },
+      );
 
   @override
-  Color get dialogColor => const Color(_dialogValue);
+  MaterialColor get successColor => const MaterialColor(
+        _successValue,
+        <int, Color>{
+          100: Color(_successValue),
+          5: Color(0xFFE3F6DD),
+        },
+      );
 
   @override
-  Color get errorColor => const Color(_errorValue);
+  MaterialColor get infoColor => const MaterialColor(
+        _infoValue,
+        <int, Color>{
+          100: Color(_infoValue),
+          5: Color(0xFFF0F8FF),
+        },
+      );
 
-  // @override
-  // MaterialColor get neutral => const MaterialColor(
-  //       _neutralValue,
-  //       <int, Color>{
-  //         100: Color(0xFFFFFFFF),
-  //         200: Color(0xFFF2F2F2),
-  //         300: Color(0xFFE9E9E9),
-  //         310: Color(0xFFD9D9D9),
-  //         400: Color(0xFFDCDCDC),
-  //         500: Color(0xFF9F9F9D),
-  //         600: Color(0xFF7C7C79),
-  //         700: Color(0xFF454442),
-  //         800: Color(0xFF222220),
-  //         900: Color(_neutralValue),
-  //       },
-  //     );
-
-  // @override
-  // MaterialColor get yellow => const MaterialColor(_primaryValue, <int, Color>{
-  //       100: Color(0xFFFFFDDE),
-  //       300: Color(0xFFFFFAC2),
-  //       400: Color(0xFFF1C143),
-  //       700: Color(0xFFFCF27C),
-  //       800: Color(0xFFFDF050),
-  //       900: Color(0xFFF5CE00),
-  //     });
-
-  // @override
-  // MaterialColor get red => const MaterialColor(_secondaryValue, <int, Color>{
-  //       100: Color(0xFFFFE9E9),
-  //       300: Color(0xFFFFABAB),
-  //       700: Color(0xFFF85F5F),
-  //       800: Color(0xFFF63B3B),
-  //       900: Color(0xFFE52013),
-  //       // 600: Color(0xFFE83126),
-  //     });
-
-  // @override
-  // MaterialColor get blue => const MaterialColor(_blueValue, <int, Color>{
-  //       200: Color(0xFFDFECFF),
-  //       600: Color(0xFF69A4FF),
-  //       700: Color(0xFF2E7CF6),
-  //       800: Color(0xFF1164E4),
-  //       900: Color(0xFF0350C7),
-  //     });
-
-  // @override
-  // MaterialColor get green => const MaterialColor(_greenValue, <int, Color>{
-  //       200: Color(0xFFCCF9DC),
-  //       300: Color(0xFFADF6C8),
-  //       700: Color(0xFF39D673),
-  //       800: Color(0xFF1CC174),
-  //       900: Color(0xFF09A35B),
-  //     });
+  @override
+  MaterialColor get neutralColor => const MaterialColor(
+        _neutralValue,
+        <int, Color>{
+          100: Color(_neutralValue),
+          80: Color(0xFF454743),
+          60: Color(0xFF767873),
+          40: Color(0xFFAAACA6),
+          30: Color(0xFFC6C7C1),
+          20: Color(0xFFE2E3DD),
+          10: Color(0xFFF0F1EB),
+          0: Color(0xFFFFFFFF),
+        },
+      );
 }

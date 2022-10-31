@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
+import '../../services/app_service.dart';
 import '../../services/environment_service.dart';
 import '../entities/base_vo.dart';
 import '../local/app_pref_key.dart';
@@ -15,27 +16,37 @@ import 'nets/app_result.dart';
 part 'api_provider.dart';
 part 'client_request.dart';
 
-class NetworkService extends GetxService {
+abstract class NetworkService extends GetxService {
+  Future<AppResult<AppResponse>> request(
+      {required ClientRequest clientRequest, bool isRequestForList = false});
+}
+
+class NetworkServiceImpl extends NetworkService {
   static const requestTimeOut = Duration(seconds: 15);
 
   late final Logger _logger;
   late final EnvironmentService _env;
   late final AppSharedPref _pref;
+  late final AppService _appService;
   late final GetConnect _client;
-
-  NetworkService(this._env, this._pref);
 
   final Map<String, String> _headers = {};
 
+  bool _isRefreshToken = false;
+
   @override
   void onInit() {
-    _logger = Logger(printer: PrettyPrinter());
+    _logger = Logger(printer: PrettyPrinter(methodCount: 0));
+    _env = Get.find();
+    _pref = Get.find();
+    _appService = Get.find();
     _client = GetConnect(timeout: requestTimeOut);
     super.onInit();
   }
 
   Future<void> _configConnect(Map<String, String> requestHeader) async {
-    _client.baseUrl = await _env.apiDomain();
+    _client.baseUrl = _env.apiDomain();
+    _headers.clear();
     final token = await _pref.getValue(AppPrefKey.token, '');
     if (token.isNotEmpty == true) {
       _headers.addAll({'Authorization': 'Bearer $token'});
@@ -43,9 +54,10 @@ class NetworkService extends GetxService {
     _headers.addAll(requestHeader);
   }
 
-  Future<AppResult<AppResponse>> request({
-    required ClientRequest clientRequest,
-  }) async {
+  @override
+  Future<AppResult<AppResponse>> request(
+      {required ClientRequest clientRequest,
+      bool isRequestForList = false}) async {
     try {
       await _configConnect(clientRequest.headers ?? {});
       final response = await _client.request(
@@ -57,60 +69,87 @@ class NetworkService extends GetxService {
         headers: _headers,
         uploadProgress: clientRequest.uploadProgress,
       );
-      _logger.i(
-          'Request Network Service: ${_client.baseUrl}${clientRequest.url} - header: $_headers \n Response Network Service: ${response.statusCode} - ${response.statusText} - Response Body: ${response.body}');
+      _logger.d('Header: ${response.request?.headers}');
+      _logger.d('Request Url: ${response.request?.url} ');
+      _logger.d('Request Body: ${clientRequest.body}');
+      _logger.d('Response Network Service: ${response.bodyString}');
       switch (response.statusCode) {
         case 200:
-          return AppResult.success(AppResponse.fromJson(response.body is String
-              ? jsonDecode(response.body)
-              : response.body));
-
+          if (isRequestForList) {
+            final bodyRes = AppResponse.fromJsonToList(response.body is String
+                ? jsonDecode(response.body)
+                : response.body);
+            return AppResult.success(
+              bodyRes,
+              hasMore: bodyRes.hasMore,
+              total: bodyRes.total,
+            );
+          }
+          return AppResult.success(
+            AppResponse.fromJson(response.body is String
+                ? jsonDecode(response.body)
+                : response.body),
+          );
         case 400:
           return AppResult.failure(
-              BadRequestException(response.body.toString()));
+              BadRequestException(details: response.body.toString()));
         case 401:
-        case 403:
-          final result = await _requestRefreshToken();
-          if (result is AppResultSuccess) {
-            return request(clientRequest: clientRequest);
-          } else {
-            return AppResult.failure(FetchDataException(
-                (result as AppResultFailure).exception?.details));
+          // Don't request refreshToken when login
+          // Requesting Token -> cancel other requests
+          if (clientRequest.url == ApiProvider.login || _isRefreshToken) {
+            return AppResult.failure(
+                UnAuthorException(details: response.body.toString()));
           }
+          _isRefreshToken = true;
+          final result = await _requestRefreshToken();
+          _isRefreshToken = false;
+          if (result is AppResultSuccess) {
+            return request(
+                clientRequest: clientRequest,
+                isRequestForList: isRequestForList);
+          } else {
+            // force logout
+            _appService.forceLogout();
+            return AppResult.failure(FetchDataException(
+                details: (result as AppResultFailure).exception?.details));
+          }
+        case 403:
+          return AppResult.failure(
+              UnAuthorException(details: response.body.toString()));
         case 404:
           return AppResult.failure(
-              BadRequestException(response.body.toString()));
+              BadRequestException(details: response.body.toString()));
         case 500:
-          return AppResult.failure(FetchDataException('Internal Server Error'));
+          return AppResult.failure(
+              FetchDataException(details: 'Internal Server Error'));
         default:
           return AppResult.failure(FetchDataException(
-              'Error occured while Communication with Server with StatusCode : ${response.statusCode}'));
+              details:
+                  'Error occured while Communication with Server with StatusCode : ${response.statusCode}'));
       }
     } on TimeoutException catch (_) {
       _logger.e('Response: TimeOutException');
-      return AppResult.failure(TimeOutException(null));
+      return AppResult.failure(TimeOutException());
     } on SocketException {
       _logger.e('Response: No Internet connection');
-      return AppResult.failure(FetchDataException('No Internet connection'));
+      return AppResult.failure(
+          FetchDataException(details: 'No Internet connection'));
     } catch (e) {
       _logger.e('Some things wrong: ${e.toString()}');
       return AppResult.failure(
-          FetchDataException('Some things wrong: ${e.toString()}'));
+          FetchDataException(details: 'Some things wrong: ${e.toString()}'));
     }
   }
 
   Future<AppResult<dynamic>> _requestRefreshToken() async {
     try {
       final refreshToken = await _pref.getValue(AppPrefKey.refreshToken, '');
-      _logger
-          .i('Request Token Service: ${_client.baseUrl} - header: $_headers');
+      _logger.d('Request Refresh Token: $refreshToken');
       final response = await _client.request(
-        "users-refresh-token",
-        HTTPMethod.get.value,
-        headers: {'Authorizationrefresh': 'Bearer $refreshToken'},
-      );
-      _logger.i(
-          'Request Refresh Token Network Service: ${response.statusCode} - ${response.statusText} - Response Body: ${response.body}');
+          ApiProvider.refreshToken, HTTPMethod.get.value,
+          body: {'refreshToken': refreshToken});
+      _logger.d(
+          'Response Refresh Token: ${response.request?.url} --- Body: ${response.body}');
       switch (response.statusCode) {
         case 200:
           final appResponse = AppResponse.fromJson(response.body is String
@@ -121,19 +160,13 @@ class NetworkService extends GetxService {
           _pref.setValue(AppPrefKey.refreshToken, tokenVo.refreshToken ?? '');
           return AppResult.success(response);
         default:
-          return AppResult.failure(AppException(
-              code: 999.toString(),
-              message: 'UnAuthenticator Exception',
+          return AppResult.failure(UnAuthorException(
               details: 'Request Refresh Token Network Failure'));
       }
     } catch (e) {
       _logger
-          .i('Request Refresh Token Network Service Failure: ${e.toString()}');
-      return AppResult.failure(AppException(
-          code: 999.toString(),
-          message: 'UnAuthenticator Exception',
-          details: e.toString()));
-      ;
+          .d('Request Refresh Token Network Service Failure: ${e.toString()}');
+      return AppResult.failure(UnAuthorException(details: e.toString()));
     }
   }
 }

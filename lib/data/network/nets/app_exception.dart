@@ -12,7 +12,7 @@ class AppException implements Exception {
 }
 
 class FetchDataException extends AppException {
-  FetchDataException(String? details)
+  FetchDataException({String? details})
       : super(
           code: "fetch-data",
           message: "Error During Communication",
@@ -21,7 +21,7 @@ class FetchDataException extends AppException {
 }
 
 class BadRequestException extends AppException {
-  BadRequestException(String? details)
+  BadRequestException({String? details})
       : super(
           code: "invalid-request",
           message: "Invalid Request",
@@ -30,7 +30,7 @@ class BadRequestException extends AppException {
 }
 
 class UnAuthorException extends AppException {
-  UnAuthorException(String? details)
+  UnAuthorException({String? details})
       : super(
           code: "unauthorised",
           message: "Unauthorised",
@@ -39,7 +39,7 @@ class UnAuthorException extends AppException {
 }
 
 class InvalidInputException extends AppException {
-  InvalidInputException(String? details)
+  InvalidInputException({String? details})
       : super(
           code: "invalid-input",
           message: "Invalid Input",
@@ -48,7 +48,7 @@ class InvalidInputException extends AppException {
 }
 
 class AuthenticationException extends AppException {
-  AuthenticationException(String? details)
+  AuthenticationException({String? details})
       : super(
           code: "authentication-failed",
           message: "Authentication Failed",
@@ -57,7 +57,7 @@ class AuthenticationException extends AppException {
 }
 
 class TimeOutException extends AppException {
-  TimeOutException(String? details)
+  TimeOutException({String? details})
       : super(
           code: "request-timeout",
           message: "Request TimeOut",

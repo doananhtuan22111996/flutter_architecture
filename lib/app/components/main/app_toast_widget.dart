@@ -1,47 +1,107 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AppToastWidget extends StatelessWidget {
-  const AppToastWidget({Key? key}) : super(key: key);
+import '../../config/theme/app_theme.dart';
+import 'app_icon_widget.dart';
 
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-
+class AppToastWidget {
   static showCustomToast(
-      {String? title,
-      required String message,
-      Color? color,
-      Duration? duration}) {
+    BuildContext? context, {
+    required IconData icon,
+    required String message,
+    Color? backgroundColor,
+  }) {
+    if (context == null) return;
     Get.rawSnackbar(
-      title: title,
-      duration: duration ?? const Duration(seconds: 3),
-      snackStyle: SnackStyle.GROUNDED,
-      backgroundColor: color ?? Colors.green,
-      onTap: (snack) {
-        Get.closeAllSnackbars();
-      },
-      //overlayBlur: 0.8,
+      icon: AppIconWidget(icon, bgColor: context.theme.backgroundColor),
+      duration: const Duration(seconds: 2),
+      snackStyle: SnackStyle.FLOATING,
+      backgroundColor: backgroundColor ?? context.theme.primaryColor,
+      onTap: (snack) => Get.closeAllSnackbars(),
       message: message,
+      margin: const EdgeInsets.all(16),
+      borderRadius: 4,
     );
   }
 
-  static showCustomErrorToast(
-      {String? title,
-      required String message,
-      Color? color,
-      Duration? duration}) {
+  static showErrorToast(BuildContext? context, {required String message}) {
+    if (context == null) return;
     Get.rawSnackbar(
-      title: title,
-      duration: duration ?? const Duration(seconds: 3),
-      snackStyle: SnackStyle.GROUNDED,
-      backgroundColor: color ?? Colors.redAccent,
-      onTap: (snack) {
-        Get.closeAllSnackbars();
-      },
-      //overlayBlur: 0.8,
+      icon: AppIconWidget(
+        Icons.error_rounded,
+        iconSize: 18,
+        bgColor: context.theme.errorColor,
+        iconColor: AppColors.get().neutralColor[0],
+      ),
+      duration: const Duration(seconds: 2),
+      snackStyle: SnackStyle.FLOATING,
+      backgroundGradient: LinearGradient(
+        colors: [
+          context.theme.errorColor,
+          context.theme.errorColor,
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        tileMode: TileMode.clamp,
+      ),
+      onTap: (snack) => Get.closeAllSnackbars(),
       message: message,
+      margin: const EdgeInsets.all(16),
+      borderRadius: 4,
+    );
+  }
+
+  static showSuccessToast(BuildContext? context, {required String message}) {
+    if (context == null) return;
+    Get.rawSnackbar(
+      icon: AppIconWidget(
+        Icons.check,
+        iconSize: 18,
+        bgColor: AppColors.get().neutralColor[0],
+        iconColor: context.theme.primaryColorLight,
+      ),
+      duration: const Duration(seconds: 2),
+      snackStyle: SnackStyle.FLOATING,
+      backgroundGradient: LinearGradient(
+        colors: [
+          context.theme.primaryColorLight,
+          context.theme.primaryColorLight,
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        tileMode: TileMode.clamp,
+      ),
+      onTap: (snack) => Get.closeAllSnackbars(),
+      message: message,
+      margin: const EdgeInsets.all(16),
+      borderRadius: 4,
+    );
+  }
+
+  static showWaringToast(BuildContext? context, {required String message}) {
+    if (context == null) return;
+    Get.rawSnackbar(
+      icon: AppIconWidget(
+        Icons.warning,
+        iconSize: 18,
+        bgColor: AppColors.get().waringColor[100],
+        iconColor: AppColors.get().neutralColor[0],
+      ),
+      duration: const Duration(seconds: 2),
+      snackStyle: SnackStyle.FLOATING,
+      backgroundGradient: LinearGradient(
+        colors: [
+          AppColors.get().waringColor[100]!,
+          AppColors.get().waringColor[100]!,
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        tileMode: TileMode.clamp,
+      ),
+      onTap: (snack) => Get.closeAllSnackbars(),
+      message: message,
+      margin: const EdgeInsets.all(16),
+      borderRadius: 4,
     );
   }
 }

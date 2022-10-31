@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'app_text_widget.dart';
+import '../../config/theme/app_theme.dart';
+import 'text/app_text_widget.dart';
 
 class AppSnackbarWidget {
   const AppSnackbarWidget(
@@ -25,25 +26,36 @@ class AppSnackbarWidget {
     if (Get.isSnackbarOpen) {
       Get.closeCurrentSnackbar();
     }
-    Get.snackbar(
-      title,
-      message,
-      titleText: titleWidget ??
-          AppTextWidget(
-            text: title,
-            padding: EdgeInsets.zero,
-            textStyle: context?.theme.textTheme.caption
-                ?.copyWith(color: context.theme.primaryColor),
-          ),
-      duration: duration ?? const Duration(seconds: 3),
-      margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      backgroundColor: context?.theme.dialogBackgroundColor,
-      icon: isError
-          ? Icon(
-              Icons.error,
-              color: context?.theme.errorColor,
-            )
-          : Icon(Icons.check_circle, color: context?.theme.primaryColor),
-    );
+    Get.snackbar(title, message,
+        titleText: titleWidget ??
+            AppTextWidget(
+              title,
+              textStyle: context?.theme.textTheme.caption
+                  ?.copyWith(color: AppColors.get().neutralColor[0]),
+            ),
+        messageText: messageWidget ??
+            AppTextWidget(
+              message,
+              textStyle: context?.theme.textTheme.bodyText1
+                  ?.copyWith(color: AppColors.get().neutralColor[0]),
+            ),
+        duration: duration ?? const Duration(seconds: 3),
+        margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        backgroundColor: isError ? context?.theme.errorColor : context?.theme.primaryColor,
+        icon: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: isError
+              ? Icon(
+                  Icons.error,
+                  color: AppColors.get().neutralColor[0],
+                  size: 32,
+                )
+              : Icon(
+                  Icons.check_circle,
+                  color: AppColors.get().neutralColor[0],
+                  size: 32,
+                ),
+        ),
+        snackPosition: SnackPosition.BOTTOM);
   }
 }
