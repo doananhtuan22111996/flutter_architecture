@@ -2,7 +2,12 @@
 
 ## [Unreleased]
 
+### Features
 
+- New Version v1.1.1
+  - Config Firebase Env, + Firebase crashlytics, * Config new CI/CD
+  
+  
 <a name="v1.1.0"></a>
 
 ## [v1.1.0] - 2022-11-01

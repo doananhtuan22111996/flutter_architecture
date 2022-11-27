@@ -9,50 +9,111 @@
 
 stages:
   - sonarqube
-  - apk
-  - ipa
+  - apk-dev
+  - apk-prod
+  - ipa-dev
+  - ipa-prod
+  - dev-apk-distribute
+  - dev-ipa-distribute
+  - prod-apk-distribute
+  - prod-ipa-distribute
 
 # Make Android Project
-assembleReleaseAndroid:
+apkDev:
   variables:
-    ANDROID_KEYSTORE: $ANDROID_KEYSTORE
-    ANDROID_KEY_DEV_PROPERTIES: $ANDROID_KEY_DEV_PROPERTIES
+    ANDROID_KEYSTORE: $ANDROID_KEYSTORE_DEV
   interruptible: true
-  stage: apk
+  stage: apk-dev
   tags:
     - sflutter-shell
+  before_script:
+    - flutter pub get
+    - flutter packages pub run build_runner build
   script:
     - cd android
-    - echo -n ${ANDROID_KEYSTORE} | base64 -d > skeleton-key-store.jks
-    - echo -n ${ANDROID_KEY_DEV_PROPERTIES} | base64 -d > key.dev.properties
+    - echo -n ${ANDROID_KEYSTORE} | base64 -d > skeleton-keystore-dev.jks
     - cd ..
     - flutter build apk --release --flavor dev --no-shrink
   artifacts:
     paths:
       - build/app/outputs/flutter-apk/app-dev-release.apk
   after_script:
-    - echo "Execute android assembleRelease completed!!!"
+    - echo "Execute android assembleDevRelease completed!!!"
+  only:
+    - merge_request
+    - main
+
+# Make Android Project
+apkProd:
+  variables:
+    ANDROID_KEYSTORE: $ANDROID_KEYSTORE_PROD
+  interruptible: true
+  stage: apk-prod
+  tags:
+    - sflutter-shell
+  before_script:
+    - flutter pub get
+    - flutter packages pub run build_runner build
+  script:
+    - cd android
+    - echo -n ${ANDROID_KEYSTORE} | base64 -d > skeleton-keystore-prod.jks
+    - cd ..
+    - flutter build apk --release --flavor prod --no-shrink
+  artifacts:
+    paths:
+      - build/app/outputs/flutter-apk/app-prod-release.apk
+  after_script:
+    - echo "Execute android assembleDevRelease completed!!!"
   only:
     - merge_request
     - main
 
 # Make IOS Project
-assembleReleaseIos:
+ipaDev:
+  variables:
+    EXPORT_OPTIONS: $EXPORT_OPTIONS_DEV
   interruptible: true
-  stage: ipa
+  stage: ipa-dev
   tags:
     - sflutter-shell
-  script:
+  before_script:
     - flutter pub get
+    - flutter packages pub run build_runner build
+  script:
     - cd ios
-    - pod install
-    - xcodebuild archive -workspace Runner.xcworkspace -scheme dev -archivePath RunnerArchive
-    - xcodebuild -exportArchive -archivePath RunnerArchive.xcarchive -exportOptionsPlist RunnerArchive.xcarchive/info.plist -exportPath ./build
+    - echo -n ${EXPORT_OPTIONS} | base64 -d > ExportOptions.plist
+    - cd ..
+    - flutter build ipa --release --flavor dev --export-options-plist='ios/ExportOptions.plist'
   artifacts:
     paths:
-      - ios/build/flutter_skeleton.ipa
+      - build/ios/ipa/flutter_skeleton.ipa
   after_script:
-    - echo "Execute ios assembleRelease completed!!!"
+    - echo "Execute ios assembleDevRelease completed!!!"
+  only:
+    - merge_request
+    - main
+
+# Make IOS Project
+ipaProd:
+  variables:
+    EXPORT_OPTIONS: $EXPORT_OPTIONS_PROD
+  interruptible: true
+  stage: ipa-prod
+  tags:
+    - sflutter-shell
+  before_script:
+    - flutter pub get
+    - flutter packages pub run build_runner build
+  script:
+    - cd ios
+    - echo -n ${EXPORT_OPTIONS} | base64 -d > ExportOptions.plist
+    - cd ..
+    - flutter build ipa --release --flavor prod --export-options-plist='ios/ExportOptions.plist'
+  artifacts:
+    paths:
+      - build/ios/ipa/flutter_skeleton.ipa
+  after_script:
+    - echo "Execute ios assembleProdRelease completed!!!"
   only:
     - merge_request
     - main
@@ -69,3 +130,122 @@ sonarqubeRelease:
   only:
     - merge_request
     - main
+
+# Distribution
+dev-apk-distribute:
+  interruptible: true
+  variables:
+    ANDROID_KEYSTORE: $ANDROID_KEYSTORE_DEV
+    FIREBASE_CLI: $FIREBASE_CLI
+  stage: dev-apk-distribute
+  tags:
+    - sflutter-shell
+  before_script:
+    - flutter pub get
+    - flutter packages pub run build_runner build
+  script:
+    - cd android
+    - echo -n ${ANDROID_KEYSTORE} | base64 -d > skeleton-keystore-dev.jks
+    - cd ..
+    - build_name="$(cut -d'/' -f2 <<<"$CI_COMMIT_TAG")"
+    - echo $build_name
+    - build_number="$(cut -d'/' -f3 <<<"$CI_COMMIT_TAG")"
+    - echo $build_number
+    - flutter build apk --release --flavor dev --no-shrink --build-name $build_name --build-number $build_number
+    # - firebase appdistribution:distribute build/app/outputs/flutter-apk/app-dev-release.apk --app ${FIREBASE_CLI} --groups "gitlab-cicd, gu-thannong"
+  artifacts:
+    paths:
+      - build/app/outputs/flutter-apk/app-dev-release.apk
+  after_script:
+    - echo "Execute android assembleDevRelease completed!!!"
+  only:
+    variables:
+      - $CI_COMMIT_TAG =~ /^dev\/\d+.\d+.\d+\/\d+/
+
+dev-ipa-distribute:
+  interruptible: true
+  stage: dev-ipa-distribute
+  variables:
+    EXPORT_OPTIONS: $EXPORT_OPTIONS_DEV
+  tags:
+    - sflutter-shell
+  before_script:
+    - flutter pub get
+    - flutter packages pub run build_runner build
+  script:
+    - cd ios
+    - echo -n ${EXPORT_OPTIONS} | base64 -d > ExportOptions.plist
+    - cd ..
+    - build_name="$(cut -d'/' -f2 <<<"$CI_COMMIT_TAG")"
+    - echo $build_name
+    - build_number="$(cut -d'/' -f3 <<<"$CI_COMMIT_TAG")"
+    - echo $build_number
+    - flutter build ipa --release --flavor dev --export-options-plist='ios/ExportOptions.plist' --build-name $build_name --build-number $build_number
+    # - xcrun altool --upload-app -f build/ios/ipa/flutter_skeleton.ipa --type ios -u product.mobile@geekup.vn -p byeo-nquz-nljn-pgwr
+  artifacts:
+    paths:
+      - build/ios/ipa/flutter_skeleton.ipa
+  after_script:
+    - echo "Execute ios assembleDevRelease completed!!!"
+  only:
+    variables:
+      - $CI_COMMIT_TAG =~ /^dev\/\d+.\d+.\d+\/\d+/
+
+prod-apk-distribute:
+  interruptible: true
+  variables:
+    ANDROID_KEYSTORE: $ANDROID_KEYSTORE_PROD
+    FIREBASE_CLI: $FIREBASE_CLI
+  stage: prod-apk-distribute
+  tags:
+    - sflutter-shell
+  before_script:
+    - flutter pub get
+    - flutter packages pub run build_runner build
+  script:
+    - cd android
+    - echo -n ${ANDROID_KEYSTORE} | base64 -d > skeleton-keystore-prod.jks
+    - cd ..
+    - build_name="$(cut -d'/' -f2 <<<"$CI_COMMIT_TAG")"
+    - echo $build_name
+    - build_number="$(cut -d'/' -f3 <<<"$CI_COMMIT_TAG")"
+    - echo $build_number
+    - flutter build apk --release --flavor prod --no-shrink --build-name $build_name --build-number $build_number
+    # - firebase appdistribution:distribute build/app/outputs/flutter-apk/app-dev-release.apk --app ${FIREBASE_CLI} --groups "gitlab-cicd, gu-thannong"
+  artifacts:
+    paths:
+      - build/app/outputs/flutter-apk/app-prod-release.apk
+  after_script:
+    - echo "Execute android assembleProdRelease completed!!!"
+  only:
+    variables:
+      - $CI_COMMIT_TAG =~ /^prod\/\d+.\d+.\d+\/\d+/
+
+prod-ipa-distribute:
+  interruptible: true
+  stage: prod-ipa-distribute
+  variables:
+    EXPORT_OPTIONS: $EXPORT_OPTIONS_PROD
+  tags:
+    - sflutter-shell
+  before_script:
+    - flutter pub get
+    - flutter packages pub run build_runner build
+  script:
+    - cd ios
+    - echo -n ${EXPORT_OPTIONS} | base64 -d > ExportOptions.plist
+    - cd ..
+    - build_name="$(cut -d'/' -f2 <<<"$CI_COMMIT_TAG")"
+    - echo $build_name
+    - build_number="$(cut -d'/' -f3 <<<"$CI_COMMIT_TAG")"
+    - echo $build_number
+    - flutter build ipa --release --flavor prod --export-options-plist='ios/ExportOptions.plist' --build-name $build_name --build-number $build_number
+    # - xcrun altool --upload-app -f build/ios/ipa/flutter_skeleton.ipa --type ios -u product.mobile@geekup.vn -p byeo-nquz-nljn-pgwr
+  artifacts:
+    paths:
+      - build/ios/ipa/flutter_skeleton.ipa
+  after_script:
+    - echo "Execute ios assembleProdRelease completed!!!"
+  only:
+    variables:
+      - $CI_COMMIT_TAG =~ /^prod\/\d+.\d+.\d+\/\d+/
