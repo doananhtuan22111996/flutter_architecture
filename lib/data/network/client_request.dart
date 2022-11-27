@@ -27,13 +27,16 @@ class ClientRequest {
   Map<String, String>? headers;
   Map<String, dynamic>? query;
   Progress? uploadProgress;
+  bool isRequestForList;
 
-  ClientRequest(
-      {required this.url,
-      required this.method,
-      this.body,
-      this.contentType,
-      this.headers,
-      this.query,
-      this.uploadProgress});
+  ClientRequest({
+    required this.url,
+    required this.method,
+    this.body,
+    this.contentType,
+    this.headers,
+    this.query,
+    this.uploadProgress,
+    this.isRequestForList = false,
+  });
 }

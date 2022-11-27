@@ -33,7 +33,7 @@ class AppListWidget<BM extends BaseModel> extends StatelessWidget {
           return Obx(
             () => SmartRefresher(
               enablePullDown: true,
-              enablePullUp: controller.hasMore.value == true,
+              enablePullUp: true,
               header: const MaterialClassicHeader(),
               footer: const ClassicFooter(
                 loadStyle: LoadStyle.ShowWhenLoading,
@@ -92,6 +92,9 @@ class AppListWidget<BM extends BaseModel> extends StatelessWidget {
   }
 
   void _onLoadMore(AppListController<BM> controller) async {
+    if (!controller.hasMore.value) {
+      return _refreshController.loadComplete();
+    }
     await controller.onLoadMoreCall();
     _refreshController.loadComplete();
   }

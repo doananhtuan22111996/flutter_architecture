@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+### Code Refactoring
+
+- update network service, update components
+  
+  
+<a name="prod/1.1.1/1"></a>
+
+## [prod/1.1.1/1] - 2022-11-27
+
+
+<a name="dev/1.1.1/1"></a>
+
+## [dev/1.1.1/1] - 2022-11-27
+
 ### Features
 
 - New Version v1.1.1
@@ -99,7 +113,9 @@
 - init changelog v1.0.0
   
   
-[Unreleased]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.1.0...HEAD
+[Unreleased]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/prod/1.1.1/1...HEAD
+[prod/1.1.1/1]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/dev/1.1.1/1...prod/1.1.1/1
+[dev/1.1.1/1]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.1.0...dev/1.1.1/1
 [v1.1.0]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.6...v1.1.0
 [v1.0.6]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.5...v1.0.6
 [v1.0.5]: https://gitlab.geekup.io/gu_mobile/flutter/skeleton/compare/v1.0.4...v1.0.5

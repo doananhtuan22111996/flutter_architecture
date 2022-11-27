@@ -18,7 +18,7 @@ part 'client_request.dart';
 
 abstract class NetworkService extends GetxService {
   Future<AppResult<AppResponse>> request(
-      {required ClientRequest clientRequest, bool isRequestForList = false});
+      {required ClientRequest clientRequest});
 }
 
 class NetworkServiceImpl extends NetworkService {
@@ -30,43 +30,38 @@ class NetworkServiceImpl extends NetworkService {
   late final AppService _appService;
   late final GetConnect _client;
 
-  final Map<String, String> _headers = {};
-
   bool _isRefreshToken = false;
 
   @override
-  void onInit() {
+  void onInit() async {
+    _client = GetConnect(timeout: requestTimeOut);
     _logger = Logger(printer: PrettyPrinter(methodCount: 0));
     _env = Get.find();
     _pref = Get.find();
     _appService = Get.find();
-    _client = GetConnect(timeout: requestTimeOut);
+    _client.baseUrl = _env.apiDomain();
     super.onInit();
   }
 
-  Future<void> _configConnect(Map<String, String> requestHeader) async {
-    _client.baseUrl = _env.apiDomain();
-    _headers.clear();
+  Future<Map<String, String>> _configConnect() async {
     final token = await _pref.getValue(AppPrefKey.token, '');
     if (token.isNotEmpty == true) {
-      _headers.addAll({'Authorization': 'Bearer $token'});
+      return {'Authorization': 'Bearer $token'};
     }
-    _headers.addAll(requestHeader);
+    return {};
   }
 
   @override
   Future<AppResult<AppResponse>> request(
-      {required ClientRequest clientRequest,
-      bool isRequestForList = false}) async {
+      {required ClientRequest clientRequest}) async {
     try {
-      await _configConnect(clientRequest.headers ?? {});
       final response = await _client.request(
         clientRequest.url,
         clientRequest.method.value,
         body: clientRequest.body,
         contentType: clientRequest.contentType,
         query: clientRequest.query,
-        headers: _headers,
+        headers: {...await _configConnect(), ...clientRequest.headers ?? {}},
         uploadProgress: clientRequest.uploadProgress,
       );
       _logger.d('Header: ${response.request?.headers}');
@@ -75,7 +70,7 @@ class NetworkServiceImpl extends NetworkService {
       _logger.d('Response Network Service: ${response.bodyString}');
       switch (response.statusCode) {
         case 200:
-          if (isRequestForList) {
+          if (clientRequest.isRequestForList) {
             final bodyRes = AppResponse.fromJsonToList(response.body is String
                 ? jsonDecode(response.body)
                 : response.body);
@@ -104,14 +99,11 @@ class NetworkServiceImpl extends NetworkService {
           final result = await _requestRefreshToken();
           _isRefreshToken = false;
           if (result is AppResultSuccess) {
-            return request(
-                clientRequest: clientRequest,
-                isRequestForList: isRequestForList);
+            return request(clientRequest: clientRequest);
           } else {
             // force logout
             _appService.forceLogout();
-            return AppResult.failure(FetchDataException(
-                details: (result as AppResultFailure).exception?.details));
+            return AppResult.exceptionEmpty();
           }
         case 403:
           return AppResult.failure(
