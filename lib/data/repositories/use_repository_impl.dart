@@ -10,17 +10,22 @@ class UserRepositoryImpl extends UserRepository {
   Future<AppResult<List<TravelUserVo>>> users(int page) async {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
-        url: ApiProvider.travelUser,
-        method: HTTPMethod.get,
-        query: {
-          'page': page.toString(),
-          'current_per_page': 25.toString(),
-        },
-      ),
+          url: ApiProvider.travelUser,
+          method: HTTPMethod.get,
+          query: {
+            'page': page.toString(),
+            'current_per_page': 25.toString(),
+          },
+          isRequestForList: true),
     );
-    return response is AppResultSuccess<AppResponse>
-        ? AppResult.success(TravelUserVo.fromJsonToList(response.netData?.data))
-        : AppResult.failure((response as AppResultFailure).exception);
+    if (response is AppResultSuccess<AppResponse>) {
+      return AppResult.success(
+          TravelUserVo.fromJsonToList(response.netData?.data));
+    }
+    if (response is AppResultFailure) {
+      return AppResult.failure((response as AppResultFailure).exception);
+    }
+    return AppResult.exceptionEmpty();
   }
 
   @override

@@ -12,9 +12,11 @@ class UserUseCaseImpl extends UserUseCase {
       await _repo.saveUsers(response.netData ?? []);
       return AppResult.success(
           response.netData?.map((e) => e.vo2Model()).toList());
-    } else {
+    }
+    if (response is AppResultFailure) {
       return AppResult.failure((response as AppResultFailure).exception);
     }
+    return AppResult.exceptionEmpty();
   }
 
   @override

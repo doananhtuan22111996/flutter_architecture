@@ -20,7 +20,6 @@ abstract class AppListController<BM extends BaseModel> extends GetxController {
   Rxn<AppException> appException = Rxn<AppException>();
   Rx<int> total = Rx(0);
   Rx<bool> hasMore = Rx(false);
-  Rx<bool> isLoading = Rx(false);
 
   int _page = 1;
 
@@ -34,7 +33,6 @@ abstract class AppListController<BM extends BaseModel> extends GetxController {
 
   void initFetch() async {
     AppFullScreenLoadingIndicator.show();
-    isLoading.value = true;
     final response = await onCall(_page);
     AppFullScreenLoadingIndicator.dismiss();
     if (response is AppResultSuccess<List<BM>>) {
@@ -48,12 +46,10 @@ abstract class AppListController<BM extends BaseModel> extends GetxController {
     if (response is AppResultFailure) {
       appException.value = (response as AppResultFailure).exception;
     }
-    isLoading.value = false;
   }
 
   Future<void> onRefreshCall() async {
     _page = 1;
-    isLoading.value = true;
     final response = await onCall(_page);
 
     if (response is AppResultSuccess<List<BM>>) {
@@ -67,7 +63,6 @@ abstract class AppListController<BM extends BaseModel> extends GetxController {
     if (response is AppResultFailure) {
       appException.value = (response as AppResultFailure).exception;
     }
-    isLoading.value = false;
   }
 
   Future<void> onRefreshCallWithLoading() async {
@@ -78,7 +73,6 @@ abstract class AppListController<BM extends BaseModel> extends GetxController {
 
   Future<void> onLoadMoreCall() async {
     _page = _page + 1;
-    isLoading.value = true;
     final response = await onCall(_page);
     if (response is AppResultSuccess<List<BM>>) {
       data.value = [
@@ -92,6 +86,5 @@ abstract class AppListController<BM extends BaseModel> extends GetxController {
     if (response is AppResultFailure) {
       appException.value = (response as AppResultFailure).exception;
     }
-    isLoading.value = false;
   }
 }

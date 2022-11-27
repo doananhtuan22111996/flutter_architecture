@@ -22,9 +22,13 @@ class AuthRepositoryImpl implements AuthRepository {
         },
       ),
     );
-    return response is AppResultSuccess<AppResponse>
-        ? AppResult.success(TokenVo.fromJson((response.netData?.data)))
-        : AppResult.failure((response as AppResultFailure).exception);
+    if (response is AppResultSuccess<AppResponse>) {
+      return AppResult.success(TokenVo.fromJson((response.netData?.data)));
+    }
+    if (response is AppResultFailure) {
+      return AppResult.failure((response as AppResultFailure).exception);
+    }
+    return AppResult.exceptionEmpty();
   }
 
   @override

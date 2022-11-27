@@ -15,7 +15,10 @@ class AuthUseCaseImpl implements AuthUseCase {
           refreshToken: resultVo.netData?.refreshToken ?? '');
       return AppResult.success(resultVo.netData?.vo2Model());
     }
-    return AppResult.failure((resultVo as AppResultFailure).exception);
+    if (resultVo is AppResultFailure) {
+      return AppResult.failure((resultVo as AppResultFailure).exception);
+    }
+    return AppResult.exceptionEmpty();
   }
 
   @override

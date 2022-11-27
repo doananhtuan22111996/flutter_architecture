@@ -11,6 +11,10 @@ class AppResult<BM> {
   factory AppResult.failure(AppException? exception) {
     return AppResultFailure(exception: exception);
   }
+
+  factory AppResult.exceptionEmpty() {
+    return AppResultEmpty();
+  }
 }
 
 class AppResultSuccess<BM> extends AppResult<BM> {
@@ -25,4 +29,8 @@ class AppResultSuccess<BM> extends AppResult<BM> {
 class AppResultFailure<BM> extends AppResult<BM> {
   AppResultFailure({required this.exception}) : super._();
   final AppException? exception;
+}
+
+class AppResultEmpty<BM> extends AppResult<BM> {
+  AppResultEmpty() : super._();
 }
