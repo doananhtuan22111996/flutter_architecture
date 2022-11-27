@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>795740523271-ua3p1j57agbicilbcmervsam3a64nspt.apps.googleusercontent.com</string>
+	<string>795740523271-6ripkj2a0fianqk7lj56ucldl7v76da5.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.795740523271-ua3p1j57agbicilbcmervsam3a64nspt</string>
+	<string>com.googleusercontent.apps.795740523271-6ripkj2a0fianqk7lj56ucldl7v76da5</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCApw6bdOUGJahIeH549c0oN3rwHmrQERo</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,22 +13,22 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>vn.geekup.flutterSkeleton.dev</string>
+	<string>vn.geekup.flutterSkeleton.prod</string>
 	<key>PROJECT_ID</key>
 	<string>flutterskeleton-c0812</string>
 	<key>STORAGE_BUCKET</key>
 	<string>flutterskeleton-c0812.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:795740523271:ios:51d1c121b354246f8a53a2</string>
+	<string>1:795740523271:ios:9d8d22b7c172d0668a53a2</string>
 </dict>
 </plist>

@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "795740523271",
+    "project_id": "flutterskeleton-c0812",
+    "storage_bucket": "flutterskeleton-c0812.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795740523271:android:d000060967139ce98a53a2",
+        "android_client_info": {
+          "package_name": "vn.geekup.flutterSkeleton.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795740523271-o6otes87ptou3hbho9pe65hnd850ubbb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.geekup.flutterSkeleton.dev",
+            "certificate_hash": "02a5561686c55525c28c650e12c81ca2cee26926"
+          }
+        },
+        {
+          "client_id": "795740523271-i180a8cd6bspprti7linf0tnvitem3rv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYzhCejXP1XMcjjhXLaOLpi55inGujMOg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795740523271-i180a8cd6bspprti7linf0tnvitem3rv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "795740523271-6ripkj2a0fianqk7lj56ucldl7v76da5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "vn.geekup.flutterSkeleton.prod"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795740523271:android:ab06b6482f03b6f98a53a2",
+        "android_client_info": {
+          "package_name": "vn.geekup.flutterSkeleton.prod"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795740523271-i180a8cd6bspprti7linf0tnvitem3rv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYzhCejXP1XMcjjhXLaOLpi55inGujMOg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795740523271-i180a8cd6bspprti7linf0tnvitem3rv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "795740523271-6ripkj2a0fianqk7lj56ucldl7v76da5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "vn.geekup.flutterSkeleton.prod"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

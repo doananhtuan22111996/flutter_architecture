@@ -38,10 +38,10 @@ if (keystorePropertiesFileDEV.exists()) {
 //end region
 
 //  region PRO key
-def keystorePropertiesPRO = new Properties()
-def keystorePropertiesFilePRO = rootProject.file('key.dev.properties')
-if (keystorePropertiesFilePRO.exists()) {
-    keystorePropertiesPRO.load(new FileInputStream(keystorePropertiesFilePRO))
+def keystorePropertiesPROD = new Properties()
+def keystorePropertiesFilePROD = rootProject.file('key.prod.properties')
+if (keystorePropertiesFilePROD.exists()) {
+    keystorePropertiesPROD.load(new FileInputStream(keystorePropertiesFilePROD))
 }
 // endregion
 
@@ -74,7 +74,7 @@ def getCurrentFlavor() {
 }
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -92,11 +92,11 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "vn.geekup.flutter_skeleton"
+        applicationId "vn.geekup.flutterSkeleton"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion 23
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -108,19 +108,19 @@ android {
             storeFile keystorePropertiesDEV['storeFile'] ? file(keystorePropertiesDEV['storeFile']) : null
             storePassword keystorePropertiesDEV['storePassword']
         }
-        PRO {
-            keyAlias keystorePropertiesPRO['keyAlias']
-            keyPassword keystorePropertiesPRO['keyPassword']
-            storeFile keystorePropertiesPRO['storeFile'] ? file(keystorePropertiesPRO['storeFile']) : null
-            storePassword keystorePropertiesPRO['storePassword']
+        PROD {
+            keyAlias keystorePropertiesPROD['keyAlias']
+            keyPassword keystorePropertiesPROD['keyPassword']
+            storeFile keystorePropertiesPROD['storeFile'] ? file(keystorePropertiesPROD['storeFile']) : null
+            storePassword keystorePropertiesPROD['storePassword']
         }
     }
     buildTypes {
         debug {
-            signingConfig getCurrentFlavor() == 'prod' ? signingConfigs.PRO : signingConfigs.DEV
+            signingConfig getCurrentFlavor() == 'prod' ? signingConfigs.PROD : signingConfigs.DEV
         }
         release {
-            signingConfig getCurrentFlavor() == 'prod' ? signingConfigs.PRO : signingConfigs.DEV
+            signingConfig getCurrentFlavor() == 'prod' ? signingConfigs.PROD : signingConfigs.DEV
         }
     }
     flavorDimensions "default"

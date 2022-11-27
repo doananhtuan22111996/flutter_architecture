@@ -15,7 +15,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+4
+version: 1.1.1+1
 
 environment:
   sdk: ">=2.17.3 <3.0.0"
@@ -29,11 +29,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  package_info_plus: ^1.4.2
+  package_info_plus: ^3.0.2
   get: ^4.6.5
   get_storage: ^2.0.3
   logger: ^1.1.0
-  rxdart: ^0.27.5
+  rxdart: ^0.27.7
   intl: ^0.17.0
   # flutter_secure_storage: Need to setup Firebase Auth
   flutter_secure_storage: ^5.0.2
@@ -46,8 +46,10 @@ dependencies:
   flutter_svg: ^1.1.5
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  firebase_core: ^2.1.1
-  firebase_auth: ^4.1.0
+  firebase_core: ^2.3.0
+  firebase_auth: ^4.1.4
+  firebase_analytics: ^10.0.6
+  firebase_crashlytics: ^3.0.6
   # package original: pull_to_refresh -> must to follow for upgrade version pull_to_refresh resolve flutter warnings
   pull_to_refresh_plus: ^2.0.3
   dropdown_button2: ^1.8.2
