@@ -18,6 +18,9 @@ stages:
   - prod-apk-distribute
   - prod-ipa-distribute
 
+variables:
+  GIT_CLEAN_FLAGS: none
+
 # Make Android Project
 apkDev:
   variables:
@@ -39,6 +42,7 @@ apkDev:
       - build/app/outputs/flutter-apk/app-dev-release.apk
   after_script:
     - echo "Execute android assembleDevRelease completed!!!"
+  retry: 1
   only:
     - merge_request
     - main
@@ -64,6 +68,7 @@ apkProd:
       - build/app/outputs/flutter-apk/app-prod-release.apk
   after_script:
     - echo "Execute android assembleDevRelease completed!!!"
+  retry: 1
   only:
     - merge_request
     - main
@@ -89,6 +94,7 @@ ipaDev:
       - build/ios/ipa/flutter_skeleton.ipa
   after_script:
     - echo "Execute ios assembleDevRelease completed!!!"
+  retry: 1
   only:
     - merge_request
     - main
@@ -114,6 +120,7 @@ ipaProd:
       - build/ios/ipa/flutter_skeleton.ipa
   after_script:
     - echo "Execute ios assembleProdRelease completed!!!"
+  retry: 1
   only:
     - merge_request
     - main
@@ -127,6 +134,7 @@ sonarqubeRelease:
     - sonar-scanner
   after_script:
     - echo "Execute sonarqubeRelease completed!!!"
+  retry: 1
   only:
     - merge_request
     - main
@@ -158,6 +166,7 @@ dev-apk-distribute:
       - build/app/outputs/flutter-apk/app-dev-release.apk
   after_script:
     - echo "Execute android assembleDevRelease completed!!!"
+  retry: 1
   only:
     variables:
       - $CI_COMMIT_TAG =~ /^dev\/\d+.\d+.\d+\/\d+/
@@ -187,6 +196,7 @@ dev-ipa-distribute:
       - build/ios/ipa/flutter_skeleton.ipa
   after_script:
     - echo "Execute ios assembleDevRelease completed!!!"
+  retry: 1
   only:
     variables:
       - $CI_COMMIT_TAG =~ /^dev\/\d+.\d+.\d+\/\d+/
@@ -217,6 +227,7 @@ prod-apk-distribute:
       - build/app/outputs/flutter-apk/app-prod-release.apk
   after_script:
     - echo "Execute android assembleProdRelease completed!!!"
+  retry: 1
   only:
     variables:
       - $CI_COMMIT_TAG =~ /^prod\/\d+.\d+.\d+\/\d+/
@@ -246,6 +257,7 @@ prod-ipa-distribute:
       - build/ios/ipa/flutter_skeleton.ipa
   after_script:
     - echo "Execute ios assembleProdRelease completed!!!"
+  retry: 1
   only:
     variables:
       - $CI_COMMIT_TAG =~ /^prod\/\d+.\d+.\d+\/\d+/
