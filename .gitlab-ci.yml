@@ -18,12 +18,10 @@ stages:
   - prod-apk-distribute
   - prod-ipa-distribute
 
-variables:
-  GIT_CLEAN_FLAGS: none
-
 # Make Android Project
 apkDev:
   variables:
+    GIT_CLEAN_FLAGS: none
     ANDROID_KEYSTORE: $ANDROID_KEYSTORE_DEV
   interruptible: true
   stage: apk-dev
@@ -50,6 +48,7 @@ apkDev:
 # Make Android Project
 apkProd:
   variables:
+    GIT_CLEAN_FLAGS: none
     ANDROID_KEYSTORE: $ANDROID_KEYSTORE_PROD
   interruptible: true
   stage: apk-prod
@@ -76,6 +75,7 @@ apkProd:
 # Make IOS Project
 ipaDev:
   variables:
+    GIT_CLEAN_FLAGS: none
     EXPORT_OPTIONS: $EXPORT_OPTIONS_DEV
   interruptible: true
   stage: ipa-dev
@@ -102,6 +102,7 @@ ipaDev:
 # Make IOS Project
 ipaProd:
   variables:
+    GIT_CLEAN_FLAGS: none
     EXPORT_OPTIONS: $EXPORT_OPTIONS_PROD
   interruptible: true
   stage: ipa-prod
