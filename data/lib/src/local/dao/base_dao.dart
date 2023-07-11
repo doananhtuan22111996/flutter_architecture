@@ -1,0 +1,40 @@
+import 'package:data/src/keys/app_key.dart';
+import 'package:data/src/raws/base_raw.dart';
+import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+
+part 'user_dao.dart';
+
+abstract class BaseDao<BV extends BaseRaw> {
+  late final Box<BV> _box;
+
+  abstract final String boxName;
+
+  Future<void> openBox() async => _box = await Hive.openBox(boxName);
+
+  List<BV> get values => _box.values.toList();
+
+  Future<void> close() => _box.close();
+
+  Future<void> deleteAll() => _box.deleteAll(_box.keys);
+
+  Future<void> writeBoxObj(BV obj) =>
+      getAt(obj) != -1 ? _box.putAt(getAt(obj), obj) : _box.add(obj);
+
+  Future<void> writeBoxListObj(List<BV> bvs) {
+    for (var element in bvs) {
+      writeBoxObj(element);
+    }
+    return Future.value();
+  }
+
+  /// getAt == -1 -> Not exist yet
+  /// getAt != -1 -> Existed
+  int getAt(BV obj) {
+    final objWithKey = _box.values
+        .toList()
+        .firstWhereOrNull((element) => element.key == obj.key);
+
+    return objWithKey != null ? _box.values.toList().indexOf(objWithKey) : -1;
+  }
+}

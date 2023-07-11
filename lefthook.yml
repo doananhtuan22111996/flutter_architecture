@@ -1,0 +1,12 @@
+pre-commit:
+  skip: merge
+  parallel: true
+  scripts:
+    "pre-commit.sh":
+      runner: bash
+
+commit-msg:
+  skip: merge
+  scripts:
+    "commit-msg.sh":
+      runner: bash
