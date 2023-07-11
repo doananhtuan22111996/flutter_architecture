@@ -1,0 +1,140 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+//region Debug and Staging key
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+//end region
+
+def getCurrentFlavor() {
+//    Gradle gradle = getGradle()
+    String tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
+
+    Pattern pattern
+
+    if (tskReqStr.contains("assemble"))
+    //>flutter build apk --release --flavor prod --no-shrink
+        pattern = Pattern.compile("assemble(\\w+)(Release|Debug)")
+    else if (tskReqStr.contains("bundle"))
+    //>flutter build appbundle --release --flavor prod --no-shrink
+        pattern = Pattern.compile("bundle(\\w+)(Release|Debug)")
+    else
+        pattern = Pattern.compile("generate(\\w+)(Release|Debug)")
+
+    println "Gradle task: ----->" + tskReqStr
+
+    Matcher matcher = pattern.matcher(tskReqStr)
+
+    if (matcher.find()) {
+        println matcher.group(1).toLowerCase()
+        return matcher.group(1).toLowerCase()
+    } else {
+        println "NO MATCH FOUND"
+        return "";
+    }
+}
+
+android {
+    compileSdkVersion 33
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId "vn.geekup.flutterSkeleton"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
+        minSdkVersion 23
+        targetSdkVersion 33
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+    }
+
+    signingConfigs {
+        config {
+            keyAlias keystoreProperties['KEY_ALIAS']
+            keyPassword keystoreProperties['KEY_PASSWORD']
+            storeFile keystoreProperties['STORE_FILE'] ? file(keystoreProperties['STORE_FILE']) : null
+            storePassword keystoreProperties['STORE_PASSWORD']
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+        }
+        release {
+            signingConfig signingConfigs.config
+        }
+    }
+    flavorDimensions "default"
+    productFlavors {
+         ext.loadConfig = { context ->
+            Properties configProps = new Properties()
+            configProps.load(project.rootProject.file("native.define.properties").newDataInputStream())
+            context.applicationId configProps.getProperty("APP_BUNDLE_ID")
+            context.manifestPlaceholders = [
+                    applicationLabel: configProps.getProperty("APP_NAME"),
+            ]
+        }
+        dev {
+            dimension "default"
+            loadConfig(productFlavors.dev)
+        }
+        prod {
+            dimension "default"
+            loadConfig(productFlavors.prod)
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation platform('com.google.firebase:firebase-bom:30.2.0')
+}

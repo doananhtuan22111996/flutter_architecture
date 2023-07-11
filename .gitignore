@@ -1,31 +1,33 @@
-# Default ignored files
-build/
-pubspec.lock
-.dart_tool
-.idea
-.flutter-*
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+# Libraries should not include pubspec.lock, per https://dart.dev/guides/libraries/private-files#pubspeclock.
+/pubspec.lock
+**/doc/api/
+.dart_tool/
 .packages
-.vscode/
-lib/data/entities/base_vo.g.dart
-
-ios/.*
-ios/Podfile.lock
-ios/Pods
-ios/Runner/GeneratedPluginRegistrant.* 
-ios/Flutter/flutter_export_environment.sh
-ios/Flutter/Flutter.*
-ios/Flutter/Generated.*
-ios/Runner.xcworkspace/xcuserdata/*
-ios/Runner/GoogleService-Info.plist
-
-android/.*
-android/**/GeneratedPluginRegistrant.java
-android/app/src/main/java
-android/*.jks
-android/gradle/wrapper
-android/gradlew
-android/gradlew.bat
-android/app/src/debug
-android/app/src/profile
-/android/app/prod/release/
-/android/app/staging/release/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.fvm/*
