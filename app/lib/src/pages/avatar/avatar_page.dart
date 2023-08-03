@@ -118,22 +118,22 @@ class AvatarPage extends GetView<AvatarController> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             AppAvatarSvgWidget()
-                .setSvg(R.svgs.icAvatar.svg())
+                .setSvg(R.svgs.avatar.account1.svg())
                 .setSize(AppAvatarSize.small)
                 .setOnPressed(() => controller.toast())
                 .build(context),
             AppAvatarSvgWidget()
-                .setSvg(R.svgs.icAvatar.svg())
+                .setSvg(R.svgs.avatar.account.svg())
                 .setSize(AppAvatarSize.medium)
                 .setOnPressed(() => controller.toast())
                 .build(context),
             AppAvatarSvgWidget()
-                .setSvg(R.svgs.icAvatar.svg())
+                .setSvg(R.svgs.avatar.account2.svg())
                 .setSize(AppAvatarSize.large)
                 .setOnPressed(() => controller.toast())
                 .build(context),
             AppAvatarSvgWidget()
-                .setSvg(R.svgs.icAvatar.svg())
+                .setSvg(R.svgs.avatar.account3.svg())
                 .setSize(AppAvatarSize.extraLarge)
                 .setOnPressed(() => controller.toast())
                 .build(context),

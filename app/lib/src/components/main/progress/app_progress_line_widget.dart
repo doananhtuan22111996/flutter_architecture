@@ -48,17 +48,26 @@ class AppProgressLineWidget extends AppProgressBaseBuilder {
 
   Widget _trainingW(BuildContext context) {
     Widget? trailing = _appProgressSize == AppProgressSize.lineMedium
-        ? R.svgs.icClockCircleMedium.svg()
-        : R.svgs.icClockCircleLarge.svg();
+        ? R.svgs.solid.progress.clockCircle.svg()
+        : R.svgs.solid.progress.clockCircle.svg(
+            width: AppThemeExt.of.majorScale(4),
+            height: AppThemeExt.of.majorScale(4),
+          );
     if (_appProgressType == AppProgressType.success) {
       trailing = _appProgressSize == AppProgressSize.lineMedium
-          ? R.svgs.icCheckedMedium.svg()
-          : R.svgs.icCheckedLarge.svg();
+          ? R.svgs.solid.progress.checked.svg()
+          : R.svgs.solid.progress.checked.svg(
+              width: AppThemeExt.of.majorScale(4),
+              height: AppThemeExt.of.majorScale(4),
+            );
     }
     if (_appProgressType == AppProgressType.error) {
       trailing = _appProgressSize == AppProgressSize.lineMedium
-          ? R.svgs.icCloseCircleMedium.svg()
-          : R.svgs.icCloseCircleLarge.svg();
+          ? R.svgs.solid.progress.closeCircle.svg()
+          : R.svgs.solid.progress.closeCircle.svg(
+              width: AppThemeExt.of.majorScale(4),
+              height: AppThemeExt.of.majorScale(4),
+            );
     }
     return trailing;
   }

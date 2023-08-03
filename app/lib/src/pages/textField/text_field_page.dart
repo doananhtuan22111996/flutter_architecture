@@ -4,14 +4,14 @@ class TextFieldPage extends GetView<TextFieldController> {
   const TextFieldPage({Key? key}) : super(key: key);
 
   static void open() {
-    Get.toNamed(Routes.progress);
+    Get.toNamed(Routes.textField);
   }
 
   @override
   Widget build(BuildContext context) {
     return AppMainPageWidget()
         .setAppBar(
-            AppBarWidget().setHeaderPage(R.strings.progress).build(context))
+            AppBarWidget().setHeaderPage(R.strings.textField).build(context))
         .setBody(_body(context))
         .build(context);
   }
@@ -20,212 +20,134 @@ class TextFieldPage extends GetView<TextFieldController> {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.all(AppThemeExt.of.majorScale(4)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Expanded(child: _basic(context)),
-                Expanded(child: _basicWithNumber(context)),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                _lineMedium(context),
-                _lineLarge(context),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                _circleLarge(context),
-                _circleMedium(context),
-              ],
-            )
-          ],
+        child: FormBuilder(
+          key: controller.formKey,
+          initialValue: const {
+            'textField2': 'Text Field Medium',
+            'textField1': 'Text Field Medium',
+            'textField99': 'Text Field Medium Disabled',
+            'textField3': 'Text Field Large',
+            'textField4': 'Text Field Large Disabled',
+            'textField5': 'Text Field Small',
+            'textField6': 'Text Field Small Disabled',
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              _small(context),
+              SizedBox(height: AppThemeExt.of.majorScale(4)),
+              _medium(context),
+              SizedBox(height: AppThemeExt.of.majorScale(4)),
+              _large(context),
+              SizedBox(height: AppThemeExt.of.majorScale(4)),
+              _search(context),
+              SizedBox(height: AppThemeExt.of.majorScale(4)),
+              SizedBox(
+                width: double.infinity,
+                child: AppFilledButtonWidget()
+                    .setButtonText('buttonText')
+                    .setOnPressed(() {
+                  controller.formKey.currentState?.saveAndValidate();
+                }).build(context),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _basic(BuildContext context) {
+  Widget _medium(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget().setText('Basic').build(context),
+        AppTextHeading4Widget().setText('Text Field Medium').build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressBasicWidget().setProgress(0.3).build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressBasicWidget()
-            .setAppProgressSize(AppProgressSize.basicMedium)
-            .setProgress(0.4)
+        AppTextFieldWithClearWidget(
+                textNotifier:
+                    ValueNotifier<String?>('Text Field Medium Disabled'))
+            .setFieldKey('textField1')
+            .setValidator(
+                FormBuilderValidators.required(errorText: 'Required Text'))
             .build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressBasicWidget()
-            .setAppProgressSize(AppProgressSize.basicSmall)
-            .setProgress(0.5)
+        AppTextFieldWithClearWidget()
+            .setFieldKey('textField77')
+            .setValidator(
+                FormBuilderValidators.required(errorText: 'Required Text'))
+            .build(context),
+        SizedBox(height: AppThemeExt.of.majorScale(2)),
+        AppTextFieldPasswordWidget().setFieldKey('textField99').build(context),
+        SizedBox(height: AppThemeExt.of.majorScale(2)),
+        AppTextFieldWidget()
+            .setFieldKey('textField2')
+            // .setValue('Text Field Medium Disabled')
+            .setIsDisabled(true)
+            .build(context),
+        SizedBox(height: AppThemeExt.of.majorScale(2)),
+        AppTextFieldWidget().setFieldKey('textField98').build(context),
+      ],
+    );
+  }
+
+  Widget _large(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppTextHeading4Widget().setText('Text Field Large').build(context),
+        SizedBox(height: AppThemeExt.of.majorScale(2)),
+        AppTextFieldWidget()
+            .setFieldKey('textField3')
+            .setAppTextFieldSize(AppTextFieldSize.large)
+            .setValidator(
+                FormBuilderValidators.required(errorText: 'Required Text'))
+            .build(context),
+        SizedBox(height: AppThemeExt.of.majorScale(2)),
+        AppTextFieldWidget()
+            .setFieldKey('textField4')
+            .setAppTextFieldSize(AppTextFieldSize.large)
+            .setIsDisabled(true)
             .build(context),
       ],
     );
   }
 
-  Widget _basicWithNumber(BuildContext context) {
+  Widget _small(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget()
-            .setText('Basic With Number')
-            .setMaxLines(1)
-            .setTextOverFlow(TextOverflow.ellipsis)
+        AppTextHeading4Widget().setText('Text Field Small').build(context),
+        SizedBox(height: AppThemeExt.of.majorScale(2)),
+        AppTextFieldWidget()
+            .setFieldKey('textField5')
+            .setAppTextFieldSize(AppTextFieldSize.small)
+            .setValidator(
+                FormBuilderValidators.required(errorText: 'Required Text'))
             .build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressBasicWidget()
-            .setProgress(0.3)
-            .setIsWithNumber(true)
-            .build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressBasicWidget()
-            .setAppProgressSize(AppProgressSize.basicMedium)
-            .setProgress(0.4)
-            .setIsWithNumber(true)
-            .build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressBasicWidget()
-            .setAppProgressSize(AppProgressSize.basicSmall)
-            .setProgress(0.5)
-            .setIsWithNumber(true)
+        AppTextFieldWidget()
+            .setFieldKey('textField6')
+            .setAppTextFieldSize(AppTextFieldSize.small)
+            .setIsDisabled(true)
             .build(context),
       ],
     );
   }
 
-  Widget _lineMedium(BuildContext context) {
+  Widget _search(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget()
-            .setText('Line Medium')
-            .setMaxLines(1)
-            .setTextOverFlow(TextOverflow.ellipsis)
-            .build(context),
+        AppTextHeading4Widget().setText('Text Field Search').build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressLineWidget()
-            .setProgress(0.3)
-            .setAppProgressSize(AppProgressSize.lineMedium)
-            .setAppProgressType(AppProgressType.processing)
-            .build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressLineWidget()
-            .setProgress(0.4)
-            .setAppProgressSize(AppProgressSize.lineMedium)
-            .setAppProgressType(AppProgressType.success)
-            .build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressLineWidget()
-            .setProgress(0.5)
-            .setAppProgressSize(AppProgressSize.lineMedium)
-            .setAppProgressType(AppProgressType.error)
-            .build(context),
-      ],
-    );
-  }
-
-  Widget _lineLarge(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AppTextHeading4Widget()
-            .setText('Line Large')
-            .setMaxLines(1)
-            .setTextOverFlow(TextOverflow.ellipsis)
-            .build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressLineWidget()
-            .setProgress(0.3)
-            .setAppProgressSize(AppProgressSize.lineLarge)
-            .setAppProgressType(AppProgressType.processing)
-            .build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressLineWidget()
-            .setProgress(0.4)
-            .setAppProgressSize(AppProgressSize.lineLarge)
-            .setAppProgressType(AppProgressType.success)
-            .build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressLineWidget()
-            .setProgress(0.5)
-            .setAppProgressSize(AppProgressSize.lineLarge)
-            .setAppProgressType(AppProgressType.error)
-            .build(context),
-      ],
-    );
-  }
-
-  Widget _circleMedium(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AppTextHeading4Widget()
-            .setText('Circle Medium')
-            .setMaxLines(1)
-            .setTextOverFlow(TextOverflow.ellipsis)
-            .build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressCircleWidget()
-            .setProgress(0.3)
-            .setAppProgressSize(AppProgressSize.circleMedium)
-            .setAppProgressType(AppProgressType.processing)
-            .build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressCircleWidget()
-            .setProgress(0.4)
-            .setAppProgressSize(AppProgressSize.circleMedium)
-            .setAppProgressType(AppProgressType.success)
-            .build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressCircleWidget()
-            .setProgress(0.5)
-            .setAppProgressSize(AppProgressSize.circleMedium)
-            .setAppProgressType(AppProgressType.error)
-            .build(context),
-      ],
-    );
-  }
-
-  Widget _circleLarge(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AppTextHeading4Widget()
-            .setText('Circle Large')
-            .setMaxLines(1)
-            .setTextOverFlow(TextOverflow.ellipsis)
-            .build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressCircleWidget()
-            .setProgress(0.3)
-            .setAppProgressSize(AppProgressSize.circleLarge)
-            .setAppProgressType(AppProgressType.processing)
-            .build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressCircleWidget()
-            .setProgress(0.4)
-            .setAppProgressSize(AppProgressSize.circleLarge)
-            .setAppProgressType(AppProgressType.success)
-            .build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressCircleWidget()
-            .setProgress(0.5)
-            .setAppProgressSize(AppProgressSize.circleLarge)
-            .setAppProgressType(AppProgressType.error)
+        AppTextFieldSearchWidget()
+            .setFieldKey('textField88')
+            .setValidator(
+                FormBuilderValidators.required(errorText: 'Required Text'))
             .build(context),
       ],
     );

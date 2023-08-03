@@ -1,15 +1,17 @@
 import 'package:app/src/pages/avatar/avatar_controller.dart';
+import 'package:app/src/pages/badge/badge_controller.dart';
 import 'package:app/src/pages/button/button_controller.dart';
 import 'package:app/src/pages/datePicker/date_picker_controller.dart';
 import 'package:app/src/pages/dialog/dialog_controller.dart';
 import 'package:app/src/pages/home/home_controller.dart';
+import 'package:app/src/pages/hospital/hospital_controller.dart';
+import 'package:app/src/pages/hospitalLocal/hospital_local_controller.dart';
 import 'package:app/src/pages/main/main_controller.dart';
 import 'package:app/src/pages/progress/progress_controller.dart';
 import 'package:app/src/pages/selectionControl/selection_control_controller.dart';
+import 'package:app/src/pages/tabBar/tab_bar_controller.dart';
 import 'package:app/src/pages/textField/text_field_controller.dart';
-import 'package:app/src/pages/user/user_controller.dart';
-import 'package:app/src/pages/usercopy/user_copy_controller.dart';
-import 'package:app/src/pages/userdb/db_user_controller.dart';
+import 'package:app/src/pages/tooltip/tooltip_controller.dart';
 import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 import 'package:get/get.dart';
@@ -33,19 +35,14 @@ class AppPages {
       binding: HomeBinding(),
     ),
     GetPage(
-      name: Routes.users,
-      page: () => const UserPage(),
-      binding: UserBinding(),
+      name: Routes.hospital,
+      page: () => const HospitalPage(),
+      binding: HospitalBinding(),
     ),
     GetPage(
-      name: Routes.usersCopy,
-      page: () => const UserCopyPage(),
-      binding: UserCopyBinding(),
-    ),
-    GetPage(
-      name: Routes.dbUsers,
-      page: () => const DbUserPage(),
-      binding: DbUserBinding(),
+      name: Routes.hospitalLocal,
+      page: () => const HospitalLocalPage(),
+      binding: HospitalLocalBinding(),
     ),
     GetPage(
       name: Routes.button,
@@ -81,6 +78,21 @@ class AppPages {
       name: Routes.textField,
       page: () => const TextFieldPage(),
       binding: TextFieldBinding(),
+    ),
+    GetPage(
+      name: Routes.tabBar,
+      page: () => const TabBarPage(),
+      binding: TabBarBinding(),
+    ),
+    GetPage(
+      name: Routes.badge,
+      page: () => const BadgePage(),
+      binding: BadgeBinding(),
+    ),
+    GetPage(
+      name: Routes.tooltip,
+      page: () => const TooltipPage(),
+      binding: TooltipBinding(),
     ),
   ];
 }

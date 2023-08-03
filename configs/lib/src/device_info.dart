@@ -18,11 +18,9 @@ class DeviceInfo {
       deviceInfo.putIfAbsent('OS', () => "iOS");
       deviceInfo.putIfAbsent(
           'isPhysicalDevice', () => "${iosDeviceInfo.isPhysicalDevice}");
-      deviceInfo.putIfAbsent('model', () => iosDeviceInfo.model ?? '');
-      deviceInfo.putIfAbsent(
-          'OSVersion', () => iosDeviceInfo.systemVersion ?? '');
-      deviceInfo.putIfAbsent(
-          'machine', () => iosDeviceInfo.utsname.machine ?? '');
+      deviceInfo.putIfAbsent('model', () => iosDeviceInfo.model);
+      deviceInfo.putIfAbsent('OSVersion', () => iosDeviceInfo.systemVersion);
+      deviceInfo.putIfAbsent('machine', () => iosDeviceInfo.utsname.machine);
       deviceInfo.putIfAbsent(
           'deviceID', () => iosDeviceInfo.identifierForVendor ?? '');
     } else {

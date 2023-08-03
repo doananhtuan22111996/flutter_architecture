@@ -17,8 +17,10 @@ class AppAvatarSvgWidget extends AppAvatarBaseBuilder {
         child: Container(
           width: _size?.value,
           height: _size?.value,
+          padding: _padding,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
+            color: AppColors.of.neutralColor[5],
             border: Border.all(color: AppColors.of.neutralColor[3]!),
           ),
           child: ClipOval(child: _svg),
@@ -44,4 +46,12 @@ class AppAvatarSvgWidget extends AppAvatarBaseBuilder {
     _onPressed = onPressed;
     return super.setOnPressed(onPressed);
   }
+
+  EdgeInsets get _padding => _size == AppAvatarSize.extraLarge
+      ? EdgeInsets.all(AppThemeExt.of.majorScale(4))
+      : _size == AppAvatarSize.large
+          ? EdgeInsets.all(AppThemeExt.of.majorScale(3))
+          : _size == AppAvatarSize.medium
+              ? EdgeInsets.all(AppThemeExt.of.majorScale(2))
+              : EdgeInsets.all(AppThemeExt.of.majorScale(1));
 }

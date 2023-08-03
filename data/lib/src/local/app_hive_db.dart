@@ -6,6 +6,8 @@ class AppHiveDb extends GetxService {
   @override
   void onInit() async {
     super.onInit();
-    Hive.registerAdapter(UserRawAdapter());
+    Hive.registerAdapter(HospitalRawAdapter());
+    Hive.registerAdapter(DoctorRawAdapter());
+    Hive.registerAdapter(SickTypeRawAdapter());
   }
 }

@@ -29,6 +29,7 @@ enum AppSelectionControlSize {
   final int height;
 }
 
+// TODO Build switch widget
 abstract class AppSelectionControlBaseBuilder {
   @protected
   late final String _fieldKey;

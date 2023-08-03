@@ -1,9 +1,21 @@
 import '../../domain.dart';
 
-part 'login_use_case.dart';
+part 'hospital_remote_use_case.dart';
 
-part 'get_user_use_case.dart';
+part 'hospital_local_use_case.dart';
 
-part 'get_user_local_use_case.dart';
+part 'hospital_local_delete_use_case.dart';
 
-part 'delete_user_use_case.dart';
+part 'hospital_local_delete_at_use_case.dart';
+
+part 'doctor_remote_use_case.dart';
+
+part 'doctor_local_use_case.dart';
+
+part 'doctor_local_delete_use_case.dart';
+
+part 'sick_type_remote_use_case.dart';
+
+part 'sick_type_local_use_case.dart';
+
+part 'sick_type_local_delete_use_case.dart';

@@ -5,9 +5,10 @@ class Routes {
 
   static const main = '/main';
   static const home = '/home';
-  static const users = '/users';
-  static const usersCopy = '/users-copy';
-  static const dbUsers = '/db_users';
+  static const hospital = '/hospital';
+  static const hospitalLocal = '/hospital-local';
+  static const doctor = '/doctor';
+  static const sickType = '/sick-type';
   static const button = '/button';
   static const text = '/text';
   static const avatar = '/avatar';
@@ -16,4 +17,7 @@ class Routes {
   static const progress = '/progress';
   static const selectionControl = '/selection-control';
   static const textField = '/text-field';
+  static const tabBar = '/tab-bar';
+  static const badge = '/badge';
+  static const tooltip = '/tooltip';
 }
