@@ -17,7 +17,9 @@
   "getListNetwork": "Get List Network",
   "getListDb": "Get List DB",
   "noError": "No Error!!",
-  "users": "Users",
+  "hospital": "Hospital",
+  "doctor": "Doctor",
+  "sickType": "Sick Type",
   "dbUsers": "Users DB",
   "disableButton": "Disable Button",
   "close": "Close",
@@ -33,5 +35,6 @@
   "timePickerHint": "Time picker",
   "dialog": "Dialog",
   "progress": "Progress",
-  "selectionControl": "Selection Control"
+  "selectionControl": "Selection Control",
+  "textField": "Text Field"
 }

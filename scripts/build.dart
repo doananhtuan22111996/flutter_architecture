@@ -58,10 +58,9 @@ void main(List<String>? args) async {
   if (runBuild.contains('build')) {
     print('command for build --> fvm flutter ${arguments.join(' ')}');
     var process = await Process.start(
-      'fvm',
-      ['flutter', ...arguments],
+      'bash',
+      ['-c', 'fvm flutter ${arguments.join(' ')}'],
       workingDirectory: './app',
-      runInShell: true,
     );
     process.stdout.transform(utf8.decoder).listen((data) {
       print(data);

@@ -2,8 +2,8 @@ part of 'app_text_field_base_builder.dart';
 
 class AppTextFieldWidget extends AppTextFieldBaseBuilder {
   @override
-  AppTextFieldBaseBuilder setFieldKey(String? fieldKey) {
-    _fieldKey = _fieldKey;
+  AppTextFieldBaseBuilder setFieldKey(String fieldKey) {
+    _fieldKey = fieldKey;
     return this;
   }
 
@@ -16,12 +16,6 @@ class AppTextFieldWidget extends AppTextFieldBaseBuilder {
   @override
   AppTextFieldBaseBuilder setIsDisabled(bool? isDisabled) {
     _isDisabled = isDisabled;
-    return this;
-  }
-
-  @override
-  AppTextFieldBaseBuilder setValue(String? value) {
-    _value = value;
     return this;
   }
 
@@ -40,64 +34,67 @@ class AppTextFieldWidget extends AppTextFieldBaseBuilder {
   }
 
   @override
+  AppTextFieldBaseBuilder setTextInputAction(TextInputAction? textInputAction) {
+    _textInputAction = textInputAction;
+    return super.setTextInputAction(textInputAction);
+  }
+
+  @override
+  AppTextFieldBaseBuilder setOnFieldSubmitted(
+      String? Function(String? value)? onFieldSubmitted) {
+    _onFieldSubmitted = onFieldSubmitted;
+    return super.setOnFieldSubmitted(onFieldSubmitted);
+  }
+
+  @override
+  AppTextFieldBaseBuilder setValidator(
+      String? Function(String? value)? validator) {
+    _validator = validator;
+    return super.setValidator(validator);
+  }
+
+  @override
+  AppTextFieldBaseBuilder setObscureText(bool? obscureText) {
+    _obscureText = obscureText;
+    return super.setObscureText(obscureText);
+  }
+
+  @override
+  AppTextFieldBaseBuilder setSuffixIcon(Widget? suffixIcon) {
+    _suffixIcon = suffixIcon;
+    return super.setSuffixIcon(suffixIcon);
+  }
+
+  @override
+  AppTextFieldBaseBuilder setMaxLines(int? maxLines) {
+    _maxLines = maxLines;
+    return super.setMaxLines(maxLines);
+  }
+
+  @override
+  AppTextFieldBaseBuilder setMaxLength(int? maxLength) {
+    _maxLength = maxLength;
+    return super.setMaxLength(maxLength);
+  }
+
+  @override
+  AppTextFieldBaseBuilder setInputFormatters(
+      List<TextInputFormatter>? inputFormatters) {
+    _inputFormatters = inputFormatters;
+    return super.setInputFormatters(inputFormatters);
+  }
+
+  @override
+  AppTextFieldBaseBuilder setKeyboardType(TextInputType? keyboardType) {
+    _keyboardType = keyboardType;
+    return super.setKeyboardType(keyboardType);
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (_appTextFieldSize == null) {
       setAppTextFieldSize(AppTextFieldSize.medium);
     }
-    return FormBuilderField<String?>(
-      name: _fieldKey,
-      builder: (field) => TextFormField(
-        keyboardType: _keyboardType,
-        inputFormatters: _inputFormatters,
-        onChanged: (value) => _onChanged?.call(value),
-        textAlign: TextAlign.start,
-        maxLines: _maxLines,
-        maxLength: _maxLength,
-        minLines: 1,
-        readOnly: _isDisabled == false,
-        style: _textStyle,
-        obscureText: _obscureText ?? false,
-        validator: _validator,
-        // textInputAction: widget.textInputAction,
-        // onFieldSubmitted: (v) {
-        //   if (widget.onActionTap != null) {
-        //     widget.onActionTap!(v);
-        //   }
-        // },
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.of.neutralColor[5]!),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.of.neutralColor[3]!),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.of.primaryColor),
-          ),
-          hintText: _hintText,
-          hintStyle: _textStyle?.copyWith(color: AppColors.of.neutralColor[6]),
-          contentPadding: _contentPadding,
-          isDense: true,
-        ),
-      ),
-    );
+    return _buildMain(suffixIcon: _suffixIcon);
   }
-
-  TextStyle? get _textStyle => _appTextFieldSize == AppTextFieldSize.large
-      ? AppTextStyleExt.of.textBody2r
-      : _appTextFieldSize == AppTextFieldSize.small
-          ? AppTextStyleExt.of.textBody2r
-          : AppTextStyleExt.of.textBody1r;
-
-  EdgeInsets get _contentPadding => _appTextFieldSize == AppTextFieldSize.large
-      ? EdgeInsets.symmetric(
-          vertical: AppThemeExt.of.majorScale(3),
-          horizontal: AppThemeExt.of.majorScale(4))
-      : _appTextFieldSize == AppTextFieldSize.small
-          ? EdgeInsets.symmetric(
-              vertical: AppThemeExt.of.majorScale(1),
-              horizontal: AppThemeExt.of.majorScale(3))
-          : EdgeInsets.symmetric(
-              vertical: AppThemeExt.of.majorScale(2),
-              horizontal: AppThemeExt.of.majorScale(4));
 }

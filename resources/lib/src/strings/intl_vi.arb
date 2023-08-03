@@ -17,8 +17,9 @@
   "getListNetwork": "Lấy danh sách từ api",
   "getListDb": "Lấy danh sách từ DB",
   "noError": "Chưa lỗi!!",
-  "users": "Danh sách người dùng",
-  "dbUsers": "Danh sách người dùng DB",
+  "hospital": "Bệnh viện",
+  "doctor": "Bác sĩ",
+  "sickType": "Loại bệnh",
   "disableButton": "Nút không hoạt động",
   "close": "Đóng",
   "confirm": "Xác nhận",
@@ -33,5 +34,6 @@
   "timePickerHint": "Time picker",
   "dialog": "Dialog",
   "progress": "Progress",
-  "selectionControl": "Selection Control"
+  "selectionControl": "Selection Control",
+  "textField": "Text Field"
 }

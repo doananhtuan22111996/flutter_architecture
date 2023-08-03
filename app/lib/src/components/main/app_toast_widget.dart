@@ -2,8 +2,6 @@ import 'package:app/src/config/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'app_icon_widget.dart';
-
 class AppToastWidget {
   static showCustomToast(
     BuildContext? context, {
@@ -13,7 +11,6 @@ class AppToastWidget {
   }) {
     if (context == null) return;
     Get.rawSnackbar(
-      icon: AppIconWidget(icon, bgColor: context.theme.backgroundColor),
       duration: const Duration(seconds: 2),
       snackStyle: SnackStyle.FLOATING,
       backgroundColor: backgroundColor ?? context.theme.primaryColor,
@@ -27,12 +24,6 @@ class AppToastWidget {
   static showErrorToast(BuildContext? context, {required String message}) {
     if (context == null) return;
     Get.rawSnackbar(
-      icon: AppIconWidget(
-        Icons.error_rounded,
-        iconSize: 18,
-        bgColor: context.theme.errorColor,
-        iconColor: AppColors.of.neutralColor[0],
-      ),
       duration: const Duration(seconds: 2),
       snackStyle: SnackStyle.FLOATING,
       backgroundGradient: LinearGradient(
@@ -54,12 +45,6 @@ class AppToastWidget {
   static showSuccessToast(BuildContext? context, {required String message}) {
     if (context == null) return;
     Get.rawSnackbar(
-      icon: AppIconWidget(
-        Icons.check,
-        iconSize: 18,
-        bgColor: AppColors.of.neutralColor[0],
-        iconColor: context.theme.primaryColorLight,
-      ),
       duration: const Duration(seconds: 2),
       snackStyle: SnackStyle.FLOATING,
       backgroundGradient: LinearGradient(
@@ -81,11 +66,6 @@ class AppToastWidget {
   static showWaringToast(BuildContext? context, {required String message}) {
     if (context == null) return;
     Get.rawSnackbar(
-      icon: AppIconWidget(
-        Icons.warning,
-        iconSize: 18,
-        iconColor: AppColors.of.neutralColor[0],
-      ),
       duration: const Duration(seconds: 2),
       snackStyle: SnackStyle.FLOATING,
       onTap: (snack) => Get.closeAllSnackbars(),

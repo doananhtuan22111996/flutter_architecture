@@ -9,7 +9,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:resources/resources.dart';
 import 'package:utilities/utilities.dart';
 
-import 'src/components/main/loading/app_loading_indicator.dart';
+import 'src/components/main/loading/app_loading_overlay_indicator.dart';
 import 'src/config/app_theme.dart';
 import 'src/routes/app_pages.dart';
 
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    AppLoadingWidget.configure(context);
+    AppLoadingOverlayWidget.configure(context);
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: true,
@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.main,
       initialBinding: AppBinding(),
       smartManagement: SmartManagement.full,
-      builder: AppLoadingWidget.init(),
+      builder: AppLoadingOverlayWidget.init(),
     );
   }
 }

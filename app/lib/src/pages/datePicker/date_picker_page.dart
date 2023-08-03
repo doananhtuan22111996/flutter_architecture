@@ -35,52 +35,60 @@ class DatePickerPage extends GetView<DatePickerController> {
   }
 
   Widget _date(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AppTextBody1Widget().setText('Date Picker').build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppDatePickerWidget()
-            .setAppDatePickerSize(AppDatePickerSize.small)
-            .setFieldKey('datePicker1')
-            .setOnDatePicked((datePicker) => controller.toastDate(datePicker))
-            .build(context),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: AppThemeExt.of.majorScale(2)),
-          child: AppDatePickerWidget()
-              .setAppDatePickerSize(AppDatePickerSize.medium)
-              .setFieldKey('datePicker2')
+    return FormBuilder(
+      key: GlobalKey<FormBuilderState>(),
+      initialValue: {
+        'datePicker4': DateTime.now(),
+        'datePicker5': DateTime.now(),
+        'datePicker6': DateTime.now(),
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppTextBody1Widget().setText('Date Picker').build(context),
+          SizedBox(height: AppThemeExt.of.majorScale(2)),
+          AppDatePickerWidget()
+              .setAppDatePickerSize(AppDatePickerSize.small)
+              .setFieldKey('datePicker1')
               .setOnDatePicked((datePicker) => controller.toastDate(datePicker))
               .build(context),
-        ),
-        AppDatePickerWidget()
-            .setAppDatePickerSize(AppDatePickerSize.large)
-            .setFieldKey('datePicker3')
-            .setOnDatePicked((datePicker) => controller.toastDate(datePicker))
-            .build(context),
-        SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppDatePickerWidget()
-            .setAppDatePickerSize(AppDatePickerSize.small)
-            .setFieldKey('datePicker4')
-            .setInitialDate(DateTime.now())
-            .setIsDisabled(true)
-            .build(context),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: AppThemeExt.of.majorScale(2)),
-          child: AppDatePickerWidget()
-              .setAppDatePickerSize(AppDatePickerSize.medium)
-              .setFieldKey('datePicker5')
-              .setInitialDate(DateTime.now())
+          Padding(
+            padding:
+                EdgeInsets.symmetric(vertical: AppThemeExt.of.majorScale(2)),
+            child: AppDatePickerWidget()
+                .setAppDatePickerSize(AppDatePickerSize.medium)
+                .setFieldKey('datePicker2')
+                .setOnDatePicked(
+                    (datePicker) => controller.toastDate(datePicker))
+                .build(context),
+          ),
+          AppDatePickerWidget()
+              .setAppDatePickerSize(AppDatePickerSize.large)
+              .setFieldKey('datePicker3')
+              .setOnDatePicked((datePicker) => controller.toastDate(datePicker))
+              .build(context),
+          SizedBox(height: AppThemeExt.of.majorScale(2)),
+          AppDatePickerWidget()
+              .setAppDatePickerSize(AppDatePickerSize.small)
+              .setFieldKey('datePicker4')
               .setIsDisabled(true)
               .build(context),
-        ),
-        AppDatePickerWidget()
-            .setAppDatePickerSize(AppDatePickerSize.large)
-            .setFieldKey('datePicker6')
-            .setInitialDate(DateTime.now())
-            .setIsDisabled(true)
-            .build(context),
-      ],
+          Padding(
+            padding:
+                EdgeInsets.symmetric(vertical: AppThemeExt.of.majorScale(2)),
+            child: AppDatePickerWidget()
+                .setAppDatePickerSize(AppDatePickerSize.medium)
+                .setFieldKey('datePicker5')
+                .setIsDisabled(true)
+                .build(context),
+          ),
+          AppDatePickerWidget()
+              .setAppDatePickerSize(AppDatePickerSize.large)
+              .setFieldKey('datePicker6')
+              .setIsDisabled(true)
+              .build(context),
+        ],
+      ),
     );
   }
 

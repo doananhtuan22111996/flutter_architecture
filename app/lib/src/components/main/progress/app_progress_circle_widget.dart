@@ -43,13 +43,19 @@ class AppProgressCircleWidget extends AppProgressBaseBuilder {
   Widget _center(BuildContext context) {
     if (_appProgressType == AppProgressType.error) {
       return _appProgressSize == AppProgressSize.circleLarge
-          ? R.svgs.icCloseError32.svg()
-          : R.svgs.icCloseError24.svg();
+          ? R.svgs.outline.progress.close.svg()
+          : R.svgs.outline.progress.close.svg(
+              width: AppThemeExt.of.majorScale(8),
+              height: AppThemeExt.of.majorScale(8),
+            );
     }
     if (_appProgressType == AppProgressType.success) {
       return _appProgressSize == AppProgressSize.circleLarge
-          ? R.svgs.icCheckSuccess32.svg()
-          : R.svgs.icCheckSuccess24.svg();
+          ? R.svgs.outline.progress.check.svg()
+          : R.svgs.outline.progress.check.svg(
+              width: AppThemeExt.of.majorScale(8),
+              height: AppThemeExt.of.majorScale(8),
+            );
     }
     return _appProgressSize == AppProgressSize.circleLarge
         ? AppTextHeading4Widget()

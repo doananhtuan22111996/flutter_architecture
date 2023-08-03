@@ -8,7 +8,7 @@ import 'package:resources/resources.dart';
 import 'package:utilities/utilities.dart';
 
 import '../../../exts/app_exts.dart';
-import '../loading/app_loading_indicator.dart';
+import '../loading/app_loading_overlay_indicator.dart';
 
 part 'app_list_widget.dart';
 
@@ -31,14 +31,14 @@ abstract class AppListController<BM extends BaseModel> extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    Logs.e('AppListController closed');
+    Logs.e('AppListController of $BM closed');
   }
 
   void initFetch() async {
     try {
-      AppLoadingWidget.show();
+      AppLoadingOverlayWidget.show();
       final response = await onCall(_appParam);
-      AppLoadingWidget.dismiss();
+      AppLoadingOverlayWidget.dismiss();
       data.value = [...response.netData ?? List.empty()];
       total.value = response.total;
       hasMore.value = response.hasMore;
@@ -46,6 +46,7 @@ abstract class AppListController<BM extends BaseModel> extends GetxController {
       Logs.i(
           'AppListWidget Init Call: Data length ${data.length} --- total: ${total.value}');
     } on AppException catch (e) {
+      AppLoadingOverlayWidget.dismiss();
       AppExceptionExt(
         appException: e,
         onError: (_) => appException.value = e,
@@ -72,9 +73,9 @@ abstract class AppListController<BM extends BaseModel> extends GetxController {
   }
 
   Future<void> onRefreshCallWithLoading() async {
-    AppLoadingWidget.show();
+    AppLoadingOverlayWidget.show();
     await onRefreshCall();
-    AppLoadingWidget.dismiss();
+    AppLoadingOverlayWidget.dismiss();
   }
 
   Future<void> onLoadMoreCall() async {

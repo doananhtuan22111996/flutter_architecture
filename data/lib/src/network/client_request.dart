@@ -13,26 +13,79 @@ enum HttpMethod {
   const HttpMethod({required this.value});
 }
 
-class ClientRequest {
-  String url;
-  HttpMethod method;
-  dynamic body;
-  String? contentType;
-  Map<String, String>? headers;
-  Map<String, dynamic>? query;
-  ProgressCallback? onSendProgress;
-  ProgressCallback? onReceiveProgress;
-  bool isRequestForList;
+abstract class ClientRequest {
+  final String url;
+  final Map<String, dynamic>? query;
+  final ProgressCallback? onSendProgress;
+  final ProgressCallback? onReceiveProgress;
 
   ClientRequest({
     required this.url,
+    this.query,
+    this.onReceiveProgress,
+    this.onSendProgress,
+  });
+
+  factory ClientRequest.request(
+    String url,
+    HttpMethod method, {
+    dynamic body,
+    Map<String, dynamic>? query,
+    Map<String, String>? headers,
+    String? contentType,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) =>
+      ClientRequestData(
+        url: url,
+        method: method,
+        body: body,
+        query: query,
+        headers: headers,
+        contentType: contentType,
+        onSendProgress: onSendProgress,
+        onReceiveProgress: onReceiveProgress,
+      );
+
+  factory ClientRequest.download(
+    String url,
+    String path, {
+    Map<String, dynamic>? query,
+    ProgressCallback? onReceiveProgress,
+  }) =>
+      ClientRequestDownload(
+        url: url,
+        path: path,
+        query: query,
+        onReceiveProgress: onReceiveProgress,
+      );
+}
+
+class ClientRequestData extends ClientRequest {
+  final HttpMethod method;
+  final dynamic body;
+  final Map<String, String>? headers;
+  final String? contentType;
+
+  ClientRequestData({
+    required super.url,
     required this.method,
     this.body,
-    this.contentType,
+    super.query,
     this.headers,
-    this.query,
-    this.onSendProgress,
-    this.onReceiveProgress,
-    this.isRequestForList = false,
+    this.contentType,
+    super.onReceiveProgress,
+    super.onSendProgress,
+  });
+}
+
+class ClientRequestDownload extends ClientRequest {
+  final String path;
+
+  ClientRequestDownload({
+    required super.url,
+    required this.path,
+    super.query,
+    super.onReceiveProgress,
   });
 }

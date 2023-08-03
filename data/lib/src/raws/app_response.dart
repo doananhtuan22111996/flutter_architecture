@@ -21,37 +21,36 @@ class Metadata {
 class AppResponse {
   late final Metadata? meta;
   final dynamic data;
-  final int page;
-  final int limit;
-  final bool hasMore;
-  final int total;
+  final int? page;
+  final int? limit;
+  final int? total;
+  final bool? hasMore;
 
   AppResponse({
     this.meta,
     this.data,
-    this.page = 1,
-    this.total = 0,
-    this.hasMore = false,
-    this.limit = 25,
+    this.page,
+    this.total,
+    this.limit,
+    this.hasMore,
   });
 
-  factory AppResponse.fromJson(Map<String, dynamic> json) {
+  factory AppResponse.fromJson(Map<String, dynamic>? json) {
+    final Metadata meta = Metadata.fromJson(json?['meta']);
+    final Map<String, dynamic>? data = json?['data'];
+    final isPagination = data?.containsKey('items') == true;
     return AppResponse(
-      meta: Metadata.fromJson(json['meta']),
-      data: json['data'],
+      meta: meta,
+      data: isPagination ? (data?['items']) : data,
+      page: isPagination ? (data?['page']) : null,
+      limit: isPagination ? (data?['limit']) : null,
+      hasMore: isPagination ? (data?['hasMore']) : null,
+      total: isPagination ? (data?['total']) : null,
     );
   }
 
-  static AppResponse fromJsonToList(Map<String, dynamic> json) {
-    return AppResponse(
-      meta: Metadata.fromJson(json['meta']),
-      data: json['data']?['items'] ?? List.empty(),
-      page: json['data']['page'] ?? 0,
-      limit: json['data']['limit'] ?? 25,
-      hasMore: json['data']['hasMore'] ?? false,
-      total: json['data']['total'] ?? 0,
-    );
-  }
+  factory AppResponse.fromJsonDownload(dynamic json) =>
+      json is Map<String, dynamic> ? AppResponse.fromJson(json) : AppResponse();
 
   AppObjResultRaw<BR> toRaw<BR extends BaseRaw>(
           BR? Function(dynamic data) netDataFunc) =>
@@ -60,5 +59,8 @@ class AppResponse {
   AppListResultRaw<BR> toRawList<BR extends BaseRaw>(
           List<BR> Function(dynamic data) netDataFunc) =>
       AppListResultRaw<BR>(
-          netData: netDataFunc(data), hasMore: hasMore, total: total);
+        netData: netDataFunc(data),
+        hasMore: hasMore ?? false,
+        total: total ?? 0,
+      );
 }

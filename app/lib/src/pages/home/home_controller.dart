@@ -1,77 +1,42 @@
 import 'package:app/src/components/main/appBar/app_bar_base_builder.dart';
-import 'package:app/src/components/main/button/app_button_base_builder.dart';
-import 'package:app/src/components/main/dialog/app_dialog_base_builder.dart';
-import 'package:app/src/components/main/loading/app_loading_indicator.dart';
 import 'package:app/src/components/main/page/app_main_page_base_builder.dart';
-import 'package:app/src/components/main/text/app_text_base_builder.dart';
-import 'package:app/src/config/app_theme.dart';
-import 'package:app/src/exts/app_exts.dart';
+import 'package:app/src/components/main/tabBar/app_tab_bar_widget.dart';
+import 'package:app/src/components/main/tabBar/app_tab_base_builder.dart';
+import 'package:app/src/pages/home/view/doctor/doctor_controller.dart';
+import 'package:app/src/pages/home/view/hospital/hospital_controller.dart';
+import 'package:app/src/pages/home/view/sickType/sick_type_controller.dart';
 import 'package:app/src/routes/app_pages.dart';
-import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resources/resources.dart';
-
-import '../../components/main/app_snack_bar_widget.dart';
 
 part 'home_binding.dart';
 
 part 'home_page.dart';
 
 class HomeController extends GetxController {
-  late final LoginUseCase _loginUseCase;
+  final RxList<AppTabWithNumberWidget> numberTabs = [
+    AppTabWithNumberWidget()
+        .setLabel('Label 1')
+        .setAppTabSize(AppTabSize.large),
+    AppTabWithNumberWidget()
+        .setLabel('Label 2')
+        .setAppTabSize(AppTabSize.large),
+    AppTabWithNumberWidget()
+        .setLabel('Label 3')
+        .setAppTabSize(AppTabSize.large),
+  ].obs;
+  RxInt numberIndex = 0.obs;
 
-  HomeController(this._loginUseCase);
-
-  Rxn<TokenModel> tokenModel = Rxn<TokenModel>();
-
-  Rxn<String> lnCode = Rxn<String>();
-  RxBool isDarkMode = false.obs;
-
-  void executeLogin() async {
-    try {
-      AppLoadingWidget.show();
-      final response = await _loginUseCase.execute(
-        param: LoginParam(username: 'GU003T', password: '123@Gu'),
-      );
-      AppLoadingWidget.dismiss();
-      tokenModel.value = response.netData;
-      AppSnackbarWidget(
-        title: R.strings.loading,
-        message: 'Network Success!!!',
-      ).show(Get.context);
-    } on AppException catch (e) {
-      AppExceptionExt(
-        appException: e,
-        onError: (e) {
-          return AppDefaultDialogWidget()
-              .setTitle('Dialog Error Home View')
-              .setContent(e.message)
-              .setAppDialogType(AppDialogType.error)
-              .setPositiveText(R.strings.confirm)
-              .setNegativeText(R.strings.close)
-              .buildDialog(Get.context!)
-              .show();
-        },
-      ).detected();
-    }
-  }
-
-  void executeGetLanguage() {
-    // lnCode.value = _authUseCase.languageCode();
-  }
-
-  void executeGetTheme() {
-    // isDarkMode.value = _authUseCase.isDarkTheme();
-  }
-
-  void executeUpdateLanguage(String code) {
-    lnCode.value = code;
-    // _authUseCase.saveLanguageCode(code);
-  }
-
-  void executeChangeThemeMode(ThemeMode themeMode) {
-    isDarkMode.value = themeMode == ThemeMode.dark;
-    // _authUseCase.changeThemeMode(themeMode);
+  void onNumberChanged({required int index, required int number}) {
+    numberTabs.value = [
+      ...numberTabs.map((element) {
+        final indexOf = numberTabs.indexOf(element);
+        if (indexOf == index) {
+          element.setNumber(number);
+        }
+        return element;
+      }).toList()
+    ];
   }
 }

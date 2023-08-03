@@ -6,7 +6,7 @@ class AppBarLeadingWidget extends AppBarBaseBuilder {
     return AppBar(
       leading: _leading ??
           AppButtonAppBarWidget()
-              .setPrefixIcon(R.svgs.icArrowLineLeft.svg())
+              .setPrefixIcon(R.svgs.outline.appBar.arrowLineLeft.svg())
               .setOnPressed(() => Get.back())
               .build(context),
       title: AppTextHeading5Widget().setText(_headerPage).build(context),

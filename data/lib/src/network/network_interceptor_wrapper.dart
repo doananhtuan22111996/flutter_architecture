@@ -1,17 +1,14 @@
 part of 'network_service.dart';
 
 class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
-  late final Dio diO;
   final AppSharedPref _pref = Get.find<AppSharedPref>();
-
-  NetworkInterceptorWrapper({required this.diO});
 
   @override
   void onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
-  ) async {
-    options.headers.addAll(await _headerToken());
+  ) {
+    options.headers.addAll(_headerToken());
 
     return handler.next(options);
   }
@@ -29,34 +26,38 @@ class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
       if (!isHasToken) {
         return handler.next(err);
       }
-      err.requestOptions.headers.remove(AppNetworkKey.authorization);
-      err.requestOptions.headers.addAll(await _headerToken());
-      final opts = Options(
-        headers: err.requestOptions.headers,
-        method: err.requestOptions.method,
-      );
-
-      final cloneReq = await diO.request(
-        err.requestOptions.path,
-        options: opts,
-        data: err.requestOptions.data,
-        queryParameters: err.requestOptions.queryParameters,
-        onSendProgress: err.requestOptions.onSendProgress,
-        onReceiveProgress: err.requestOptions.onReceiveProgress,
-        cancelToken: err.requestOptions.cancelToken,
-      );
-      if (HttpStatus(cloneReq.statusCode).isOk) {
-        return handler.resolve(cloneReq);
+      final cloneRequestOpts = err.requestOptions.copyWith();
+      final cloneError = err.copyWith();
+      final newDio = NetworkService.newDio();
+      try {
+        final cloneReq = await newDio.request(
+          cloneRequestOpts.path,
+          options: Options(
+            headers: _headerToken(),
+            method: cloneRequestOpts.method,
+          ),
+          data: cloneRequestOpts.data,
+          queryParameters: cloneRequestOpts.queryParameters,
+          onSendProgress: cloneRequestOpts.onSendProgress,
+          onReceiveProgress: cloneRequestOpts.onReceiveProgress,
+          cancelToken: cloneRequestOpts.cancelToken,
+        );
+        newDio.close(force: true);
+        if (HttpStatus(cloneReq.statusCode).isOk) {
+          return handler.resolve(cloneReq);
+        }
+        return handler.next(cloneError);
+      } catch (_) {
+        newDio.close(force: true);
+        return handler.next(cloneError);
       }
-      return handler
-          .reject(DioException(requestOptions: err.response!.requestOptions));
     }
 
     return handler.next(err);
   }
 
-  Future<Map<String, String>> _headerToken() async {
-    final token = await _pref.getValue(AppPrefKey.token, '');
+  Map<String, String> _headerToken() {
+    final token = _pref.getString(AppPrefKey.token, '');
     return token.isEmpty
         ? _basicToken
         : {AppNetworkKey.authorization: '${AppNetworkKey.bearer} $token'};
@@ -70,7 +71,7 @@ class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
   Future<bool> _refreshToken() async {
     final newDio = NetworkService.newDio();
     try {
-      final refreshToken = await _pref.getValue(AppPrefKey.refreshToken, '');
+      final refreshToken = _pref.getString(AppPrefKey.refreshToken, '');
       final response = await newDio.get(
         ApiProvider.refreshToken,
         queryParameters: {AppPrefKey.refreshToken: refreshToken},
@@ -80,15 +81,13 @@ class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
 
       if (HttpStatus(response.statusCode).isOk) {
         final tokenVo = TokenRaw.fromJson(appResponse.data);
-        await _pref.setValue(AppPrefKey.token, tokenVo.accessToken);
-        await _pref.setValue(AppPrefKey.refreshToken, tokenVo.refreshToken);
+        await _pref.setString(AppPrefKey.token, tokenVo.accessToken);
+        await _pref.setString(AppPrefKey.refreshToken, tokenVo.refreshToken);
       }
       newDio.close(force: true);
-
       return HttpStatus(response.statusCode).isOk;
     } catch (_) {
       newDio.close(force: true);
-
       return false;
     }
   }

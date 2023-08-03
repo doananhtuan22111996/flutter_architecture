@@ -1,11 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 part 'exts/app_theme_ext.dart';
+
 part 'exts/app_text_style_ext.dart';
 
 part 'app_colors.dart';
+
 part 'app_text_style.dart';
+
 part 'app_button_style.dart';
 
 class AppThemeData {
@@ -28,6 +32,13 @@ class AppThemeData {
           TextButtonThemeData(style: AppButtonStyle.textButtonStyle),
       outlinedButtonTheme:
           OutlinedButtonThemeData(style: AppButtonStyle.outlinedButtonStyle),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: appColor.primaryColor,
+        selectionColor: appColor.primaryColor,
+        selectionHandleColor: appColor.primaryColor,
+      ),
+      cupertinoOverrideTheme:
+          CupertinoThemeData(primaryColor: appColor.primaryColor),
     );
   }
 }

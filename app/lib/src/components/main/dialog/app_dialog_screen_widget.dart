@@ -40,13 +40,13 @@ class AppScreenDialogWidget extends AppDialogBaseBuilder {
   @override
   AppDialogBaseBuilder buildDialog(BuildContext context) {
     if (_appDialogType == AppDialogType.success) {
-      setIcon(R.svgs.icSuccessOnDialog.svg());
+      setIcon(R.svgs.dialog.success.svg());
     }
     if (_appDialogType == AppDialogType.error) {
-      setIcon(R.svgs.icErrorOnDialog.svg());
+      setIcon(R.svgs.dialog.error.svg());
     }
     if (_appDialogType == AppDialogType.confirm) {
-      setIcon(R.svgs.icConfirmOnDialog.svg());
+      setIcon(R.svgs.dialog.confirm.svg());
     }
     _dialog = Dialog.fullscreen(
       child: Container(

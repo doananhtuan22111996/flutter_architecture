@@ -7,14 +7,15 @@ class AppBarLeadingAvatarWidget extends AppBarBaseBuilder {
       titleSpacing: 0,
       leading: _leading ??
           AppButtonAppBarWidget()
-              .setPrefixIcon(R.svgs.icArrowLineLeft.svg())
+              .setPrefixIcon(R.svgs.outline.appBar.arrowLineLeft.svg())
               .setOnPressed(() => Get.back())
               .build(context),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          AppButtonAppBarWidget()
-              .setPrefixIcon(R.svgs.icAvatar.svg())
+          AppAvatarSvgWidget()
+              .setSvg(R.svgs.avatar.account.svg())
+              .setSize(AppAvatarSize.medium)
               .setOnPressed(() {})
               .build(context),
           Flexible(

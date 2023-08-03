@@ -10,9 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_svg: ^2.0.5
+  flutter_svg: ^2.0.7
   intl: ^0.18.0
-  intl_utils: ^2.8.1
+  intl_utils: ^2.8.3
   flutter_native_splash:
     git:
       url: https://github.com/lux-studio-66/flutter_native_splash.git
@@ -21,14 +21,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.1
-  build_runner: ^2.4.4
+  flutter_lints: ^2.0.2
+  build_runner: ^2.4.6
   flutter_gen_runner: ^5.3.1
   flutter_launcher_icons:
     git:
       url: https://github.com/lux-studio-66/flutter_launcher_icons.git
       ref: master
-  melos: ^3.0.1
+  melos: ^3.1.1
 
 flutter_gen:
   output: lib/src/generated/assets
@@ -61,6 +61,17 @@ flutter:
   assets:
     - assets/pngs/
     - assets/svgs/
+    - assets/svgs/avatar/
+    - assets/svgs/dialog/
+    - assets/svgs/filled/tab/
+    - assets/svgs/outline/tab/
+    - assets/svgs/outline/appBar/
+    - assets/svgs/outline/tagBadge/
+    - assets/svgs/outline/progress/
+    - assets/svgs/outline/textField/
+    - assets/svgs/solid/progress/
+    - assets/svgs/solid/textField/
+    - assets/svgs/solid/datePicker/
 
     # To add assets to your package, add an assets section, like this:
     # assets:
