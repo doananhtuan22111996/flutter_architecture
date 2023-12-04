@@ -1,48 +1,33 @@
 part of 'app_avatar_base_builder.dart';
 
 class AppAvatarNetworkWidget extends AppAvatarBaseBuilder {
+  const AppAvatarNetworkWidget(
+      {super.key, super.link, super.size, super.onPressed});
+
   @override
   Widget build(BuildContext context) {
-    if (_link == null) {
+    if (link == null) {
       return SizedBox(
-        width: _size?.value,
-        height: _size?.value,
+        width: size?.value,
+        height: size?.value,
       );
     }
 
     return InkWell(
-      onTap: _onPressed,
+      onTap: onPressed,
       customBorder: const CircleBorder(),
       child: Padding(
         padding: EdgeInsets.all(AppThemeExt.of.majorScale(1)),
         child: Container(
-          width: _size?.value,
-          height: _size?.value,
+          width: size?.value,
+          height: size?.value,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(color: AppColors.of.neutralColor[3]!),
           ),
-          child: ClipOval(child: Image.network(_link!, fit: BoxFit.fill)),
+          child: ClipOval(child: Image.network(link!, fit: BoxFit.fill)),
         ),
       ),
     );
-  }
-
-  @override
-  AppAvatarBaseBuilder setLink(String? link) {
-    _link = link;
-    return super.setLink(link);
-  }
-
-  @override
-  AppAvatarBaseBuilder setSize(AppAvatarSize? size) {
-    _size = size;
-    return super.setSize(size);
-  }
-
-  @override
-  AppAvatarBaseBuilder setOnPressed(void Function()? onPressed) {
-    _onPressed = onPressed;
-    return super.setOnPressed(onPressed);
   }
 }

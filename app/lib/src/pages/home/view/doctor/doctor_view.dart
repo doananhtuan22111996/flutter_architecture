@@ -11,11 +11,11 @@ class DoctorView extends GetWidget<DoctorController> {
           padding: EdgeInsets.symmetric(
               horizontal: AppThemeExt.of.majorScale(4),
               vertical: AppThemeExt.of.majorScale(1)),
-          child: AppTextBody1Widget()
-              .setText('${model.doctorId} - ${model.doctorName}')
-              .setMaxLines(1)
-              .setTextOverFlow(TextOverflow.ellipsis)
-              .build(context),
+          child: AppTextBody1Widget(
+            text: '${model.doctorId} - ${model.doctorName}',
+            maxLines: 1,
+            textOverflow: TextOverflow.ellipsis,
+          ),
         );
       },
     );

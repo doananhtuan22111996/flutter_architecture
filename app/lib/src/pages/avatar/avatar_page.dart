@@ -9,11 +9,9 @@ class AvatarPage extends GetView<AvatarController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget()
-        .setAppBar(
-            AppBarWidget().setHeaderPage(R.strings.avatar).build(context))
-        .setBody(_body(context))
-        .build(context);
+    return AppMainPageWidget(
+        appBar: AppBarWidget(headerPage: R.strings.avatar).build(context),
+        body: _body(context));
   }
 
   Widget _body(BuildContext context) {
@@ -38,35 +36,35 @@ class AvatarPage extends GetView<AvatarController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Avatar Network').build(context),
+        const AppTextBody1Widget(text: 'Avatar Network'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            AppAvatarNetworkWidget()
-                .setLink(
-                    'https://kiemtientuweb.com/ckfinder/userfiles/images/avt-cute/avatar-cute-8.jpg')
-                .setSize(AppAvatarSize.small)
-                .setOnPressed(() => controller.toast())
-                .build(context),
-            AppAvatarNetworkWidget()
-                .setLink(
-                    'https://kiemtientuweb.com/ckfinder/userfiles/images/avt-cute/avatar-cute-8.jpg')
-                .setSize(AppAvatarSize.medium)
-                .setOnPressed(() => controller.toast())
-                .build(context),
-            AppAvatarNetworkWidget()
-                .setLink(
-                    'https://kiemtientuweb.com/ckfinder/userfiles/images/avt-cute/avatar-cute-8.jpg')
-                .setSize(AppAvatarSize.large)
-                .setOnPressed(() => controller.toast())
-                .build(context),
-            AppAvatarNetworkWidget()
-                .setLink(
-                    'https://kiemtientuweb.com/ckfinder/userfiles/images/avt-cute/avatar-cute-8.jpg')
-                .setSize(AppAvatarSize.extraLarge)
-                .setOnPressed(() => controller.toast())
-                .build(context),
+            AppAvatarNetworkWidget(
+              link:
+                  'https://kiemtientuweb.com/ckfinder/userfiles/images/avt-cute/avatar-cute-8.jpg',
+              size: AppAvatarSize.small,
+              onPressed: () => controller.toast(),
+            ),
+            AppAvatarNetworkWidget(
+              link:
+                  'https://kiemtientuweb.com/ckfinder/userfiles/images/avt-cute/avatar-cute-8.jpg',
+              size: AppAvatarSize.medium,
+              onPressed: () => controller.toast(),
+            ),
+            AppAvatarNetworkWidget(
+              link:
+                  'https://kiemtientuweb.com/ckfinder/userfiles/images/avt-cute/avatar-cute-8.jpg',
+              size: AppAvatarSize.large,
+              onPressed: () => controller.toast(),
+            ),
+            AppAvatarNetworkWidget(
+              link:
+                  'https://kiemtientuweb.com/ckfinder/userfiles/images/avt-cute/avatar-cute-8.jpg',
+              size: AppAvatarSize.extraLarge,
+              onPressed: () => controller.toast(),
+            ),
           ],
         )
       ],
@@ -77,31 +75,31 @@ class AvatarPage extends GetView<AvatarController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Avatar Label').build(context),
+        const AppTextBody1Widget(text: 'Avatar Label'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            AppAvatarTextWidget()
-                .setText('GU')
-                .setSize(AppAvatarSize.small)
-                .setOnPressed(() => controller.toast())
-                .build(context),
-            AppAvatarTextWidget()
-                .setText('GU')
-                .setSize(AppAvatarSize.medium)
-                .setOnPressed(() => controller.toast())
-                .build(context),
-            AppAvatarTextWidget()
-                .setText('GU')
-                .setSize(AppAvatarSize.large)
-                .setOnPressed(() => controller.toast())
-                .build(context),
-            AppAvatarTextWidget()
-                .setText('GU')
-                .setSize(AppAvatarSize.extraLarge)
-                .setOnPressed(() => controller.toast())
-                .build(context),
+            AppAvatarTextWidget(
+              text: 'GU',
+              size: AppAvatarSize.small,
+              onPressed: () => controller.toast(),
+            ),
+            AppAvatarTextWidget(
+              text: 'GU',
+              size: AppAvatarSize.medium,
+              onPressed: () => controller.toast(),
+            ),
+            AppAvatarTextWidget(
+              text: 'GU',
+              size: AppAvatarSize.large,
+              onPressed: () => controller.toast(),
+            ),
+            AppAvatarTextWidget(
+              text: 'GU',
+              size: AppAvatarSize.extraLarge,
+              onPressed: () => controller.toast(),
+            ),
           ],
         )
       ],
@@ -112,31 +110,31 @@ class AvatarPage extends GetView<AvatarController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Avatar Default').build(context),
+        const AppTextBody1Widget(text: 'Avatar Default'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            AppAvatarSvgWidget()
-                .setSvg(R.svgs.avatar.account1.svg())
-                .setSize(AppAvatarSize.small)
-                .setOnPressed(() => controller.toast())
-                .build(context),
-            AppAvatarSvgWidget()
-                .setSvg(R.svgs.avatar.account.svg())
-                .setSize(AppAvatarSize.medium)
-                .setOnPressed(() => controller.toast())
-                .build(context),
-            AppAvatarSvgWidget()
-                .setSvg(R.svgs.avatar.account2.svg())
-                .setSize(AppAvatarSize.large)
-                .setOnPressed(() => controller.toast())
-                .build(context),
-            AppAvatarSvgWidget()
-                .setSvg(R.svgs.avatar.account3.svg())
-                .setSize(AppAvatarSize.extraLarge)
-                .setOnPressed(() => controller.toast())
-                .build(context),
+            AppAvatarSvgWidget(
+              svg: R.svgs.avatar.account1.svg(),
+              size: AppAvatarSize.small,
+              onPressed: () => controller.toast(),
+            ),
+            AppAvatarSvgWidget(
+              svg: R.svgs.avatar.account.svg(),
+              size: AppAvatarSize.medium,
+              onPressed: () => controller.toast(),
+            ),
+            AppAvatarSvgWidget(
+              svg: R.svgs.avatar.account2.svg(),
+              size: AppAvatarSize.large,
+              onPressed: () => controller.toast(),
+            ),
+            AppAvatarSvgWidget(
+              svg: R.svgs.avatar.account3.svg(),
+              size: AppAvatarSize.extraLarge,
+              onPressed: () => controller.toast(),
+            ),
           ],
         )
       ],

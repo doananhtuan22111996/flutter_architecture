@@ -1,38 +1,14 @@
 part of 'app_date_picker_base_builder.dart';
 
 class AppDateRangePickerWidget extends AppDatePickerBaseBuilder {
-  @override
-  AppDatePickerBaseBuilder setFieldKey(String fieldKey) {
-    _fieldKey = fieldKey;
-    return this;
-  }
-
-  @override
-  AppDatePickerBaseBuilder setInitialDateRange(
-      DateTimeRange? initialDateRange) {
-    _initialDateRange = initialDateRange;
-    return super.setInitialDateRange(initialDateRange);
-  }
-
-  @override
-  AppDatePickerBaseBuilder setOnDateRangePicked(
-      void Function(DateTimeRange? dateRangePicked)? onDateRangePicked) {
-    _onDateRangePicked = onDateRangePicked;
-    return super.setOnDateRangePicked(onDateRangePicked);
-  }
-
-  @override
-  AppDatePickerBaseBuilder setAppDatePickerSize(
-      AppDatePickerSize? appDatePickerSize) {
-    _appDatePickerSize = appDatePickerSize;
-    return super.setAppDatePickerSize(appDatePickerSize);
-  }
-
-  @override
-  AppDatePickerBaseBuilder setIsDisabled(bool? isDisabled) {
-    _isDisabled = isDisabled;
-    return super.setIsDisabled(isDisabled);
-  }
+  AppDateRangePickerWidget({
+    super.key,
+    required super.fieldKey,
+    super.initialDateRange,
+    super.onDateRangePicked,
+    super.appDatePickerSize,
+    super.isDisabled,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,40 +19,40 @@ class AppDateRangePickerWidget extends AppDatePickerBaseBuilder {
       height: AppDatePickerSize.medium.value,
     );
     double iconSize = AppThemeExt.of.majorScale(3);
-    if (_appDatePickerSize == AppDatePickerSize.small) {
+    if (appDatePickerSize == AppDatePickerSize.small) {
       contentPadding = EdgeInsets.only(left: AppThemeExt.of.majorScale(2));
       suffixIconConstraints = BoxConstraints.expand(
         width: AppThemeExt.of.majorScale(8),
-        height: _appDatePickerSize!.value,
+        height: appDatePickerSize!.value,
       );
     }
-    if (_appDatePickerSize == AppDatePickerSize.large) {
+    if (appDatePickerSize == AppDatePickerSize.large) {
       contentPadding = EdgeInsets.only(left: AppThemeExt.of.majorScale(4));
       iconSize = AppThemeExt.of.majorScale(4);
       suffixIconConstraints = BoxConstraints.expand(
         width: AppThemeExt.of.majorScale(13),
-        height: _appDatePickerSize!.value,
+        height: appDatePickerSize!.value,
       );
     }
     return FormBuilderField<DateTimeRange?>(
-      name: _fieldKey,
-      initialValue: _initialDateRange,
+      name: fieldKey,
+      initialValue: initialDateRange,
       builder: (field) => InkWell(
-        onTap: _isDisabled == true
+        onTap: isDisabled == true
             ? null
             : () async {
                 final dateRagePicked = await open(context, field.value);
                 if (dateRagePicked != null) {
                   field.didChange(dateRagePicked);
-                  _onDateRangePicked?.call(dateRagePicked);
+                  onDateRangePicked?.call(dateRagePicked);
                 }
               },
         borderRadius: BorderRadius.circular(AppThemeExt.of.majorScale(1)),
         child: InputDecorator(
           decoration: InputDecoration(
             constraints: BoxConstraints.expand(
-                height: _appDatePickerSize?.value ??
-                    AppDatePickerSize.medium.value),
+                height:
+                    appDatePickerSize?.value ?? AppDatePickerSize.medium.value),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppThemeExt.of.majorScale(1)),
               borderSide: BorderSide(color: AppColors.of.neutralColor[5]!),
@@ -94,7 +70,7 @@ class AppDateRangePickerWidget extends AppDatePickerBaseBuilder {
             suffixIcon: Icon(
               Icons.calendar_today,
               size: iconSize,
-              color: _isDisabled == true
+              color: isDisabled == true
                   ? AppColors.of.neutralColor[5]
                   : AppColors.of.neutralColor,
             ),
@@ -108,41 +84,35 @@ class AppDateRangePickerWidget extends AppDatePickerBaseBuilder {
   }
 
   Widget _text(BuildContext context, DateTimeRange? initialDateRange) {
-    final textColor = _isDisabled == true
+    final textColor = isDisabled == true
         ? AppColors.of.neutralColor[5]
         : AppColors.of.neutralColor;
-    if (_appDatePickerSize == AppDatePickerSize.large) {
-      return AppTextBody1Widget()
-          .setText(DateTimeExt.dateTimeRangeToDisplay(
-              dateTimeRange: initialDateRange))
-          .setTextStyle(
-              AppTextStyleExt.of.textBody1r?.copyWith(color: textColor))
-          .build(context);
+    if (appDatePickerSize == AppDatePickerSize.large) {
+      return AppTextBody1Widget(
+        text:
+            DateTimeExt.dateTimeRangeToDisplay(dateTimeRange: initialDateRange),
+        textStyle: AppTextStyleExt.of.textBody1r?.copyWith(color: textColor),
+      );
     }
-    return AppTextBody2Widget()
-        .setText(
-            DateTimeExt.dateTimeRangeToDisplay(dateTimeRange: initialDateRange))
-        .setTextStyle(AppTextStyleExt.of.textBody2r?.copyWith(color: textColor))
-        .build(context);
+    return AppTextBody2Widget(
+      text: DateTimeExt.dateTimeRangeToDisplay(dateTimeRange: initialDateRange),
+      textStyle: AppTextStyleExt.of.textBody2r?.copyWith(color: textColor),
+    );
   }
 
   Widget _hint(BuildContext context) {
-    if (_appDatePickerSize == AppDatePickerSize.large) {
-      return AppTextBody1Widget()
-          .setText(_hintText ?? R.strings.datePickerRangeHint)
-          .setTextStyle(
-            AppTextStyleExt.of.textBody1r
-                ?.copyWith(color: AppColors.of.neutralColor[5]),
-          )
-          .build(context);
+    if (appDatePickerSize == AppDatePickerSize.large) {
+      return AppTextBody1Widget(
+        text: hintText ?? R.strings.datePickerRangeHint,
+        textStyle: AppTextStyleExt.of.textBody1r
+            ?.copyWith(color: AppColors.of.neutralColor[5]),
+      );
     }
-    return AppTextBody2Widget()
-        .setText(_hintText ?? R.strings.datePickerRangeHint)
-        .setTextStyle(
-          AppTextStyleExt.of.textBody2r
-              ?.copyWith(color: AppColors.of.neutralColor[5]),
-        )
-        .build(context);
+    return AppTextBody2Widget(
+      text: hintText ?? R.strings.datePickerRangeHint,
+      textStyle: AppTextStyleExt.of.textBody2r
+          ?.copyWith(color: AppColors.of.neutralColor[5]),
+    );
   }
 
   Future<DateTimeRange?> open(
@@ -154,8 +124,8 @@ class AppDateRangePickerWidget extends AppDatePickerBaseBuilder {
             start: DateTime.now(),
             end: DateTime.now(),
           ),
-      firstDate: _firstDate ?? _limitFirstDate,
-      lastDate: _lastDate ?? _limitLastDate,
+      firstDate: firstDate ?? _limitFirstDate,
+      lastDate: lastDate ?? _limitLastDate,
       initialEntryMode: DatePickerEntryMode.calendarOnly,
       builder: (context, child) {
         return Theme(
@@ -163,7 +133,7 @@ class AppDateRangePickerWidget extends AppDatePickerBaseBuilder {
             dialogTheme: context.theme.dialogTheme.copyWith(
               surfaceTintColor: AppColors.of.neutralColor[1],
             ),
-            // TODO
+            // TODO update theme follow syntax document flutter
             // datePickerTheme: context.theme.datePickerTheme.copyWith(
             //   surfaceTintColor: AppColors.of.neutralColor[1],
             // ),

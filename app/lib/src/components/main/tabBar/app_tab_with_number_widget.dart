@@ -1,10 +1,18 @@
 part of 'app_tab_base_builder.dart';
 
 class AppTabWithNumberWidget extends AppTabBaseBuilder {
+  const AppTabWithNumberWidget({
+    super.key,
+    super.appTabSize,
+    super.label,
+    super.number,
+    super.isSelected,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Tab(
-      height: _appTabSize?.value,
+      height: appTabSize?.value,
       iconMargin: EdgeInsets.zero,
       child: Padding(
         padding: paddingBase,
@@ -24,40 +32,32 @@ class AppTabWithNumberWidget extends AppTabBaseBuilder {
     );
   }
 
-  @override
-  AppTabWithNumberWidget setLabel(String? label) {
-    _label = label;
-    return this;
-  }
-
-  @override
-  AppTabWithNumberWidget setAppTabSize(AppTabSize? appTabSize) {
-    _appTabSize = appTabSize;
-    return this;
-  }
-
-  @override
-  AppTabWithNumberWidget setNumber(int? number) {
-    _number = number;
-    return this;
-  }
-
-  @override
-  AppTabWithNumberWidget setIsSelected(bool isSelected) {
-    _isSelected = isSelected;
-    return this;
-  }
-
   Widget _withNumber(BuildContext context) {
-    return _isSelected == true
-        ? AppBadgeNumberWidget()
-            .setNumber(_number)
-            .setAppBadgeBaseType(AppBadgeBaseType.filled)
-            .setColor(AppColors.of.primaryColor)
-            .build(context)
-        : AppBadgeNumberWidget()
-            .setNumber(_number)
-            .setAppBadgeBaseType(AppBadgeBaseType.outlined)
-            .build(context);
+    return isSelected == true
+        ? AppBadgeNumberWidget(
+            number: number,
+            appBadgeBaseType: AppBadgeBaseType.filled,
+            color: AppColors.of.primaryColor,
+          )
+        : AppBadgeNumberWidget(
+            number: number,
+            appBadgeBaseType: AppBadgeBaseType.outlined,
+          );
+  }
+
+  @override
+  AppTabWithNumberWidget copyWith(
+      {String? label,
+      int? number,
+      bool? isSelected,
+      AppTabSize? appTabSize,
+      Widget? iconSelected,
+      Widget? iconUnselected}) {
+    return AppTabWithNumberWidget(
+      key: super.key,
+      label: label ?? super.label,
+      appTabSize: appTabSize ?? super.appTabSize,
+      isSelected: isSelected ?? super.isSelected,
+    );
   }
 }

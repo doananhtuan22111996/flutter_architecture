@@ -5,7 +5,9 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:resources/resources.dart';
 
 part 'app_progress_basic_widget.dart';
+
 part 'app_progress_circle_widget.dart';
+
 part 'app_progress_line_widget.dart';
 
 enum AppProgressSize {
@@ -29,41 +31,30 @@ enum AppProgressType {
   error(type: 'error');
 
   final String type;
+
   const AppProgressType({required this.type});
 }
 
-abstract class AppProgressBaseBuilder {
-  static const double maxProgress = 100;
+abstract class AppProgressBaseBuilder extends StatelessWidget {
+  static const double max = 100;
+
   @protected
-  AppProgressSize? _appProgressSize;
+  final AppProgressSize? appProgressSize;
   @protected
-  double? _maxProgress;
+  final double? maxProgress;
   @protected
-  double? _progress;
+  final double? progress;
   @protected
-  AppProgressType? _appProgressType;
+  final AppProgressType? appProgressType;
   @protected
-  bool? _isWithNumber;
+  final bool? isWithNumber;
 
-  AppProgressBaseBuilder setAppProgressSize(AppProgressSize? appProgressSize) {
-    return this;
-  }
-
-  AppProgressBaseBuilder setMaxProgress(double? maxProgress) {
-    return this;
-  }
-
-  AppProgressBaseBuilder setProgress(double? progress) {
-    return this;
-  }
-
-  AppProgressBaseBuilder setAppProgressType(AppProgressType? appProgressType) {
-    return this;
-  }
-
-  AppProgressBaseBuilder setIsWithNumber(bool? isWithNumber) {
-    return this;
-  }
-
-  Widget build(BuildContext context);
+  const AppProgressBaseBuilder({
+    super.key,
+    this.appProgressSize,
+    this.maxProgress,
+    this.progress,
+    this.appProgressType,
+    this.isWithNumber,
+  });
 }

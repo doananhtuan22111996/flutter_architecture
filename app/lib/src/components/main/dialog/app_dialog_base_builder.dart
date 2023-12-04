@@ -15,66 +15,44 @@ enum AppDialogType {
   confirm(type: 'confirm');
 
   final String type;
+
   const AppDialogType({required this.type});
 }
 
-abstract class AppDialogBaseBuilder {
+abstract class AppDialogBaseBuilder extends Dialog {
+  // @protected
+  // final Dialog? dialog;
   @protected
-  Dialog? _dialog;
+  final String? title;
   @protected
-  String? _title;
+  final String? content;
   @protected
-  String? _content;
+  final String? positiveText;
   @protected
-  String? _positiveText;
+  final String? negativeText;
   @protected
-  String? _negativeText;
+  final AppDialogType? appDialogType;
   @protected
-  Widget? _icon;
+  final void Function()? onPositive;
   @protected
-  AppDialogType? _appDialogType;
-  @protected
-  void Function()? _onPositive;
-  @protected
-  void Function()? _onNegative;
+  final void Function()? onNegative;
 
-  AppDialogBaseBuilder setTitle(String? title) {
-    return this;
-  }
+  const AppDialogBaseBuilder({
+    super.key,
+    // this.dialog,
+    this.title,
+    this.content,
+    this.positiveText,
+    this.negativeText,
+    this.appDialogType,
+    this.onPositive,
+    this.onNegative,
+  });
 
-  AppDialogBaseBuilder setContent(String? content) {
-    return this;
-  }
-
-  AppDialogBaseBuilder setPositiveText(String? positiveText) {
-    return this;
-  }
-
-  AppDialogBaseBuilder setNegativeText(String? negativeText) {
-    return this;
-  }
-
-  AppDialogBaseBuilder setIcon(Widget? icon) {
-    return this;
-  }
-
-  AppDialogBaseBuilder setAppDialogType(AppDialogType? type) {
-    return this;
-  }
-
-  AppDialogBaseBuilder setOnPositive(void Function()? onPositive) {
-    return this;
-  }
-
-  AppDialogBaseBuilder setOnNegative(void Function()? onNegative) {
-    return this;
-  }
-
-  AppDialogBaseBuilder buildDialog(BuildContext context);
+  // AppDialogBaseBuilder buildDialog(BuildContext context);
 
   void show() {
-    if (_dialog == null) return;
     if (Get.isDialogOpen == true) return;
-    Get.dialog(_dialog!, barrierDismissible: false, useSafeArea: false);
+    Get.dialog(this, barrierDismissible: false, useSafeArea: false);
   }
 }

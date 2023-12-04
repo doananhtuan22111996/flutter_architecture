@@ -2,6 +2,7 @@ import 'package:app/src/config/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+@Deprecated('TODO remove')
 class AppSnackbarWidget {
   const AppSnackbarWidget(
       {required this.title,

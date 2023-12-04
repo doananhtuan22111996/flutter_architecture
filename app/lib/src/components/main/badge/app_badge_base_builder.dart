@@ -1,6 +1,7 @@
 import 'package:app/src/components/main/text/app_text_base_builder.dart';
 import 'package:app/src/config/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 part 'app_badge_number_widget.dart';
 
@@ -8,29 +9,21 @@ part 'app_badge_dot_widget.dart';
 
 enum AppBadgeBaseType { filled, outlined }
 
-abstract class AppBadgeBaseBuilder {
+abstract class AppBadgeBaseBuilder extends StatelessWidget {
   @protected
-  int? _number;
+  final int? number;
   @protected
-  Color? _color;
+  final Color? color;
   @protected
-  AppBadgeBaseType? _appBadgeBaseType;
+  final AppBadgeBaseType? appBadgeBaseType;
   @protected
-  bool? _isDisabled;
+  final bool? isDisabled;
 
-  AppBadgeBaseBuilder setNumber(int? number) {
-    return this;
-  }
-
-  AppBadgeBaseBuilder setColor(Color? color);
-
-  AppBadgeBaseBuilder setAppBadgeBaseType(AppBadgeBaseType? appBadgeBaseType) {
-    return this;
-  }
-
-  AppBadgeBaseBuilder setIsDisabled(bool? isDisabled) {
-    return this;
-  }
-
-  Widget build(BuildContext context);
+  const AppBadgeBaseBuilder({
+    super.key,
+    required this.color,
+    this.number,
+    this.appBadgeBaseType = AppBadgeBaseType.filled,
+    this.isDisabled,
+  });
 }

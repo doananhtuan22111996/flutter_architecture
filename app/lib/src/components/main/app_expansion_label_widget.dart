@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+@Deprecated('TODO remove')
 class AppExpansionLabelWidget extends StatefulWidget {
   const AppExpansionLabelWidget({
     Key? key,

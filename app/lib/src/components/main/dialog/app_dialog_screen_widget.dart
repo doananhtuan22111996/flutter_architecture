@@ -1,54 +1,23 @@
 part of 'app_dialog_base_builder.dart';
 
 class AppScreenDialogWidget extends AppDialogBaseBuilder {
-  @override
-  AppDialogBaseBuilder setTitle(String? title) {
-    _title = title;
-    return super.setTitle(title);
-  }
+  const AppScreenDialogWidget({
+    super.key,
+    super.title,
+    super.content,
+    super.positiveText,
+    super.negativeText,
+    super.appDialogType,
+  });
 
   @override
-  AppDialogBaseBuilder setContent(String? content) {
-    _content = content;
-    return super.setContent(content);
-  }
-
-  @override
-  AppDialogBaseBuilder setIcon(Widget? icon) {
-    _icon = icon;
-    return super.setIcon(icon);
-  }
-
-  @override
-  AppDialogBaseBuilder setPositiveText(String? positiveText) {
-    _positiveText = positiveText;
-    return super.setPositiveText(positiveText);
-  }
-
-  @override
-  AppDialogBaseBuilder setNegativeText(String? negativeText) {
-    _negativeText = negativeText;
-    return super.setNegativeText(negativeText);
-  }
-
-  @override
-  AppDialogBaseBuilder setAppDialogType(AppDialogType? type) {
-    _appDialogType = type;
-    return super.setAppDialogType(type);
-  }
-
-  @override
-  AppDialogBaseBuilder buildDialog(BuildContext context) {
-    if (_appDialogType == AppDialogType.success) {
-      setIcon(R.svgs.dialog.success.svg());
-    }
-    if (_appDialogType == AppDialogType.error) {
-      setIcon(R.svgs.dialog.error.svg());
-    }
-    if (_appDialogType == AppDialogType.confirm) {
-      setIcon(R.svgs.dialog.confirm.svg());
-    }
-    _dialog = Dialog.fullscreen(
+  Widget build(BuildContext context) {
+    Widget icon = appDialogType == AppDialogType.success
+        ? R.svgs.dialog.success.svg()
+        : appDialogType == AppDialogType.error
+            ? R.svgs.dialog.error.svg()
+            : R.svgs.dialog.confirm.svg();
+    return Dialog.fullscreen(
       child: Container(
         color: AppColors.of.neutralColor[1],
         padding: EdgeInsets.all(AppThemeExt.of.majorScale(6)),
@@ -57,32 +26,34 @@ class AppScreenDialogWidget extends AppDialogBaseBuilder {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Expanded(child: _container(context)),
+            Expanded(child: _container(context, icon)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                if (_negativeText != null)
+                if (negativeText != null)
                   Expanded(
-                    child: AppOutlinedButtonWidget()
-                        .setButtonText(_negativeText)
-                        .setAppButtonSize(AppButtonSize.large)
-                        .setOnPressed(() {
-                      Get.back();
-                      _onNegative?.call();
-                    }).build(context),
+                    child: AppOutlinedButtonWidget(
+                      buttonText: negativeText,
+                      appButtonSize: AppButtonSize.large,
+                      onPressed: () {
+                        Get.back();
+                        onNegative?.call();
+                      },
+                    ),
                   ),
-                if (_negativeText != null)
+                if (negativeText != null)
                   SizedBox(width: AppThemeExt.of.majorScale(3)),
-                if (_positiveText != null)
+                if (positiveText != null)
                   Expanded(
-                    child: AppFilledButtonWidget()
-                        .setButtonText(_positiveText)
-                        .setAppButtonSize(AppButtonSize.large)
-                        .setOnPressed(() {
-                      Get.back();
-                      _onPositive?.call();
-                    }).build(context),
+                    child: AppFilledButtonWidget(
+                      buttonText: positiveText,
+                      appButtonSize: AppButtonSize.large,
+                      onPressed: () {
+                        Get.back();
+                        onPositive?.call();
+                      },
+                    ).build(context),
                   ),
               ],
             ),
@@ -90,30 +61,29 @@ class AppScreenDialogWidget extends AppDialogBaseBuilder {
         ),
       ),
     );
-    return this;
   }
 
-  Widget _container(BuildContext context) {
+  Widget _container(BuildContext context, Widget icon) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        if (_icon != null) _icon!,
-        if (_title != null)
+        icon,
+        if (title != null)
           Padding(
             padding:
                 EdgeInsets.symmetric(vertical: AppThemeExt.of.majorScale(3)),
-            child: AppTextHeading4Widget()
-                .setText(_title)
-                .setTextAlign(TextAlign.center)
-                .build(context),
+            child: AppTextHeading4Widget(
+              text: title,
+              textAlign: TextAlign.center,
+            ),
           ),
-        if (_content != null)
-          AppTextBody1Widget()
-              .setText(_content)
-              .setTextStyle(AppTextStyleExt.of.textBody1r)
-              .setTextAlign(TextAlign.center)
-              .build(context),
+        if (content != null)
+          AppTextBody1Widget(
+            text: content,
+            textStyle: AppTextStyleExt.of.textBody1r,
+            textAlign: TextAlign.center,
+          ),
       ],
     );
   }

@@ -1,37 +1,14 @@
 part of 'app_date_picker_base_builder.dart';
 
 class AppTimePickerWidget extends AppDatePickerBaseBuilder {
-  @override
-  AppDatePickerBaseBuilder setFieldKey(String fieldKey) {
-    _fieldKey = fieldKey;
-    return this;
-  }
-
-  @override
-  AppDatePickerBaseBuilder setInitialTime(TimeOfDay? initialTime) {
-    _initialTime = initialTime;
-    return super.setInitialTime(initialTime);
-  }
-
-  @override
-  AppDatePickerBaseBuilder setOnTimePicked(
-      void Function(TimeOfDay? timePicked)? onTimePicked) {
-    _onTimePicked = onTimePicked;
-    return super.setOnTimePicked(onTimePicked);
-  }
-
-  @override
-  AppDatePickerBaseBuilder setAppDatePickerSize(
-      AppDatePickerSize? appDatePickerSize) {
-    _appDatePickerSize = appDatePickerSize;
-    return super.setAppDatePickerSize(appDatePickerSize);
-  }
-
-  @override
-  AppDatePickerBaseBuilder setIsDisabled(bool? isDisabled) {
-    _isDisabled = isDisabled;
-    return super.setIsDisabled(isDisabled);
-  }
+  AppTimePickerWidget({
+    super.key,
+    required super.fieldKey,
+    super.initialTime,
+    super.onTimePicked,
+    super.appDatePickerSize,
+    super.isDisabled,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,40 +19,40 @@ class AppTimePickerWidget extends AppDatePickerBaseBuilder {
       height: AppDatePickerSize.medium.value,
     );
     double iconSize = AppThemeExt.of.majorScale(3);
-    if (_appDatePickerSize == AppDatePickerSize.small) {
+    if (appDatePickerSize == AppDatePickerSize.small) {
       contentPadding = EdgeInsets.only(left: AppThemeExt.of.majorScale(2));
       suffixIconConstraints = BoxConstraints.expand(
         width: AppThemeExt.of.majorScale(8),
-        height: _appDatePickerSize!.value,
+        height: appDatePickerSize!.value,
       );
     }
-    if (_appDatePickerSize == AppDatePickerSize.large) {
+    if (appDatePickerSize == AppDatePickerSize.large) {
       contentPadding = EdgeInsets.only(left: AppThemeExt.of.majorScale(4));
       iconSize = AppThemeExt.of.majorScale(4);
       suffixIconConstraints = BoxConstraints.expand(
         width: AppThemeExt.of.majorScale(13),
-        height: _appDatePickerSize!.value,
+        height: appDatePickerSize!.value,
       );
     }
     return FormBuilderField<TimeOfDay?>(
-      name: _fieldKey,
-      initialValue: _initialTime,
+      name: fieldKey,
+      initialValue: initialTime,
       builder: (field) => InkWell(
-        onTap: _isDisabled == true
+        onTap: isDisabled == true
             ? null
             : () async {
                 final timePicked = await open(context, field.value);
                 if (timePicked != null) {
                   field.didChange(timePicked);
-                  _onTimePicked?.call(timePicked);
+                  onTimePicked?.call(timePicked);
                 }
               },
         borderRadius: BorderRadius.circular(AppThemeExt.of.majorScale(1)),
         child: InputDecorator(
           decoration: InputDecoration(
             constraints: BoxConstraints.expand(
-                height: _appDatePickerSize?.value ??
-                    AppDatePickerSize.medium.value),
+                height:
+                    appDatePickerSize?.value ?? AppDatePickerSize.medium.value),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppThemeExt.of.majorScale(1)),
               borderSide: BorderSide(color: AppColors.of.neutralColor[5]!),
@@ -93,7 +70,7 @@ class AppTimePickerWidget extends AppDatePickerBaseBuilder {
             suffixIcon: Icon(
               Icons.timelapse_outlined,
               size: iconSize,
-              color: _isDisabled == true
+              color: isDisabled == true
                   ? AppColors.of.neutralColor[5]
                   : AppColors.of.neutralColor,
             ),
@@ -107,39 +84,33 @@ class AppTimePickerWidget extends AppDatePickerBaseBuilder {
   }
 
   Widget _text(BuildContext context, TimeOfDay? initialTime) {
-    final textColor = _isDisabled == true
+    final textColor = isDisabled == true
         ? AppColors.of.neutralColor[5]
         : AppColors.of.neutralColor;
-    if (_appDatePickerSize == AppDatePickerSize.large) {
-      return AppTextBody1Widget()
-          .setText(initialTime?.format(context))
-          .setTextStyle(
-              AppTextStyleExt.of.textBody1r?.copyWith(color: textColor))
-          .build(context);
+    if (appDatePickerSize == AppDatePickerSize.large) {
+      return AppTextBody1Widget(
+        text: initialTime?.format(context),
+        textStyle: AppTextStyleExt.of.textBody1r?.copyWith(color: textColor),
+      );
     }
-    return AppTextBody2Widget()
-        .setText(initialTime?.format(context))
-        .setTextStyle(AppTextStyleExt.of.textBody2r?.copyWith(color: textColor))
-        .build(context);
+    return AppTextBody2Widget(
+      text: initialTime?.format(context),
+      textStyle: AppTextStyleExt.of.textBody2r?.copyWith(color: textColor),
+    );
   }
 
   Widget _hint(BuildContext context) {
-    if (_appDatePickerSize == AppDatePickerSize.large) {
-      return AppTextBody1Widget()
-          .setText(_hintText ?? R.strings.timePickerHint)
-          .setTextStyle(
-            AppTextStyleExt.of.textBody1r
-                ?.copyWith(color: AppColors.of.neutralColor[5]),
-          )
-          .build(context);
+    if (appDatePickerSize == AppDatePickerSize.large) {
+      return AppTextBody1Widget(
+          text: hintText ?? R.strings.timePickerHint,
+          textStyle: AppTextStyleExt.of.textBody1r
+              ?.copyWith(color: AppColors.of.neutralColor[5]));
     }
-    return AppTextBody2Widget()
-        .setText(_hintText ?? R.strings.timePickerHint)
-        .setTextStyle(
-          AppTextStyleExt.of.textBody2r
-              ?.copyWith(color: AppColors.of.neutralColor[5]),
-        )
-        .build(context);
+    return AppTextBody2Widget(
+      text: hintText ?? R.strings.timePickerHint,
+      textStyle: AppTextStyleExt.of.textBody2r
+          ?.copyWith(color: AppColors.of.neutralColor[5]),
+    );
   }
 
   Future<TimeOfDay?> open(BuildContext context, TimeOfDay? initialValue) async {
@@ -153,7 +124,7 @@ class AppTimePickerWidget extends AppDatePickerBaseBuilder {
             dialogTheme: context.theme.dialogTheme.copyWith(
               surfaceTintColor: AppColors.of.neutralColor[1],
             ),
-            // TODO
+            // TODO update theme follow syntax document flutter
             // timePickerTheme: context.theme.timePickerTheme.copyWith(
             //   surfaceTintColor: AppColors.of.neutralColor[1],
             // ),

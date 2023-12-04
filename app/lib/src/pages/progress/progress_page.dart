@@ -9,11 +9,12 @@ class ProgressPage extends GetView<ProgressController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget()
-        .setAppBar(
-            AppBarWidget().setHeaderPage(R.strings.progress).build(context))
-        .setBody(_body(context))
-        .build(context);
+    return AppMainPageWidget(
+      appBar: AppBarWidget(
+        headerPage: R.strings.progress,
+      ).build(context),
+      body: _body(context),
+    );
   }
 
   Widget _body(BuildContext context) {
@@ -55,19 +56,15 @@ class ProgressPage extends GetView<ProgressController> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget().setText('Basic').build(context),
+        const AppTextHeading4Widget(text: 'Basic'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressBasicWidget().setProgress(0.3).build(context),
+        const AppProgressBasicWidget(progress: 0.3),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressBasicWidget()
-            .setAppProgressSize(AppProgressSize.basicMedium)
-            .setProgress(0.4)
-            .build(context),
+        const AppProgressBasicWidget(
+            appProgressSize: AppProgressSize.basicMedium, progress: 0.4),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressBasicWidget()
-            .setAppProgressSize(AppProgressSize.basicSmall)
-            .setProgress(0.5)
-            .build(context),
+        const AppProgressBasicWidget(
+            appProgressSize: AppProgressSize.basicSmall, progress: 0.5),
       ],
     );
   }
@@ -77,28 +74,23 @@ class ProgressPage extends GetView<ProgressController> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget()
-            .setText('Basic With Number')
-            .setMaxLines(1)
-            .setTextOverFlow(TextOverflow.ellipsis)
-            .build(context),
+        const AppTextHeading4Widget(
+            text: 'Basic With Number',
+            maxLines: 1,
+            textOverflow: TextOverflow.ellipsis),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressBasicWidget()
-            .setProgress(0.3)
-            .setIsWithNumber(true)
-            .build(context),
+        const AppProgressBasicWidget(progress: 0.3, isWithNumber: true),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressBasicWidget()
-            .setAppProgressSize(AppProgressSize.basicMedium)
-            .setProgress(0.4)
-            .setIsWithNumber(true)
-            .build(context),
+        const AppProgressBasicWidget(
+            appProgressSize: AppProgressSize.basicMedium,
+            progress: 0.4,
+            isWithNumber: true),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressBasicWidget()
-            .setAppProgressSize(AppProgressSize.basicSmall)
-            .setProgress(0.5)
-            .setIsWithNumber(true)
-            .build(context),
+        const AppProgressBasicWidget(
+          appProgressSize: AppProgressSize.basicSmall,
+          progress: 0.5,
+          isWithNumber: true,
+        ),
       ],
     );
   }
@@ -108,29 +100,29 @@ class ProgressPage extends GetView<ProgressController> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget()
-            .setText('Line Medium')
-            .setMaxLines(1)
-            .setTextOverFlow(TextOverflow.ellipsis)
-            .build(context),
+        const AppTextHeading4Widget(
+          text: 'Line Medium',
+          maxLines: 1,
+          textOverflow: TextOverflow.ellipsis,
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressLineWidget()
-            .setProgress(0.3)
-            .setAppProgressSize(AppProgressSize.lineMedium)
-            .setAppProgressType(AppProgressType.processing)
-            .build(context),
+        const AppProgressLineWidget(
+          progress: 0.3,
+          appProgressSize: AppProgressSize.lineMedium,
+          appProgressType: AppProgressType.processing,
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressLineWidget()
-            .setProgress(0.4)
-            .setAppProgressSize(AppProgressSize.lineMedium)
-            .setAppProgressType(AppProgressType.success)
-            .build(context),
+        const AppProgressLineWidget(
+          progress: 0.4,
+          appProgressSize: AppProgressSize.lineMedium,
+          appProgressType: AppProgressType.success,
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressLineWidget()
-            .setProgress(0.5)
-            .setAppProgressSize(AppProgressSize.lineMedium)
-            .setAppProgressType(AppProgressType.error)
-            .build(context),
+        const AppProgressLineWidget(
+          progress: 0.5,
+          appProgressType: AppProgressType.error,
+          appProgressSize: AppProgressSize.lineMedium,
+        ),
       ],
     );
   }
@@ -140,29 +132,26 @@ class ProgressPage extends GetView<ProgressController> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget()
-            .setText('Line Large')
-            .setMaxLines(1)
-            .setTextOverFlow(TextOverflow.ellipsis)
-            .build(context),
+        const AppTextHeading4Widget(
+            text: 'Line Large',
+            maxLines: 1,
+            textOverflow: TextOverflow.ellipsis),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressLineWidget()
-            .setProgress(0.3)
-            .setAppProgressSize(AppProgressSize.lineLarge)
-            .setAppProgressType(AppProgressType.processing)
-            .build(context),
+        const AppProgressLineWidget(
+            progress: 0.3,
+            appProgressSize: AppProgressSize.lineLarge,
+            appProgressType: AppProgressType.processing),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressLineWidget()
-            .setProgress(0.4)
-            .setAppProgressSize(AppProgressSize.lineLarge)
-            .setAppProgressType(AppProgressType.success)
-            .build(context),
+        const AppProgressLineWidget(
+            progress: 0.4,
+            appProgressSize: AppProgressSize.lineLarge,
+            appProgressType: AppProgressType.success),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressLineWidget()
-            .setProgress(0.5)
-            .setAppProgressSize(AppProgressSize.lineLarge)
-            .setAppProgressType(AppProgressType.error)
-            .build(context),
+        const AppProgressLineWidget(
+          progress: 0.5,
+          appProgressSize: AppProgressSize.lineLarge,
+          appProgressType: AppProgressType.error,
+        ),
       ],
     );
   }
@@ -172,29 +161,29 @@ class ProgressPage extends GetView<ProgressController> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget()
-            .setText('Circle Medium')
-            .setMaxLines(1)
-            .setTextOverFlow(TextOverflow.ellipsis)
-            .build(context),
+        const AppTextHeading4Widget(
+          text: 'Circle Medium',
+          maxLines: 1,
+          textOverflow: TextOverflow.ellipsis,
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressCircleWidget()
-            .setProgress(0.3)
-            .setAppProgressSize(AppProgressSize.circleMedium)
-            .setAppProgressType(AppProgressType.processing)
-            .build(context),
+        const AppProgressCircleWidget(
+          progress: 0.3,
+          appProgressType: AppProgressType.processing,
+          appProgressSize: AppProgressSize.circleMedium,
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressCircleWidget()
-            .setProgress(0.4)
-            .setAppProgressSize(AppProgressSize.circleMedium)
-            .setAppProgressType(AppProgressType.success)
-            .build(context),
+        const AppProgressCircleWidget(
+          progress: 0.4,
+          appProgressSize: AppProgressSize.circleMedium,
+          appProgressType: AppProgressType.success,
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressCircleWidget()
-            .setProgress(0.5)
-            .setAppProgressSize(AppProgressSize.circleMedium)
-            .setAppProgressType(AppProgressType.error)
-            .build(context),
+        const AppProgressCircleWidget(
+          progress: 0.5,
+          appProgressSize: AppProgressSize.circleMedium,
+          appProgressType: AppProgressType.error,
+        ),
       ],
     );
   }
@@ -204,29 +193,29 @@ class ProgressPage extends GetView<ProgressController> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget()
-            .setText('Circle Large')
-            .setMaxLines(1)
-            .setTextOverFlow(TextOverflow.ellipsis)
-            .build(context),
+        const AppTextHeading4Widget(
+          text: 'Circle Large',
+          maxLines: 1,
+          textOverflow: TextOverflow.ellipsis,
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressCircleWidget()
-            .setProgress(0.3)
-            .setAppProgressSize(AppProgressSize.circleLarge)
-            .setAppProgressType(AppProgressType.processing)
-            .build(context),
+        const AppProgressCircleWidget(
+          progress: 0.3,
+          appProgressSize: AppProgressSize.circleLarge,
+          appProgressType: AppProgressType.processing,
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressCircleWidget()
-            .setProgress(0.4)
-            .setAppProgressSize(AppProgressSize.circleLarge)
-            .setAppProgressType(AppProgressType.success)
-            .build(context),
+        const AppProgressCircleWidget(
+          progress: 0.4,
+          appProgressSize: AppProgressSize.circleLarge,
+          appProgressType: AppProgressType.success,
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppProgressCircleWidget()
-            .setProgress(0.5)
-            .setAppProgressSize(AppProgressSize.circleLarge)
-            .setAppProgressType(AppProgressType.error)
-            .build(context),
+        const AppProgressCircleWidget(
+          progress: 0.5,
+          appProgressSize: AppProgressSize.circleLarge,
+          appProgressType: AppProgressType.error,
+        ),
       ],
     );
   }

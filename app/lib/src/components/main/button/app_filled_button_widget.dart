@@ -1,94 +1,63 @@
 part of 'app_button_base_builder.dart';
 
 class AppFilledButtonWidget extends AppButtonBaseBuilder {
-  @override
-  AppFilledButtonWidget setButtonText(String? buttonText) {
-    _buttonText = buttonText;
-    return this;
-  }
-
-  @override
-  AppFilledButtonWidget setIsDisabled(bool isDisabled) {
-    _isDisabled = isDisabled;
-    return this;
-  }
-
-  @override
-  AppFilledButtonWidget setOnPressed(void Function()? onPressed) {
-    _onPressed = onPressed;
-    return this;
-  }
-
-  @override
-  AppFilledButtonWidget setPrefixIcon(Widget? prefixIcon) {
-    _prefixIcon = prefixIcon;
-    return this;
-  }
-
-  @override
-  AppFilledButtonWidget setTextStyle(TextStyle? textStyle) {
-    _textStyle = textStyle;
-    return this;
-  }
-
-  @override
-  AppFilledButtonWidget setAppButtonSize(AppButtonSize? appButtonSize) {
-    _appButtonSize = appButtonSize;
-    return this;
-  }
-
-  @override
-  AppFilledButtonWidget setAppButtonType(AppButtonType? appButtonType) {
-    _appButtonType = appButtonType;
-    return this;
-  }
+  const AppFilledButtonWidget({
+    super.key,
+    super.buttonText,
+    super.isDisabled,
+    super.onPressed,
+    super.prefixIcon,
+    super.textStyle,
+    super.appButtonSize,
+    super.appButtonType,
+  });
 
   @override
   Widget build(BuildContext context) {
-    if (_prefixIcon == null && _buttonText == null) return const SizedBox();
-    if (_appButtonType == AppButtonType.circle) {
+    if (prefixIcon == null && buttonText == null) return const SizedBox();
+    if (appButtonType == AppButtonType.circle) {
       return _circle(context);
     }
-    if (_appButtonType == AppButtonType.square) {
+    if (appButtonType == AppButtonType.square) {
       return _square(context);
     }
     return _standard(context);
   }
 
   Widget _standard(BuildContext context) {
-    return _prefixIcon != null
+    return prefixIcon != null
         ? FilledButton.icon(
-            onPressed: _isDisabled == true ? null : _onPressed,
+            onPressed: isDisabled == true ? null : onPressed,
             style: _buttonStyle(context),
-            icon: _prefixIcon!,
-            label: Text(_buttonText!),
+            icon: prefixIcon!,
+            label: Text(buttonText!),
           )
         : FilledButton(
-            onPressed: _isDisabled == true ? null : _onPressed,
+            onPressed: isDisabled == true ? null : onPressed,
             style: _buttonStyle(context),
-            child: Text(_buttonText!),
+            child: Text(buttonText!),
           );
   }
 
   Widget _circle(BuildContext context) {
-    return _prefixIcon != null
+    return prefixIcon != null
         ? FilledButton(
-            onPressed: _isDisabled == true ? null : _onPressed,
+            onPressed: isDisabled == true ? null : onPressed,
             style: _buttonStyle(context)?.copyWith(
               shape: MaterialStateProperty.resolveWith<OutlinedBorder?>(
                 (Set<MaterialState> states) => const CircleBorder(),
               ),
             ),
-            child: _prefixIcon!,
+            child: prefixIcon!,
           )
         : FilledButton(
-            onPressed: _isDisabled == true ? null : _onPressed,
+            onPressed: isDisabled == true ? null : onPressed,
             style: _buttonStyle(context)?.copyWith(
               shape: MaterialStateProperty.resolveWith<OutlinedBorder?>(
                 (Set<MaterialState> states) => const CircleBorder(),
               ),
             ),
-            child: Text(_buttonText!),
+            child: Text(buttonText!),
           );
   }
 
@@ -97,12 +66,12 @@ class AppFilledButtonWidget extends AppButtonBaseBuilder {
     double height = AppThemeExt.of.majorScale(12);
     double horizontalPadding = AppThemeExt.of.majorScale(3);
 
-    if (_appButtonSize == AppButtonSize.medium) {
+    if (appButtonSize == AppButtonSize.medium) {
       width = AppThemeExt.of.majorScale(10);
       height = AppThemeExt.of.majorScale(10);
       horizontalPadding = AppThemeExt.of.majorScale(2);
     }
-    if (_appButtonSize == AppButtonSize.small) {
+    if (appButtonSize == AppButtonSize.small) {
       width = AppThemeExt.of.majorScale(8);
       height = AppThemeExt.of.majorScale(8);
       horizontalPadding = AppThemeExt.of.majorScale(1);
@@ -111,26 +80,26 @@ class AppFilledButtonWidget extends AppButtonBaseBuilder {
     return SizedBox(
       width: width,
       height: height,
-      child: _prefixIcon != null
+      child: prefixIcon != null
           ? FilledButton(
-              onPressed: _isDisabled == true ? null : _onPressed,
+              onPressed: isDisabled == true ? null : onPressed,
               style: _buttonStyle(context)?.copyWith(
                 padding: MaterialStateProperty.resolveWith<EdgeInsets?>(
                   (Set<MaterialState> states) =>
                       EdgeInsets.symmetric(horizontal: horizontalPadding),
                 ),
               ),
-              child: _prefixIcon!,
+              child: prefixIcon!,
             )
           : FilledButton(
-              onPressed: _isDisabled == true ? null : _onPressed,
+              onPressed: isDisabled == true ? null : onPressed,
               style: _buttonStyle(context)?.copyWith(
                 padding: MaterialStateProperty.resolveWith<EdgeInsets?>(
                   (Set<MaterialState> states) =>
                       EdgeInsets.symmetric(horizontal: horizontalPadding),
                 ),
               ),
-              child: Text(_buttonText!),
+              child: Text(buttonText!),
             ),
     );
   }
@@ -139,27 +108,28 @@ class AppFilledButtonWidget extends AppButtonBaseBuilder {
     double horizontalPadding = AppThemeExt.of.majorScale(4);
     double verticalPadding = AppThemeExt.of.majorScale(3);
     final textColor = AppColors.of.neutralColor[1];
-    TextStyle? textStyle = _textStyle?.copyWith(color: textColor) ??
+    TextStyle? textStyleCopied = textStyle?.copyWith(color: textColor) ??
         AppTextStyleExt.of.textBody1m?.copyWith(color: textColor);
 
-    if (_appButtonSize == AppButtonSize.medium) {
+    if (appButtonSize == AppButtonSize.medium) {
       verticalPadding = AppThemeExt.of.majorScale(2);
-      textStyle = _textStyle?.copyWith(color: textStyle?.color) ??
+      textStyleCopied = textStyle?.copyWith(color: textStyle?.color) ??
           AppTextStyleExt.of.textBody2m?.copyWith(color: textStyle?.color);
     }
-    if (_appButtonSize == AppButtonSize.small) {
+    if (appButtonSize == AppButtonSize.small) {
       verticalPadding = AppThemeExt.of.majorScale(1);
-      textStyle = _textStyle?.copyWith(color: textStyle?.color) ??
-          AppTextStyleExt.of.textBody2m?.copyWith(color: textStyle?.color);
+      textStyleCopied = textStyle?.copyWith(color: textStyleCopied?.color) ??
+          AppTextStyleExt.of.textBody2m
+              ?.copyWith(color: textStyleCopied?.color);
     }
-    if (_appButtonType == AppButtonType.danger) {
+    if (appButtonType == AppButtonType.danger) {
       return AppButtonStyle.filledButtonDangerStyle?.copyWith(
         padding: MaterialStateProperty.resolveWith<EdgeInsets?>(
           (Set<MaterialState> states) => EdgeInsets.symmetric(
               horizontal: horizontalPadding, vertical: verticalPadding),
         ),
         textStyle: MaterialStateProperty.resolveWith<TextStyle?>(
-          (Set<MaterialState> states) => textStyle,
+          (Set<MaterialState> states) => textStyleCopied,
         ),
       );
     }
@@ -169,7 +139,7 @@ class AppFilledButtonWidget extends AppButtonBaseBuilder {
             horizontal: horizontalPadding, vertical: verticalPadding),
       ),
       textStyle: MaterialStateProperty.resolveWith<TextStyle?>(
-        (Set<MaterialState> states) => textStyle,
+        (Set<MaterialState> states) => textStyleCopied,
       ),
     );
   }

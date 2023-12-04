@@ -7,7 +7,9 @@ import 'package:resources/resources.dart';
 import 'package:utilities/utilities.dart';
 
 part 'app_date_picker_widget.dart';
+
 part 'app_date_range_picker_widget.dart';
+
 part 'app_time_picker_widget.dart';
 
 enum AppDatePickerSize {
@@ -17,97 +19,63 @@ enum AppDatePickerSize {
 
   final String size;
   final double value;
+
   const AppDatePickerSize({required this.size, required this.value});
 }
 
-abstract class AppDatePickerBaseBuilder {
-  static const Duration _durationYears = Duration(days: 10 * 365); /* 10 yrs*/
+abstract class AppDatePickerBaseBuilder extends StatelessWidget {
+  static const Duration _durationYears = Duration(days: 10 * 365);
+
+  /* 10 yrs*/
   final DateTime _limitFirstDate = DateTime.now().subtract(_durationYears);
   final DateTime _limitLastDate = DateTime.now().add(_durationYears);
 
   /// [_fieldKey] for FormBuilderField
   @protected
-  late final String _fieldKey;
+  final String fieldKey;
 
-  /// [_initialDate] for Date picker
+  /// [initialDate] for Date picker
   @protected
-  DateTime? _initialDate;
+  final DateTime? initialDate;
 
-  /// [_initialDateRange] for Date range picker
+  /// [initialDateRange] for Date range picker
   @protected
-  DateTimeRange? _initialDateRange;
+  final DateTimeRange? initialDateRange;
 
-  /// [_initialTime] for Time picker
+  /// [initialTime] for Time picker
   @protected
-  TimeOfDay? _initialTime;
+  final TimeOfDay? initialTime;
 
   @protected
-  DateTime? _firstDate;
+  final DateTime? firstDate;
   @protected
-  DateTime? _lastDate;
+  final DateTime? lastDate;
   @protected
-  bool? _isDisabled;
+  final bool? isDisabled;
   @protected
-  String? _hintText;
+  final String? hintText;
   @protected
-  AppDatePickerSize? _appDatePickerSize;
+  final AppDatePickerSize? appDatePickerSize;
   @protected
-  void Function(DateTime? datePicked)? _onDatePicked;
+  final void Function(DateTime? datePicked)? onDatePicked;
   @protected
-  void Function(DateTimeRange? dateRangePicked)? _onDateRangePicked;
+  final void Function(DateTimeRange? dateRangePicked)? onDateRangePicked;
   @protected
-  void Function(TimeOfDay? timePicker)? _onTimePicked;
+  final void Function(TimeOfDay? timePicker)? onTimePicked;
 
-  AppDatePickerBaseBuilder setFieldKey(String fieldKey);
-
-  AppDatePickerBaseBuilder setInitialDate(DateTime? initialDate) {
-    return this;
-  }
-
-  AppDatePickerBaseBuilder setInitialDateRange(
-      DateTimeRange? initialDateRange) {
-    return this;
-  }
-
-  AppDatePickerBaseBuilder setInitialTime(TimeOfDay? initialTime) {
-    return this;
-  }
-
-  AppDatePickerBaseBuilder setFirstDate(DateTime? firstDate) {
-    return this;
-  }
-
-  AppDatePickerBaseBuilder setLastDate(DateTime? lastDate) {
-    return this;
-  }
-
-  AppDatePickerBaseBuilder setIsDisabled(bool? isDisabled) {
-    return this;
-  }
-
-  AppDatePickerBaseBuilder setAppDatePickerSize(
-      AppDatePickerSize? appDatePickerSize) {
-    return this;
-  }
-
-  AppDatePickerBaseBuilder setHintText(String? hintText) {
-    return this;
-  }
-
-  AppDatePickerBaseBuilder setOnDatePicked(
-      void Function(DateTime? datePicked)? onDatePicked) {
-    return this;
-  }
-
-  AppDatePickerBaseBuilder setOnDateRangePicked(
-      void Function(DateTimeRange? dateRangePicked)? onDateRangePicked) {
-    return this;
-  }
-
-  AppDatePickerBaseBuilder setOnTimePicked(
-      void Function(TimeOfDay? timePicked)? onTimePicked) {
-    return this;
-  }
-
-  Widget build(BuildContext context);
+  AppDatePickerBaseBuilder({
+    super.key,
+    required this.fieldKey,
+    this.initialDate,
+    this.initialDateRange,
+    this.initialTime,
+    this.firstDate,
+    this.lastDate,
+    this.isDisabled,
+    this.hintText,
+    this.appDatePickerSize,
+    this.onDatePicked,
+    this.onDateRangePicked,
+    this.onTimePicked,
+  });
 }

@@ -31,49 +31,30 @@ enum AppButtonType {
   const AppButtonType({required this.type});
 }
 
-abstract class AppButtonBaseBuilder {
+abstract class AppButtonBaseBuilder extends StatelessWidget {
   @protected
-  String? _buttonText;
+  final String? buttonText;
   @protected
-  bool? _isDisabled;
+  final bool? isDisabled;
   @protected
-  Widget? _prefixIcon;
+  final Widget? prefixIcon;
   @protected
-  TextStyle? _textStyle;
+  final TextStyle? textStyle;
   @protected
-  AppButtonSize? _appButtonSize;
+  final AppButtonSize? appButtonSize;
   @protected
-  AppButtonType? _appButtonType;
+  final AppButtonType? appButtonType;
   @protected
-  void Function()? _onPressed;
+  final void Function()? onPressed;
 
-  AppButtonBaseBuilder setButtonText(String? buttonText) {
-    return this;
-  }
-
-  AppButtonBaseBuilder setIsDisabled(bool isDisabled) {
-    return this;
-  }
-
-  AppButtonBaseBuilder setPrefixIcon(Widget? prefixIcon) {
-    return this;
-  }
-
-  AppButtonBaseBuilder setTextStyle(TextStyle? textStyle) {
-    return this;
-  }
-
-  AppButtonBaseBuilder setOnPressed(void Function()? onPressed) {
-    return this;
-  }
-
-  AppButtonBaseBuilder setAppButtonSize(AppButtonSize? appButtonSize) {
-    return this;
-  }
-
-  AppButtonBaseBuilder setAppButtonType(AppButtonType? appButtonType) {
-    return this;
-  }
-
-  Widget build(BuildContext context);
+  const AppButtonBaseBuilder({
+    super.key,
+    this.buttonText,
+    this.isDisabled,
+    this.prefixIcon,
+    this.textStyle,
+    this.appButtonSize,
+    this.appButtonType,
+    this.onPressed,
+  });
 }

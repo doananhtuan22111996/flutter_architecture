@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// TODO build dropdown follow builder pattern
 class DropdownModel {
   final String value;
   final String name;

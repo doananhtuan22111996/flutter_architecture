@@ -17,41 +17,24 @@ part 'app_text_body_2_widget.dart';
 
 part 'app_text_body_3_widget.dart';
 
-abstract class AppTextBaseBuilder {
+abstract class AppTextBaseBuilder extends StatelessWidget {
   @protected
-  String? _text;
+  final String? text;
   @protected
-  TextStyle? _textStyle;
+  final TextStyle? textStyle;
   @protected
-  TextAlign? _textAlign;
+  final TextAlign? textAlign;
   @protected
-  int? _maxLines;
+  final int? maxLines;
   @protected
-  TextOverflow? _textOverflow;
-  @protected
-  Color? _color;
+  final TextOverflow? textOverflow;
 
-  AppTextBaseBuilder setText(String? text);
-
-  AppTextBaseBuilder setTextStyle(TextStyle? textStyle);
-
-  AppTextBaseBuilder setTextAlign(TextAlign? textAlign);
-
-  AppTextBaseBuilder setMaxLines(int? maxLines);
-
-  AppTextBaseBuilder setTextOverFlow(TextOverflow? textOverflow);
-
-  AppTextBaseBuilder setColor(Color? color);
-
-  @protected
-  Widget build(BuildContext context) {
-    final textStyle = _textStyle?.copyWith(color: _color ?? _textStyle?.color);
-    return Text(
-      _text ?? '-',
-      textAlign: _textAlign,
-      style: textStyle,
-      maxLines: _maxLines,
-      overflow: _textOverflow,
-    );
-  }
+  const AppTextBaseBuilder({
+    super.key,
+    this.text,
+    this.textStyle,
+    this.textAlign,
+    this.maxLines,
+    this.textOverflow,
+  });
 }

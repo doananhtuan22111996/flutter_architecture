@@ -1,52 +1,24 @@
 part of 'app_text_base_builder.dart';
 
 class AppTextBody2Widget extends AppTextBaseBuilder {
+  const AppTextBody2Widget({
+    super.key,
+    super.text,
+    super.textStyle,
+    super.maxLines,
+    super.textAlign,
+    super.textOverflow,
+  });
+
   @override
   Widget build(BuildContext context) {
-    final orgTextStyle = context.textTheme.bodyMedium;
-    if (_textStyle == null) {
-      setTextStyle(orgTextStyle);
-    } else {
-      setTextStyle(
-        _textStyle?.copyWith(fontSize: orgTextStyle?.fontSize),
-      );
-    }
-    return super.build(context);
-  }
-
-  @override
-  AppTextBody2Widget setMaxLines(int? maxLines) {
-    _maxLines = maxLines;
-    return this;
-  }
-
-  @override
-  AppTextBody2Widget setText(String? text) {
-    _text = text;
-    return this;
-  }
-
-  @override
-  AppTextBody2Widget setTextAlign(TextAlign? textAlign) {
-    _textAlign = textAlign;
-    return this;
-  }
-
-  @override
-  AppTextBody2Widget setTextOverFlow(TextOverflow? textOverflow) {
-    _textOverflow = textOverflow;
-    return this;
-  }
-
-  @override
-  AppTextBody2Widget setTextStyle(TextStyle? textStyle) {
-    _textStyle = textStyle;
-    return this;
-  }
-
-  @override
-  AppTextBody2Widget setColor(Color? color) {
-    _color = color;
-    return this;
+    final body2 = context.textTheme.bodyMedium;
+    return Text(
+      text ?? '-',
+      textAlign: textAlign,
+      style: textStyle?.copyWith(fontSize: body2?.fontSize) ?? body2,
+      maxLines: maxLines,
+      overflow: textOverflow,
+    );
   }
 }

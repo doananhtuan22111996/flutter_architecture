@@ -9,11 +9,12 @@ class DialogPage extends GetView<DialogController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget()
-        .setAppBar(
-            AppBarWidget().setHeaderPage(R.strings.dialog).build(context))
-        .setBody(_body(context))
-        .build(context);
+    return AppMainPageWidget(
+      appBar: AppBarWidget(
+        headerPage: R.strings.dialog,
+      ).build(context),
+      body: _body(context),
+    );
   }
 
   Widget _body(BuildContext context) {
@@ -26,49 +27,49 @@ class DialogPage extends GetView<DialogController> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppFilledButtonWidget()
-                  .setButtonText('Dialog Success')
-                  .setAppButtonSize(AppButtonSize.small)
-                  .setOnPressed(() => controller.dialogSuccess())
-                  .build(context),
+              AppFilledButtonWidget(
+                buttonText: 'Dialog Success',
+                appButtonSize: AppButtonSize.small,
+                onPressed: () => controller.dialogSuccess(),
+              ).build(context),
               Padding(
                 padding: EdgeInsets.symmetric(
                     vertical: AppThemeExt.of.majorScale(2)),
-                child: AppFilledButtonWidget()
-                    .setButtonText('Dialog error')
-                    .setAppButtonSize(AppButtonSize.small)
-                    .setOnPressed(() => controller.dialogError())
-                    .build(context),
+                child: AppFilledButtonWidget(
+                  buttonText: 'Dialog error',
+                  appButtonSize: AppButtonSize.small,
+                  onPressed: () => controller.dialogError(),
+                ).build(context),
               ),
-              AppFilledButtonWidget()
-                  .setButtonText('Dialog confirm')
-                  .setAppButtonSize(AppButtonSize.small)
-                  .setOnPressed(() => controller.dialogConfirm())
-                  .build(context),
+              AppFilledButtonWidget(
+                buttonText: 'Dialog confirm',
+                appButtonSize: AppButtonSize.small,
+                onPressed: () => controller.dialogConfirm(),
+              ).build(context),
             ],
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppFilledButtonWidget()
-                  .setButtonText('Dialog Screen Success')
-                  .setAppButtonSize(AppButtonSize.small)
-                  .setOnPressed(() => controller.dialogScreenSuccess())
-                  .build(context),
+              AppFilledButtonWidget(
+                buttonText: 'Dialog Screen Success',
+                appButtonSize: AppButtonSize.small,
+                onPressed: () => controller.dialogScreenSuccess(),
+              ).build(context),
               Padding(
                 padding: EdgeInsets.symmetric(
                     vertical: AppThemeExt.of.majorScale(2)),
-                child: AppFilledButtonWidget()
-                    .setButtonText('Dialog Screen error')
-                    .setAppButtonSize(AppButtonSize.small)
-                    .setOnPressed(() => controller.dialogScreenError())
-                    .build(context),
+                child: AppFilledButtonWidget(
+                  buttonText: 'Dialog Screen error',
+                  appButtonSize: AppButtonSize.small,
+                  onPressed: () => controller.dialogScreenError(),
+                ).build(context),
               ),
-              AppFilledButtonWidget()
-                  .setButtonText('Dialog Screen confirm')
-                  .setAppButtonSize(AppButtonSize.small)
-                  .setOnPressed(() => controller.dialogScreenConfirm())
-                  .build(context),
+              AppFilledButtonWidget(
+                buttonText: 'Dialog Screen confirm',
+                appButtonSize: AppButtonSize.small,
+                onPressed: () => controller.dialogScreenConfirm(),
+              ).build(context),
             ],
           ),
         ],

@@ -46,10 +46,10 @@ class AppListWidget<BM extends BaseModel, BC extends AppListController<BM>>
 
     return data.isEmpty
         ? Center(
-            child: AppTextHeading3Widget()
-                .setText(R.strings.emptyMessage)
-                .setTextAlign(TextAlign.center)
-                .build(context),
+            child: AppTextHeading3Widget(
+              text: R.strings.emptyMessage,
+              textAlign: TextAlign.center,
+            ),
           )
         : ListView.builder(
             controller: scrollController,
@@ -71,15 +71,15 @@ class AppListWidget<BM extends BaseModel, BC extends AppListController<BM>>
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 16.0),
-          child: AppTextHeading3Widget()
-              .setText(R.strings.serverError)
-              .setTextAlign(TextAlign.center)
-              .build(context),
+          child: AppTextHeading3Widget(
+            text: R.strings.serverError,
+            textAlign: TextAlign.center,
+          ),
         ),
-        AppFilledButtonWidget()
-            .setButtonText(R.strings.retry)
-            .setOnPressed(() => controller.initFetch())
-            .build(context),
+        AppFilledButtonWidget(
+          buttonText: R.strings.retry,
+          onPressed: () => controller.initFetch(),
+        ).build(context),
       ],
     );
   }

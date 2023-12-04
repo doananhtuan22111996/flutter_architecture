@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 part 'app_check_box_widget.dart';
+
 part 'app_basic_radio_widget.dart';
 
 enum AppSelectionControlType {
@@ -30,58 +31,33 @@ enum AppSelectionControlSize {
 }
 
 // TODO Build switch widget
-abstract class AppSelectionControlBaseBuilder {
+abstract class AppSelectionControlBaseBuilder<T> extends StatelessWidget {
   @protected
-  late final String _fieldKey;
+  final String fieldKey;
   @protected
-  String? _label;
+  final String? label;
   @protected
-  dynamic _value;
+  final T value;
   @protected
-  dynamic _radioGroupValue;
+  final T? radioGroupValue;
   @protected
-  AppSelectionControlType? _appSelectionControlType;
+  final AppSelectionControlType? appSelectionControlType;
   @protected
-  AppSelectionControlSize? _appSelectionControlSize;
+  final AppSelectionControlSize? appSelectionControlSize;
   @protected
-  bool? _isDisabled;
+  final bool? isDisabled;
   @protected
-  void Function(dynamic value)? _onValueChanged;
+  final void Function(dynamic value)? onValueChanged;
 
-  AppSelectionControlBaseBuilder setFieldKey(String fieldKey) {
-    return this;
-  }
-
-  AppSelectionControlBaseBuilder setLabel(String? label) {
-    return this;
-  }
-
-  AppSelectionControlBaseBuilder setValue(bool? value) {
-    return this;
-  }
-
-  AppSelectionControlBaseBuilder setRadioGroupValue(dynamic radioGroupValue) {
-    return this;
-  }
-
-  AppSelectionControlBaseBuilder setAppSelectionControlType(
-      AppSelectionControlType? appSelectionControlType) {
-    return this;
-  }
-
-  AppSelectionControlBaseBuilder setAppSelectionControlSize(
-      AppSelectionControlSize? appSelectionControlSize) {
-    return this;
-  }
-
-  AppSelectionControlBaseBuilder setOnValueChanged(
-      void Function(dynamic value)? onValueChanged) {
-    return this;
-  }
-
-  AppSelectionControlBaseBuilder setIsDisabled(bool? isDisabled) {
-    return this;
-  }
-
-  Widget build(BuildContext context);
+  const AppSelectionControlBaseBuilder({
+    super.key,
+    required this.fieldKey,
+    required this.value,
+    this.radioGroupValue,
+    this.label,
+    this.appSelectionControlSize,
+    this.appSelectionControlType,
+    this.isDisabled,
+    this.onValueChanged,
+  });
 }

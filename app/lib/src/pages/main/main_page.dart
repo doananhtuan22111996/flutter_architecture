@@ -5,11 +5,10 @@ class MainPage extends GetView<MainController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget()
-        .setAppBar(
-            AppBarWidget().setHeaderPage(R.strings.homeView).build(context))
-        .setBody(_body(context))
-        .build(context);
+    return AppMainPageWidget(
+      appBar: AppBarWidget(headerPage: R.strings.homeView).build(context),
+      body: _body(context),
+    );
   }
 
   Widget _body(BuildContext context) {
@@ -32,7 +31,7 @@ class MainPage extends GetView<MainController> {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(vertical: AppThemeExt.of.majorScale(2)),
-          child: AppTextHeading5Widget().setText('UI kit').build(context),
+          child: const AppTextHeading5Widget(text: 'UI Kit'),
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,59 +40,59 @@ class MainPage extends GetView<MainController> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppFilledButtonWidget()
-                    .setButtonText(R.strings.button)
-                    .setOnPressed(() => ButtonPage.open())
-                    .build(context),
+                AppFilledButtonWidget(
+                  buttonText: R.strings.button,
+                  onPressed: () => ButtonPage.open(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setButtonText(R.strings.avatar)
-                    .setOnPressed(() => AvatarPage.open())
-                    .build(context),
+                AppFilledButtonWidget(
+                  buttonText: R.strings.avatar,
+                  onPressed: () => AvatarPage.open(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setButtonText(R.strings.datePicker)
-                    .setOnPressed(() => DatePickerPage.open())
-                    .build(context),
+                AppFilledButtonWidget(
+                  buttonText: R.strings.datePicker,
+                  onPressed: () => DatePickerPage.open(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setButtonText(R.strings.textField)
-                    .setOnPressed(() => TextFieldPage.open())
-                    .build(context),
+                AppFilledButtonWidget(
+                  buttonText: R.strings.textField,
+                  onPressed: () => TextFieldPage.open(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setButtonText('Badge')
-                    .setOnPressed(() => BadgePage.open())
-                    .build(context),
+                AppFilledButtonWidget(
+                  buttonText: 'Badge',
+                  onPressed: () => BadgePage.open(),
+                ),
               ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppFilledButtonWidget()
-                    .setButtonText(R.strings.dialog)
-                    .setOnPressed(() => DialogPage.open())
-                    .build(context),
+                AppFilledButtonWidget(
+                  buttonText: R.strings.dialog,
+                  onPressed: () => DialogPage.open(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setButtonText(R.strings.progress)
-                    .setOnPressed(() => ProgressPage.open())
-                    .build(context),
+                AppFilledButtonWidget(
+                  buttonText: R.strings.progress,
+                  onPressed: () => ProgressPage.open(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setButtonText(R.strings.selectionControl)
-                    .setOnPressed(() => SelectionControlPage.open())
-                    .build(context),
+                AppFilledButtonWidget(
+                  buttonText: R.strings.selectionControl,
+                  onPressed: () => SelectionControlPage.open(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setButtonText('TabBar')
-                    .setOnPressed(() => TabBarPage.open())
-                    .build(context),
+                AppFilledButtonWidget(
+                  buttonText: 'TabBar',
+                  onPressed: () => TabBarPage.open(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setButtonText('Tooltip')
-                    .setOnPressed(() => TooltipPage.open())
-                    .build(context),
+                AppFilledButtonWidget(
+                  buttonText: 'Tooltip',
+                  onPressed: () => TooltipPage.open(),
+                ),
               ],
             ),
           ],
@@ -108,28 +107,28 @@ class MainPage extends GetView<MainController> {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(vertical: AppThemeExt.of.majorScale(2)),
-          child: AppTextHeading5Widget().setText('Flow Data').build(context),
+          child: const AppTextHeading5Widget(text: 'Flow Data'),
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            AppFilledButtonWidget()
-                .setButtonText('Network')
-                .setOnPressed(() => HospitalPage.open())
-                .build(context),
+            AppFilledButtonWidget(
+              buttonText: 'Network',
+              onPressed: () => HospitalPage.open(),
+            ),
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: AppThemeExt.of.majorScale(2)),
-              child: AppFilledButtonWidget()
-                  .setButtonText('Database')
-                  .setOnPressed(() => HospitalLocalPage.open())
-                  .build(context),
+              child: AppFilledButtonWidget(
+                buttonText: 'Database',
+                onPressed: () => HospitalLocalPage.open(),
+              ),
             ),
-            AppFilledButtonWidget()
-                .setButtonText('Page View')
-                .setOnPressed(() => HomePage.open())
-                .build(context),
+            AppFilledButtonWidget(
+              buttonText: 'Page View',
+              onPressed: () => HomePage.open,
+            ),
           ],
         ),
       ],
@@ -141,10 +140,10 @@ class MainPage extends GetView<MainController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(vertical: AppThemeExt.of.majorScale(2)),
-          child: AppTextHeading5Widget().setText('Theme style').build(context),
-        ),
-        AppTextBody2Widget().setText(R.strings.changeLanguage).build(context),
+            padding:
+                EdgeInsets.symmetric(vertical: AppThemeExt.of.majorScale(2)),
+            child: const AppTextHeading5Widget(text: 'Theme style')),
+        AppTextBody2Widget(text: R.strings.changeLanguage),
         Obx(
           () => ToggleButtons(
             isSelected: [
@@ -156,17 +155,13 @@ class MainPage extends GetView<MainController> {
               controller.executeUpdateLanguage(code);
             },
             children: [
-              AppTextBody1Widget()
-                  .setText(R.strings.vietNamLanguage)
-                  .build(context),
-              AppTextBody1Widget()
-                  .setText(R.strings.englishLanguage)
-                  .build(context),
+              AppTextBody1Widget(text: R.strings.vietNamLanguage),
+              AppTextBody1Widget(text: R.strings.englishLanguage),
             ],
           ),
         ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextBody2Widget().setText(R.strings.changeTheme).build(context),
+        AppTextBody2Widget(text: R.strings.changeTheme),
         Obx(
           () => ToggleButtons(
             isSelected: [

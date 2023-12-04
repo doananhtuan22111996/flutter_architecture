@@ -1,11 +1,20 @@
 part of 'app_selection_control_base_builder.dart';
 
 class AppCheckBoxWidget extends AppSelectionControlBaseBuilder {
+  const AppCheckBoxWidget({
+    super.key,
+    required super.fieldKey,
+    required super.value,
+    super.label,
+    super.onValueChanged,
+    super.isDisabled,
+  });
+
   @override
   Widget build(BuildContext context) {
     return FormBuilderField<bool?>(
-      name: _fieldKey,
-      initialValue: _value,
+      name: fieldKey,
+      initialValue: value,
       builder: (field) => Row(
         children: [
           Checkbox(
@@ -15,63 +24,33 @@ class AppCheckBoxWidget extends AppSelectionControlBaseBuilder {
               (Set<MaterialState> states) => AppColors.of.neutralColor[3],
             ),
             side: BorderSide(color: _sideColor),
-            onChanged: _isDisabled == true
+            onChanged: isDisabled == true
                 ? null
                 : (value) {
                     field.didChange(value);
-                    _onValueChanged?.call(value);
+                    onValueChanged?.call(value);
                   },
           ),
-          if (_label != null)
-            AppTextBody2Widget()
-                .setText(_label)
-                .setTextStyle(
-                    AppTextStyleExt.of.textBody2r?.copyWith(color: _labelColor))
-                .build(context)
+          if (label != null)
+            AppTextBody2Widget(
+              text: label,
+              textStyle:
+                  AppTextStyleExt.of.textBody2r?.copyWith(color: _labelColor),
+            )
         ],
       ),
     );
   }
 
-  Color? get _activeColor => _isDisabled == true
+  Color? get _activeColor => isDisabled == true
       ? AppColors.of.neutralColor[4]
       : AppColors.of.primaryColor;
 
-  Color get _sideColor => _isDisabled == true
+  Color get _sideColor => isDisabled == true
       ? AppColors.of.neutralColor[3]!
       : AppColors.of.neutralColor[5]!;
-  Color? get _labelColor => _isDisabled == true
+
+  Color? get _labelColor => isDisabled == true
       ? AppColors.of.neutralColor[5]
       : AppColors.of.neutralColor;
-
-  @override
-  AppSelectionControlBaseBuilder setLabel(String? label) {
-    _label = label;
-    return super.setLabel(label);
-  }
-
-  @override
-  AppSelectionControlBaseBuilder setFieldKey(String fieldKey) {
-    _fieldKey = fieldKey;
-    return super.setFieldKey(fieldKey);
-  }
-
-  @override
-  AppSelectionControlBaseBuilder setValue(bool? value) {
-    _value = value;
-    return super.setValue(value);
-  }
-
-  @override
-  AppSelectionControlBaseBuilder setIsDisabled(bool? isDisabled) {
-    _isDisabled = isDisabled;
-    return super.setIsDisabled(isDisabled);
-  }
-
-  @override
-  AppSelectionControlBaseBuilder setOnValueChanged(
-      void Function(dynamic value)? onValueChanged) {
-    _onValueChanged = onValueChanged;
-    return super.setOnValueChanged(onValueChanged);
-  }
 }

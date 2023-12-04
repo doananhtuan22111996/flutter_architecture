@@ -1,10 +1,19 @@
 part of 'app_tab_base_builder.dart';
 
 class AppTabWithIconWidget extends AppTabBaseBuilder {
+  const AppTabWithIconWidget({
+    super.key,
+    super.label,
+    super.appTabSize,
+    super.iconSelected,
+    super.iconUnselected,
+    super.isSelected,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Tab(
-      height: _appTabSize?.value,
+      height: appTabSize?.value,
       iconMargin: EdgeInsets.zero,
       child: Padding(
         padding: paddingBase,
@@ -25,37 +34,25 @@ class AppTabWithIconWidget extends AppTabBaseBuilder {
   }
 
   @override
-  AppTabWithIconWidget setLabel(String? label) {
-    _label = label;
-    return this;
-  }
-
-  @override
-  AppTabWithIconWidget setAppTabSize(AppTabSize? appTabSize) {
-    _appTabSize = appTabSize;
-    return this;
-  }
-
-  @override
-  AppTabWithIconWidget setIconSelected(Widget? icon) {
-    _iconSelected = icon;
-    return this;
-  }
-
-  @override
-  AppTabWithIconWidget setIconUnselected(Widget? icon) {
-    _iconUnselected = icon;
-    return this;
-  }
-
-  @override
-  AppTabWithIconWidget setIsSelected(bool isSelected) {
-    _isSelected = isSelected;
-    return this;
+  AppTabWithIconWidget copyWith(
+      {String? label,
+      int? number,
+      bool? isSelected,
+      AppTabSize? appTabSize,
+      Widget? iconSelected,
+      Widget? iconUnselected}) {
+    return AppTabWithIconWidget(
+      key: super.key,
+      label: label ?? super.label,
+      appTabSize: appTabSize ?? super.appTabSize,
+      iconSelected: iconSelected ?? super.iconSelected,
+      iconUnselected: iconUnselected ?? super.iconUnselected,
+      isSelected: isSelected ?? super.isSelected,
+    );
   }
 
   Widget _icon() {
-    return (_isSelected == true ? _iconSelected : _iconUnselected) ??
+    return (isSelected == true ? iconSelected : iconUnselected) ??
         const SizedBox();
   }
 }
