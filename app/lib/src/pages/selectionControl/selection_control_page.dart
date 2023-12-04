@@ -9,12 +9,11 @@ class SelectionControlPage extends GetWidget<SelectionControlController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget()
-        .setAppBar(AppBarWidget()
-            .setHeaderPage(R.strings.selectionControl)
-            .build(context))
-        .setBody(_body(context))
-        .build(context);
+    return AppMainPageWidget(
+      appBar:
+          AppBarWidget(headerPage: R.strings.selectionControl).build(context),
+      body: _body(context),
+    );
   }
 
   Widget _body(BuildContext context) {
@@ -44,24 +43,21 @@ class SelectionControlPage extends GetWidget<SelectionControlController> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget().setText('CheckBox').build(context),
+        const AppTextHeading4Widget(text: 'CheckBox'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppCheckBoxWidget()
-            .setFieldKey('checkBox1')
-            .setLabel('Label')
-            .setValue(true)
-            .build(context),
-        AppCheckBoxWidget()
-            .setFieldKey('checkBox2')
-            .setLabel('Label')
-            .setValue(false)
-            .build(context),
-        AppCheckBoxWidget()
-            .setFieldKey('checkBox3')
-            .setLabel('Label')
-            .setValue(false)
-            .setIsDisabled(true)
-            .build(context),
+        const AppCheckBoxWidget(
+          fieldKey: 'checkBox1',
+          label: 'Label',
+          value: true,
+        ),
+        const AppCheckBoxWidget(
+            fieldKey: 'checkBox2', label: 'Label', value: false),
+        const AppCheckBoxWidget(
+          fieldKey: 'checkBox3',
+          label: 'Label',
+          value: false,
+          isDisabled: true,
+        ),
       ],
     );
   }
@@ -71,21 +67,15 @@ class SelectionControlPage extends GetWidget<SelectionControlController> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget().setText('CheckBox No Label').build(context),
+        const AppTextHeading4Widget(text: 'Checkbox No Label'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppCheckBoxWidget()
-            .setFieldKey('checkBox4')
-            .setValue(true)
-            .build(context),
-        AppCheckBoxWidget()
-            .setFieldKey('checkBox5')
-            .setValue(false)
-            .build(context),
-        AppCheckBoxWidget()
-            .setFieldKey('checkBox6')
-            .setValue(false)
-            .setIsDisabled(true)
-            .build(context),
+        const AppCheckBoxWidget(fieldKey: 'checkBox4', value: true),
+        const AppCheckBoxWidget(fieldKey: 'checkBox5', value: false),
+        const AppCheckBoxWidget(
+          fieldKey: 'checkBox6',
+          value: false,
+          isDisabled: true,
+        ),
       ],
     );
   }
@@ -95,24 +85,18 @@ class SelectionControlPage extends GetWidget<SelectionControlController> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget().setText('Radio').build(context),
+        const AppTextHeading4Widget(text: 'Radio'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppBasicRadioWidget()
-            .setFieldKey('radio1')
-            .setLabel('Radio')
-            .setValue(true)
-            .build(context),
-        AppBasicRadioWidget()
-            .setFieldKey('radio2')
-            .setLabel('Radio')
-            .setValue(false)
-            .build(context),
-        AppBasicRadioWidget()
-            .setFieldKey('radio3')
-            .setLabel('Radio')
-            .setValue(false)
-            .setIsDisabled(true)
-            .build(context),
+        const AppBasicRadioWidget(
+            fieldKey: 'radio1', label: 'Radio', value: true),
+        const AppBasicRadioWidget(
+            fieldKey: 'radio2', label: 'Radio', value: false),
+        const AppBasicRadioWidget(
+          fieldKey: 'radio3',
+          label: 'Radio',
+          value: false,
+          isDisabled: true,
+        ),
       ],
     );
   }
@@ -122,21 +106,12 @@ class SelectionControlPage extends GetWidget<SelectionControlController> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget().setText('Radio No Label').build(context),
+        const AppTextHeading4Widget(text: 'Radio No Label'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppBasicRadioWidget()
-            .setFieldKey('radio1')
-            .setValue(true)
-            .build(context),
-        AppBasicRadioWidget()
-            .setFieldKey('radio2')
-            .setValue(false)
-            .build(context),
-        AppBasicRadioWidget()
-            .setFieldKey('radio3')
-            .setValue(false)
-            .setIsDisabled(true)
-            .build(context),
+        const AppBasicRadioWidget(fieldKey: 'radio1', value: true),
+        const AppBasicRadioWidget(fieldKey: 'radio2', value: false),
+        const AppBasicRadioWidget(
+            fieldKey: 'radio3', value: false, isDisabled: true),
       ],
     );
   }

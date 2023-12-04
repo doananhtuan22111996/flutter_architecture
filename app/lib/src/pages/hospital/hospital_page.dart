@@ -9,22 +9,19 @@ class HospitalPage extends GetWidget<HospitalController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget()
-        .setAppBar(AppBarLeadingAvatarWidget()
-            .setHeaderPage(R.strings.hospital)
-            .setActions([
-      AppButtonAppBarWidget()
-          .setPrefixIcon(const Icon(Icons.more_horiz))
-          .setOnPressed(() {})
-          .build(context),
-    ]).build(context))
-        .setBody(
-      AppListWidget<HospitalModel, HospitalController>(
+    return AppMainPageWidget(
+      appBar: AppBarLeadingAvatarWidget(
+        headerPage: R.strings.hospital,
+        actions: const [
+          AppButtonAppBarWidget(prefixIcon: Icon(Icons.more_horiz))
+        ],
+      ).build(context),
+      body: AppListWidget<HospitalModel, HospitalController>(
         childWidget: (ctx, model, index) {
           return HospitalItemWidget(model: model, index: index);
         },
       ),
-    ).build(context);
+    );
   }
 }
 

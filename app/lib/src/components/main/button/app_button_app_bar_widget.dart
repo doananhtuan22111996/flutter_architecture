@@ -1,21 +1,11 @@
 part of 'app_button_base_builder.dart';
 
 class AppButtonAppBarWidget extends AppButtonBaseBuilder {
-  @override
-  AppButtonBaseBuilder setOnPressed(void Function()? onPressed) {
-    _onPressed = onPressed;
-    return this;
-  }
-
-  @override
-  AppButtonBaseBuilder setPrefixIcon(Widget? prefixIcon) {
-    _prefixIcon = prefixIcon;
-    return this;
-  }
+  const AppButtonAppBarWidget({super.key, super.prefixIcon, super.onPressed});
 
   @override
   Widget build(BuildContext context) {
-    if (_prefixIcon == null) {
+    if (prefixIcon == null) {
       return SizedBox(
         width: AppThemeExt.of.majorScale(12),
         height: AppThemeExt.of.majorScale(12),
@@ -26,10 +16,10 @@ class AppButtonAppBarWidget extends AppButtonBaseBuilder {
 
   Widget _standard(BuildContext context) {
     return IconButton(
-      icon: _prefixIcon!,
+      icon: prefixIcon!,
       iconSize: AppThemeExt.of.majorScale(6),
       padding: EdgeInsets.zero,
-      onPressed: _onPressed,
+      onPressed: onPressed,
     );
   }
 }

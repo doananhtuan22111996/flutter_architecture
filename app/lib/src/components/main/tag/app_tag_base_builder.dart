@@ -19,21 +19,15 @@ enum AppTagBaseType {
   actionTagOnlyText,
 }
 
-abstract class AppTagBaseBuilder {
+abstract class AppTagBaseBuilder extends StatelessWidget {
   @protected
-  String? _tag;
+  final String? tag;
   @protected
-  SvgGenImage? _icon;
-  @protected
-  AppTagBaseType? _appTagBaseType;
+  final AppTagBaseType? appTagBaseType;
 
-  AppTagBaseBuilder setTag(String? tag);
-
-  AppTagBaseBuilder setIcon(SvgGenImage? icon) {
-    return this;
-  }
-
-  AppTagBaseBuilder setAppTagBaseType(AppTagBaseType? appTagBaseType);
-
-  Widget build(BuildContext context);
+  const AppTagBaseBuilder({
+    super.key,
+    this.tag,
+    this.appTagBaseType = AppTagBaseType.disabled,
+  });
 }

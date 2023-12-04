@@ -24,44 +24,27 @@ enum AppAvatarSize {
   const AppAvatarSize({required this.size, required this.value});
 }
 
-abstract class AppAvatarBaseBuilder {
+abstract class AppAvatarBaseBuilder extends StatelessWidget {
   @protected
-  AppAvatarSize? _size;
+  final AppAvatarSize? size;
   @protected
-  String? _link;
+  final String? link;
   @protected
-  String? _text;
+  final String? text;
   @protected
-  Widget? _svg;
+  final Widget? svg;
   @protected
-  File? _file;
+  final File? file;
   @protected
-  void Function()? _onPressed;
+  final void Function()? onPressed;
 
-  AppAvatarBaseBuilder setSize(AppAvatarSize? size) {
-    _size = size ?? AppAvatarSize.medium;
-    return this;
-  }
-
-  AppAvatarBaseBuilder setLink(String? link) {
-    return this;
-  }
-
-  AppAvatarBaseBuilder setText(String? text) {
-    return this;
-  }
-
-  AppAvatarBaseBuilder setSvg(Widget? svg) {
-    return this;
-  }
-
-  AppAvatarBaseBuilder setFile(File? file) {
-    return this;
-  }
-
-  AppAvatarBaseBuilder setOnPressed(void Function()? onPressed) {
-    return this;
-  }
-
-  Widget build(BuildContext context);
+  const AppAvatarBaseBuilder({
+    super.key,
+    this.size,
+    this.link,
+    this.text,
+    this.svg,
+    this.file,
+    this.onPressed,
+  });
 }

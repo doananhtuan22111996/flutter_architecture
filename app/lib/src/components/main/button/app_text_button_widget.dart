@@ -1,84 +1,53 @@
 part of 'app_button_base_builder.dart';
 
 class AppTextButtonWidget extends AppButtonBaseBuilder {
-  @override
-  AppTextButtonWidget setButtonText(String? buttonText) {
-    _buttonText = buttonText;
-    return this;
-  }
-
-  @override
-  AppTextButtonWidget setIsDisabled(bool isDisabled) {
-    _isDisabled = isDisabled;
-    return this;
-  }
-
-  @override
-  AppTextButtonWidget setOnPressed(void Function()? onPressed) {
-    _onPressed = onPressed;
-    return this;
-  }
-
-  @override
-  AppTextButtonWidget setPrefixIcon(Widget? prefixIcon) {
-    _prefixIcon = prefixIcon;
-    return this;
-  }
-
-  @override
-  AppTextButtonWidget setTextStyle(TextStyle? textStyle) {
-    _textStyle = textStyle;
-    return this;
-  }
-
-  @override
-  AppTextButtonWidget setAppButtonSize(AppButtonSize? appButtonSize) {
-    _appButtonSize = appButtonSize;
-    return this;
-  }
-
-  @override
-  AppTextButtonWidget setAppButtonType(AppButtonType? appButtonType) {
-    _appButtonType = appButtonType;
-    return this;
-  }
+  const AppTextButtonWidget({
+    super.key,
+    super.buttonText,
+    super.isDisabled,
+    super.onPressed,
+    super.prefixIcon,
+    super.textStyle,
+    super.appButtonSize,
+    super.appButtonType,
+  });
 
   @override
   Widget build(BuildContext context) {
-    if (_prefixIcon == null && _buttonText == null) return const SizedBox();
+    if (prefixIcon == null && buttonText == null) return const SizedBox();
     return _standard(context);
   }
 
   Widget _standard(BuildContext context) {
-    return _prefixIcon != null
+    return prefixIcon != null
         ? TextButton.icon(
-            onPressed: _isDisabled == true ? null : _onPressed,
+            onPressed: isDisabled == true ? null : onPressed,
             style: _buttonStyle(context),
-            icon: _prefixIcon!,
-            label: Text(_buttonText!),
+            icon: prefixIcon!,
+            label: Text(buttonText!),
           )
         : TextButton(
-            onPressed: _isDisabled == true ? null : _onPressed,
+            onPressed: isDisabled == true ? null : onPressed,
             style: _buttonStyle(context),
-            child: Text(_buttonText!),
+            child: Text(buttonText!),
           );
   }
 
   ButtonStyle? _buttonStyle(BuildContext context) {
     double horizontalPadding = AppThemeExt.of.majorScale(4);
     double verticalPadding = AppThemeExt.of.majorScale(3);
-    TextStyle? textStyle = _textStyle ?? AppTextStyleExt.of.textBody1m;
+    TextStyle? textStyleCopied = textStyle ?? AppTextStyleExt.of.textBody1m;
 
-    if (_appButtonSize == AppButtonSize.medium) {
+    if (appButtonSize == AppButtonSize.medium) {
       verticalPadding = AppThemeExt.of.majorScale(2);
-      textStyle = _textStyle ?? AppTextStyleExt.of.textBody2m;
+      textStyleCopied = textStyle ?? AppTextStyleExt.of.textBody2m;
     }
-    if (_appButtonSize == AppButtonSize.small) {
+    if (appButtonSize == AppButtonSize.small) {
       verticalPadding = AppThemeExt.of.majorScale(1);
-      textStyle = _textStyle ?? AppTextStyleExt.of.textBody2m;
+      textStyleCopied = textStyle ?? AppTextStyleExt.of.textBody2m;
     }
 
-    if (_appButtonType == AppButtonType.danger) {
+    if (appButtonType == AppButtonType.danger) {
       return AppButtonStyle.textButtonDangerStyle?.copyWith(
         padding: MaterialStateProperty.resolveWith<EdgeInsets?>(
           (Set<MaterialState> states) => EdgeInsets.symmetric(
@@ -89,22 +58,22 @@ class AppTextButtonWidget extends AppButtonBaseBuilder {
         textStyle: MaterialStateProperty.resolveWith<TextStyle?>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.focused)) {
-              return textStyle?.copyWith(
+              return textStyleCopied?.copyWith(
                   decorationColor: AppColors.of.errorColor[6]);
             }
             if (states.contains(MaterialState.hovered)) {
-              return textStyle?.copyWith(
+              return textStyleCopied?.copyWith(
                   decorationColor: AppColors.of.errorColor[6]);
             }
             if (states.contains(MaterialState.pressed)) {
-              return textStyle?.copyWith(
+              return textStyleCopied?.copyWith(
                   decorationColor: AppColors.of.errorColor[6]);
             }
             if (states.contains(MaterialState.disabled)) {
-              return textStyle?.copyWith(
+              return textStyleCopied?.copyWith(
                   decorationColor: AppColors.of.neutralColor[5]);
             }
-            return textStyle?.copyWith(
+            return textStyleCopied?.copyWith(
                 decorationColor: AppColors.of.errorColor);
           },
         ),

@@ -16,15 +16,18 @@ part 'home_page.dart';
 
 class HomeController extends GetxController {
   final RxList<AppTabWithNumberWidget> numberTabs = [
-    AppTabWithNumberWidget()
-        .setLabel('Label 1')
-        .setAppTabSize(AppTabSize.large),
-    AppTabWithNumberWidget()
-        .setLabel('Label 2')
-        .setAppTabSize(AppTabSize.large),
-    AppTabWithNumberWidget()
-        .setLabel('Label 3')
-        .setAppTabSize(AppTabSize.large),
+    const AppTabWithNumberWidget(
+      label: 'Label 1',
+      appTabSize: AppTabSize.large,
+    ),
+    const AppTabWithNumberWidget(
+      label: 'Label 2',
+      appTabSize: AppTabSize.large,
+    ),
+    const AppTabWithNumberWidget(
+      label: 'Label 3',
+      appTabSize: AppTabSize.large,
+    ),
   ].obs;
   RxInt numberIndex = 0.obs;
 
@@ -32,10 +35,7 @@ class HomeController extends GetxController {
     numberTabs.value = [
       ...numberTabs.map((element) {
         final indexOf = numberTabs.indexOf(element);
-        if (indexOf == index) {
-          element.setNumber(number);
-        }
-        return element;
+        return indexOf == index ? element.copyWith(number: number) : element;
       }).toList()
     ];
   }

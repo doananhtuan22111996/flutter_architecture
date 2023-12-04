@@ -23,97 +23,62 @@ enum AppTextFieldSize {
   const AppTextFieldSize({required this.value});
 }
 
-abstract class AppTextFieldBaseBuilder {
+abstract class AppTextFieldBaseBuilder extends StatelessWidget {
   @protected
   final GlobalKey<FormBuilderFieldState> _fieldState =
       GlobalKey<FormBuilderFieldState>();
 
   /// [_fieldKey] for FormBuilderField
   @protected
-  late final String _fieldKey;
+  final String fieldKey;
   @protected
-  String? _hintText;
+  final String? hintText;
   @protected
-  int? _maxLines;
+  final int? maxLines;
   @protected
-  int? _maxLength;
+  final int? maxLength;
   @protected
-  bool? _isDisabled;
+  final bool? isDisabled;
   @protected
-  bool? _obscureText;
+  final bool? obscureText;
   @protected
-  TextInputType? _keyboardType;
+  final TextInputType? keyboardType;
   @protected
-  AppTextFieldSize? _appTextFieldSize;
+  final AppTextFieldSize? appTextFieldSize;
   @protected
-  List<TextInputFormatter>? _inputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
   @protected
-  TextInputAction? _textInputAction;
+  final TextInputAction? textInputAction;
   @protected
-  void Function(String?)? _onChanged;
+  final void Function(String?)? onChanged;
   @protected
-  String? Function(String?)? _validator;
+  final String? Function(String?)? validator;
   @protected
-  void Function(String?)? _onFieldSubmitted;
+  final void Function(String?)? onFieldSubmitted;
   @protected
-  Widget? _suffixIcon;
+  final Widget? suffixIcon;
 
-  AppTextFieldBaseBuilder setFieldKey(String fieldKey);
+  AppTextFieldBaseBuilder({
+    super.key,
+    required this.fieldKey,
+    this.hintText,
+    this.maxLength,
+    this.maxLines,
+    this.isDisabled,
+    this.obscureText,
+    this.keyboardType,
+    this.appTextFieldSize,
+    this.inputFormatters,
+    this.textInputAction,
+    this.onChanged,
+    this.validator,
+    this.onFieldSubmitted,
+    this.suffixIcon,
+  });
 
-  AppTextFieldBaseBuilder setHintText(String? hintText);
-
-  AppTextFieldBaseBuilder setIsDisabled(bool? isDisabled);
-
-  AppTextFieldBaseBuilder setMaxLines(int? maxLines) {
-    return this;
-  }
-
-  AppTextFieldBaseBuilder setAppTextFieldSize(
-      AppTextFieldSize? appTextFieldSize) {
-    return this;
-  }
-
-  AppTextFieldBaseBuilder setMaxLength(int? maxLength) {
-    return this;
-  }
-
-  AppTextFieldBaseBuilder setKeyboardType(TextInputType? keyboardType) {
-    return this;
-  }
-
-  AppTextFieldBaseBuilder setInputFormatters(
-      List<TextInputFormatter>? inputFormatters) {
-    return this;
-  }
-
-  AppTextFieldBaseBuilder setOnChanged(void Function(String?)? onChanged) {
-    return this;
-  }
-
-  AppTextFieldBaseBuilder setValidator(String? Function(String?)? validator) {
-    return this;
-  }
-
-  AppTextFieldBaseBuilder setObscureText(bool? obscureText) {
-    return this;
-  }
-
-  AppTextFieldBaseBuilder setTextInputAction(TextInputAction? textInputAction) {
-    return this;
-  }
-
-  AppTextFieldBaseBuilder setOnFieldSubmitted(
-      String? Function(String?)? onFieldSubmitted) {
-    return this;
-  }
-
-  AppTextFieldBaseBuilder setSuffixIcon(Widget? suffixIcon) {
-    return this;
-  }
-
-  Widget build(BuildContext context);
-
+  @protected
   Widget _buildMain({
+    bool? obscureText,
     Widget? prefixIcon,
     Widget? suffixIcon,
     Function(String?)? valueListener,
@@ -121,30 +86,30 @@ abstract class AppTextFieldBaseBuilder {
   }) {
     return FormBuilderTextField(
       key: _fieldState,
-      name: _fieldKey,
-      keyboardType: _keyboardType,
-      inputFormatters: _inputFormatters,
+      name: fieldKey,
+      keyboardType: keyboardType,
+      inputFormatters: inputFormatters,
       onChanged: (value) {
         /// Value changed Callback
         valueListener?.call(value);
-        _onChanged?.call(value);
+        onChanged?.call(value);
       },
       textAlign: TextAlign.start,
-      maxLines: _maxLines,
-      maxLength: _maxLength,
-      readOnly: _isDisabled == true,
-      enabled: _isDisabled == null || _isDisabled == false,
+      maxLines: maxLines,
+      maxLength: maxLength,
+      readOnly: isDisabled == true,
+      enabled: isDisabled == null || isDisabled == false,
       style: _textStyle,
       cursorColor: AppColors.of.primaryColor,
-      obscureText: _obscureText ?? false,
+      obscureText: obscureText ?? this.obscureText ?? false,
       validator: (value) {
         /// Error value Callback
-        final errorText = _validator?.call(value);
+        final errorText = validator?.call(value);
         errorListener?.call(errorText);
         return errorText;
       },
-      textInputAction: _textInputAction,
-      onSubmitted: _onFieldSubmitted,
+      textInputAction: textInputAction,
+      onSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.of.neutralColor[5]!),
@@ -161,7 +126,7 @@ abstract class AppTextFieldBaseBuilder {
         errorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.of.errorColor),
         ),
-        hintText: _hintText,
+        hintText: hintText,
         hintStyle: _textStyle?.copyWith(color: AppColors.of.neutralColor[6]),
         contentPadding: _contentPadding,
         errorStyle: AppTextStyleExt.of.textBody3r
@@ -177,17 +142,17 @@ abstract class AppTextFieldBaseBuilder {
     );
   }
 
-  TextStyle? get _textStyle => _appTextFieldSize == AppTextFieldSize.large
+  TextStyle? get _textStyle => appTextFieldSize == AppTextFieldSize.large
       ? AppTextStyleExt.of.textBody2r
-      : _appTextFieldSize == AppTextFieldSize.small
+      : appTextFieldSize == AppTextFieldSize.small
           ? AppTextStyleExt.of.textBody2r
           : AppTextStyleExt.of.textBody1r;
 
-  EdgeInsets get _contentPadding => _appTextFieldSize == AppTextFieldSize.large
+  EdgeInsets get _contentPadding => appTextFieldSize == AppTextFieldSize.large
       ? EdgeInsets.symmetric(
           vertical: AppThemeExt.of.majorScale(3),
           horizontal: AppThemeExt.of.majorScale(4))
-      : _appTextFieldSize == AppTextFieldSize.small
+      : appTextFieldSize == AppTextFieldSize.small
           ? EdgeInsets.symmetric(
               vertical: AppThemeExt.of.majorScale(1),
               horizontal: AppThemeExt.of.majorScale(3))
@@ -196,12 +161,12 @@ abstract class AppTextFieldBaseBuilder {
               horizontal: AppThemeExt.of.majorScale(4));
 
   BoxConstraints get _boxSuffixIconConstraints =>
-      _appTextFieldSize == AppTextFieldSize.large
+      appTextFieldSize == AppTextFieldSize.large
           ? BoxConstraints.expand(
               height: AppThemeExt.of.majorScale(12),
               width: AppThemeExt.of.majorScale(12),
             )
-          : _appTextFieldSize == AppTextFieldSize.small
+          : appTextFieldSize == AppTextFieldSize.small
               ? BoxConstraints.expand(
                   height: AppThemeExt.of.majorScale(8),
                   width: AppThemeExt.of.majorScale(8),
@@ -212,11 +177,11 @@ abstract class AppTextFieldBaseBuilder {
                 );
 
   BoxConstraints get _boxPrefixIconConstraints =>
-      _appTextFieldSize == AppTextFieldSize.large
+      appTextFieldSize == AppTextFieldSize.large
           ? BoxConstraints.expand(
               height: AppThemeExt.of.majorScale(12),
               width: AppThemeExt.of.majorScale(12))
-          : _appTextFieldSize == AppTextFieldSize.small
+          : appTextFieldSize == AppTextFieldSize.small
               ? BoxConstraints.expand(
                   height: AppThemeExt.of.majorScale(8),
                   width: AppThemeExt.of.majorScale(8),

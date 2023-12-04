@@ -3,32 +3,24 @@ import 'package:flutter/material.dart';
 
 part 'app_main_page_widget.dart';
 
-abstract class AppMainPageBaseBuilder {
+abstract class AppMainPageBaseBuilder extends StatelessWidget {
   @protected
-  Key? _key;
+  final Widget? body;
   @protected
-  Widget? _body;
+  final PreferredSizeWidget? appBar;
   @protected
-  PreferredSizeWidget? _appBar;
+  final Widget? endDrawer;
   @protected
-  Widget? _endDrawer;
+  final Color? backgroundColor;
   @protected
-  Color? _backgroundColor;
-  @protected
-  void Function(bool)? _onEndDrawerChanged;
+  final void Function(bool)? onEndDrawerChanged;
 
-  AppMainPageBaseBuilder setKey(Key? key);
-
-  AppMainPageBaseBuilder setAppBar(PreferredSizeWidget? appBar);
-
-  AppMainPageBaseBuilder setBody(Widget? body);
-
-  AppMainPageBaseBuilder setEndDrawer(Widget? endDrawer);
-
-  AppMainPageBaseBuilder setBackgroundColor(Color? backgroundColor);
-
-  AppMainPageBaseBuilder setEndDrawerChanged(
-      void Function(bool)? onEndDrawerChanged);
-
-  Widget build(BuildContext context);
+  const AppMainPageBaseBuilder({
+    super.key,
+    this.body,
+    this.appBar,
+    this.endDrawer,
+    this.backgroundColor,
+    this.onEndDrawerChanged,
+  });
 }

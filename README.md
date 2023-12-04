@@ -85,9 +85,15 @@ samples, guidance on mobile development, and a full API reference.
 
 ### MacOs
 - One time: `make denied` (Mac OS)
-- PreBuild: `make pre-bootstrap`, `make pub-get`, `make build-init flavor=dev`, `make build-init flavor=prod`, `make build-runner`
-- Get Command for run: `make run flavor=dev/staging/prod` -> Copy command
-- Run Project: `cd app`, `paste Command copied`
+- PreBuild: 
+  - `make pre-bootstrap`
+  - `make pub-get`
+  - `make build-init flavor=dev` and `make build-init flavor=prod`
+  - `make build-runner`
+- Get Command for run: `make run flavor=[dev|staging|prod]` -> Copy command show in console
+- Run Project: 
+  - `cd app`
+  - `paste Command copied`
 
 ### Windown
 - Install Flutter 3.10.4 or latest version

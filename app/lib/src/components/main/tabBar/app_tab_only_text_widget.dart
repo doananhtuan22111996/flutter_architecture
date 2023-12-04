@@ -1,10 +1,13 @@
 part of 'app_tab_base_builder.dart';
 
 class AppTabOnlyTextWidget extends AppTabBaseBuilder {
+  const AppTabOnlyTextWidget(
+      {super.key, super.label, super.appTabSize, super.isSelected});
+
   @override
   Widget build(BuildContext context) {
     return Tab(
-      height: _appTabSize?.value,
+      height: appTabSize?.value,
       child: Padding(
         padding: paddingBase,
         child: textBase(context),
@@ -13,20 +16,19 @@ class AppTabOnlyTextWidget extends AppTabBaseBuilder {
   }
 
   @override
-  AppTabOnlyTextWidget setLabel(String? label) {
-    _label = label;
-    return this;
-  }
-
-  @override
-  AppTabOnlyTextWidget setAppTabSize(AppTabSize? appTabSize) {
-    _appTabSize = appTabSize;
-    return this;
-  }
-
-  @override
-  AppTabOnlyTextWidget setIsSelected(bool isSelected) {
-    _isSelected = isSelected;
-    return this;
+  AppTabOnlyTextWidget copyWith({
+    String? label,
+    int? number,
+    bool? isSelected,
+    AppTabSize? appTabSize,
+    Widget? iconSelected,
+    Widget? iconUnselected,
+  }) {
+    return AppTabOnlyTextWidget(
+      key: super.key,
+      label: label ?? super.label,
+      appTabSize: appTabSize ?? super.appTabSize,
+      isSelected: isSelected ?? super.isSelected,
+    );
   }
 }

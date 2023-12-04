@@ -20,69 +20,58 @@ enum AppTabSize {
   const AppTabSize({required this.size, required this.value});
 }
 
-abstract class AppTabBaseBuilder {
+abstract class AppTabBaseBuilder extends StatelessWidget {
   @protected
-  String? _label;
+  final String? label;
   @protected
-  int? _number;
+  final int? number;
   @protected
-  Widget? _iconSelected;
+  final Widget? iconSelected;
   @protected
-  Widget? _iconUnselected;
+  final Widget? iconUnselected;
   @protected
-  bool? _isSelected;
+  final bool? isSelected;
   @protected
-  AppTabSize? _appTabSize;
+  final AppTabSize? appTabSize;
 
-  AppTabBaseBuilder setLabel(String? label);
+  const AppTabBaseBuilder({
+    super.key,
+    this.label,
+    this.number,
+    this.iconSelected,
+    this.iconUnselected,
+    this.isSelected,
+    this.appTabSize,
+  });
 
-  AppTabBaseBuilder setNumber(int? number) {
-    return this;
-  }
-
-  AppTabBaseBuilder setIconSelected(Widget? icon) {
-    return this;
-  }
-
-  AppTabBaseBuilder setIconUnselected(Widget? icon) {
-    return this;
-  }
-
-  AppTabBaseBuilder setIsSelected(bool isSelected) {
-    return this;
-  }
-
-  AppTabBaseBuilder setAppTabSize(AppTabSize? appTabSize) {
-    return this;
-  }
-
-  Widget build(BuildContext context);
+  AppTabBaseBuilder copyWith({
+    String? label,
+    int? number,
+    bool? isSelected,
+    AppTabSize? appTabSize,
+    Widget? iconSelected,
+    Widget? iconUnselected,
+  });
 
   Widget textBase(BuildContext context) {
-    return _appTabSize == AppTabSize.large
-        ? AppTextBody1Widget()
-            .setText(_label)
-            .setTextStyle(textStyle(context))
-            .build(context)
-        : AppTextBody2Widget()
-            .setText(_label)
-            .setTextStyle(textStyle(context))
-            .build(context);
+    return appTabSize == AppTabSize.large
+        ? AppTextBody1Widget(text: label, textStyle: textStyle(context))
+        : AppTextBody2Widget(text: label, textStyle: textStyle(context));
   }
 
-  TextStyle? textStyle(BuildContext context) => _appTabSize == AppTabSize.large
-      ? _isSelected == true
+  TextStyle? textStyle(BuildContext context) => appTabSize == AppTabSize.large
+      ? isSelected == true
           ? context.textTheme.bodyLarge?.copyWith(color: colorBase)
           : AppTextStyleExt.of.textBody1r?.copyWith(color: colorBase)
-      : _isSelected == true
+      : isSelected == true
           ? context.textTheme.bodyMedium?.copyWith(color: colorBase)
           : AppTextStyleExt.of.textBody2r?.copyWith(color: colorBase);
 
-  Color? get colorBase => _isSelected == true
+  Color? get colorBase => isSelected == true
       ? AppColors.of.primaryColor
       : AppColors.of.neutralColor;
 
-  EdgeInsetsGeometry get paddingBase => _appTabSize == AppTabSize.large
+  EdgeInsetsGeometry get paddingBase => appTabSize == AppTabSize.large
       ? EdgeInsets.symmetric(
           horizontal: AppThemeExt.of.majorScale(2),
           vertical: AppThemeExt.of.majorScale(3),

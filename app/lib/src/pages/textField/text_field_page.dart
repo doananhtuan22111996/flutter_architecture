@@ -9,11 +9,10 @@ class TextFieldPage extends GetView<TextFieldController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget()
-        .setAppBar(
-            AppBarWidget().setHeaderPage(R.strings.textField).build(context))
-        .setBody(_body(context))
-        .build(context);
+    return AppMainPageWidget(
+      appBar: AppBarWidget(headerPage: R.strings.textField).build(context),
+      body: _body(context),
+    );
   }
 
   Widget _body(BuildContext context) {
@@ -44,11 +43,12 @@ class TextFieldPage extends GetView<TextFieldController> {
               SizedBox(height: AppThemeExt.of.majorScale(4)),
               SizedBox(
                 width: double.infinity,
-                child: AppFilledButtonWidget()
-                    .setButtonText('buttonText')
-                    .setOnPressed(() {
-                  controller.formKey.currentState?.saveAndValidate();
-                }).build(context),
+                child: AppFilledButtonWidget(
+                  buttonText: 'buttonText',
+                  onPressed: () {
+                    controller.formKey.currentState?.saveAndValidate();
+                  },
+                ).build(context),
               ),
             ],
           ),
@@ -62,31 +62,27 @@ class TextFieldPage extends GetView<TextFieldController> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget().setText('Text Field Medium').build(context),
+        const AppTextHeading4Widget(text: 'Text Field Medium'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
         AppTextFieldWithClearWidget(
-                textNotifier:
-                    ValueNotifier<String?>('Text Field Medium Disabled'))
-            .setFieldKey('textField1')
-            .setValidator(
-                FormBuilderValidators.required(errorText: 'Required Text'))
-            .build(context),
+          fieldKey: 'textField1',
+          validator: FormBuilderValidators.required(errorText: 'Required Text'),
+          textNotifier: ValueNotifier<String?>('Text Field Medium Disabled'),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextFieldWithClearWidget()
-            .setFieldKey('textField77')
-            .setValidator(
-                FormBuilderValidators.required(errorText: 'Required Text'))
-            .build(context),
+        AppTextFieldWithClearWidget(
+          fieldKey: 'textField77',
+          validator: FormBuilderValidators.required(errorText: 'Required Text'),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextFieldPasswordWidget().setFieldKey('textField99').build(context),
+        AppTextFieldPasswordWidget(fieldKey: 'textField99'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextFieldWidget()
-            .setFieldKey('textField2')
-            // .setValue('Text Field Medium Disabled')
-            .setIsDisabled(true)
-            .build(context),
+        AppTextFieldWidget(
+          fieldKey: 'textField2',
+          isDisabled: true,
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextFieldWidget().setFieldKey('textField98').build(context),
+        AppTextFieldWidget(fieldKey: 'textField98'),
       ],
     );
   }
@@ -96,20 +92,19 @@ class TextFieldPage extends GetView<TextFieldController> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget().setText('Text Field Large').build(context),
+        const AppTextHeading4Widget(text: 'Text Field Large'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextFieldWidget()
-            .setFieldKey('textField3')
-            .setAppTextFieldSize(AppTextFieldSize.large)
-            .setValidator(
-                FormBuilderValidators.required(errorText: 'Required Text'))
-            .build(context),
+        AppTextFieldWidget(
+          fieldKey: 'textField3',
+          appTextFieldSize: AppTextFieldSize.large,
+          validator: FormBuilderValidators.required(errorText: 'Required Text'),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextFieldWidget()
-            .setFieldKey('textField4')
-            .setAppTextFieldSize(AppTextFieldSize.large)
-            .setIsDisabled(true)
-            .build(context),
+        AppTextFieldWidget(
+          fieldKey: 'textField04',
+          appTextFieldSize: AppTextFieldSize.large,
+          isDisabled: true,
+        ),
       ],
     );
   }
@@ -119,20 +114,19 @@ class TextFieldPage extends GetView<TextFieldController> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget().setText('Text Field Small').build(context),
+        const AppTextHeading4Widget(text: 'Text Field Small'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextFieldWidget()
-            .setFieldKey('textField5')
-            .setAppTextFieldSize(AppTextFieldSize.small)
-            .setValidator(
-                FormBuilderValidators.required(errorText: 'Required Text'))
-            .build(context),
+        AppTextFieldWidget(
+          fieldKey: 'textField5',
+          appTextFieldSize: AppTextFieldSize.small,
+          validator: FormBuilderValidators.required(errorText: 'Required Text'),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextFieldWidget()
-            .setFieldKey('textField6')
-            .setAppTextFieldSize(AppTextFieldSize.small)
-            .setIsDisabled(true)
-            .build(context),
+        AppTextFieldWidget(
+          fieldKey: 'textField6',
+          appTextFieldSize: AppTextFieldSize.small,
+          isDisabled: true,
+        )
       ],
     );
   }
@@ -142,13 +136,12 @@ class TextFieldPage extends GetView<TextFieldController> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextHeading4Widget().setText('Text Field Search').build(context),
+        const AppTextHeading4Widget(text: 'Text Field Search'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextFieldSearchWidget()
-            .setFieldKey('textField88')
-            .setValidator(
-                FormBuilderValidators.required(errorText: 'Required Text'))
-            .build(context),
+        AppTextFieldSearchWidget(
+          fieldKey: 'textField88',
+          validator: FormBuilderValidators.required(errorText: 'Required Text'),
+        ),
       ],
     );
   }

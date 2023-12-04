@@ -40,7 +40,6 @@ apkDev:
     - jar xf .env.zip
     - cd ..
     - make build-android-apk flavor=dev
-  after_script:
     - echo "Execute android assembleDevRelease completed!!!"
   retry: 1
   only:
@@ -61,7 +60,6 @@ apkProd:
     - jar xf .env.zip
     - cd ..
     - make build-android-apk flavor=prod
-  after_script:
     - echo "Execute android assembleProdRelease completed!!!"
   retry: 1
   only:
@@ -82,7 +80,6 @@ ipaDev:
     - jar xf .env.zip
     - cd ..
     - make build-ios flavor=dev
-  after_script:
     - echo "Execute ios assembleDevRelease completed!!!"
   retry: 1
   only:
@@ -103,7 +100,6 @@ ipaProd:
     - jar xf .env.zip
     - cd ..
     - make build-ios flavor=prod
-  after_script:
     - echo "Execute ios assembleProdRelease completed!!!"
   retry: 1
   only:
@@ -145,7 +141,6 @@ dev-apk-distribute:
     - echo $build_number
     - make build-android-apk flavor=dev buildName=$build_name buildNumber=$build_number
     - firebase appdistribution:distribute app/build/app/outputs/flutter-apk/app-dev-release.apk --app ${FIREBASE_APP_DEV} --groups "gu"
-  after_script:
     - echo "Execute android assembleDevRelease completed!!!"
   retry: 1
   only:
@@ -172,7 +167,6 @@ dev-ipa-distribute:
     - echo $build_number
     - make build-ios flavor=dev buildName=$build_name buildNumber=$build_number
     - xcrun altool --upload-app -f app/build/ios/ipa/AppSkeleton.ipa --type ios -u ${APP_STORE_EMAIL} -p ${APP_STORE_PASSWORD}
-  after_script:
     - echo "Execute ios assembleDevIpaRelease completed!!!"
   retry: 1
   only:
@@ -197,7 +191,6 @@ prod-apk-distribute:
     - echo $build_number
     - make build-android-apk flavor=prod buildName=$build_name buildNumber=$build_number
     - firebase appdistribution:distribute app/build/app/outputs/flutter-apk/app-prod-release.apk --app ${FIREBASE_APP_PROD} --groups "gu"
-  after_script:
     - echo "Execute android assembleProdRelease completed!!!"
   retry: 1
   only:
@@ -223,7 +216,6 @@ prod-ipa-distribute:
     - echo $build_number
     - make build-ios flavor=prod buildName=$build_name buildNumber=$build_number
     - xcrun altool --upload-app -f app/build/ios/ipa/AppSkeleton.ipa --type ios -u ${APP_STORE_EMAIL} -p ${APP_STORE_PASSWORD}
-  after_script:
     - echo "Execute ios assembleProdRelease completed!!!"
   retry: 1
   only:

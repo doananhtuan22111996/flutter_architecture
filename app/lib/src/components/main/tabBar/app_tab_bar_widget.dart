@@ -78,9 +78,8 @@ class _AppTabBarWidgetState extends State<AppTabBarWidget>
   TabBar get _tabBar => TabBar(
         controller: _tabController,
         tabs: widget.tabs
-            .map((e) => e
-                .setIsSelected(widget.tabs.indexOf(e) == widget.index)
-                .build(context))
+            .map((e) =>
+                e.copyWith(isSelected: widget.tabs.indexOf(e) == widget.index))
             .toList(),
         isScrollable: widget.isScrollable,
         onTap: widget.onTap,

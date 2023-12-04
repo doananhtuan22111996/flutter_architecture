@@ -9,10 +9,10 @@ class BadgePage extends GetView<BadgeController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget()
-        .setAppBar(AppBarWidget().setHeaderPage('Badge').build(context))
-        .setBody(_body(context))
-        .build(context);
+    return AppMainPageWidget(
+      appBar: const AppBarWidget(headerPage: 'Badge').build(context),
+      body: _body(context),
+    );
   }
 
   Widget _body(BuildContext context) {
@@ -42,43 +42,43 @@ class BadgePage extends GetView<BadgeController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Number Badge').build(context),
+        const AppTextBody1Widget(text: 'Number Badge'),
         Row(
           children: [
-            AppBadgeNumberWidget()
-                .setNumber(13)
-                .setColor(AppColors.of.primaryColor)
-                .setAppBadgeBaseType(AppBadgeBaseType.filled)
-                .build(context),
+            AppBadgeNumberWidget(
+              number: 13,
+              color: AppColors.of.primaryColor,
+              appBadgeBaseType: AppBadgeBaseType.filled,
+            ),
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: AppThemeExt.of.majorScale(2)),
-              child: AppBadgeNumberWidget()
-                  .setNumber(12)
-                  .setColor(AppColors.of.errorColor)
-                  .setAppBadgeBaseType(AppBadgeBaseType.filled)
-                  .build(context),
+              child: AppBadgeNumberWidget(
+                number: 12,
+                color: AppColors.of.errorColor,
+                appBadgeBaseType: AppBadgeBaseType.filled,
+              ),
             ),
-            AppBadgeNumberWidget()
-                .setNumber(11)
-                .setColor(AppColors.of.successColor)
-                .setAppBadgeBaseType(AppBadgeBaseType.filled)
-                .build(context),
+            AppBadgeNumberWidget(
+              number: 11,
+              color: AppColors.of.successColor,
+              appBadgeBaseType: AppBadgeBaseType.filled,
+            ),
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: AppThemeExt.of.majorScale(2)),
-              child: AppBadgeNumberWidget()
-                  .setNumber(10)
-                  .setColor(AppColors.of.processInformColor)
-                  .setAppBadgeBaseType(AppBadgeBaseType.filled)
-                  .build(context),
+              child: AppBadgeNumberWidget(
+                number: 10,
+                color: AppColors.of.processInformColor,
+                appBadgeBaseType: AppBadgeBaseType.filled,
+              ),
             ),
-            AppBadgeNumberWidget()
-                .setNumber(15)
-                .setColor(AppColors.of.successColor)
-                .setIsDisabled(true)
-                .setAppBadgeBaseType(AppBadgeBaseType.filled)
-                .build(context),
+            AppBadgeNumberWidget(
+              number: 15,
+              color: AppColors.of.successColor,
+              isDisabled: true,
+              appBadgeBaseType: AppBadgeBaseType.filled,
+            ),
           ],
         ),
       ],
@@ -89,28 +89,20 @@ class BadgePage extends GetView<BadgeController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Dot Badge').build(context),
+        const AppTextBody1Widget(text: 'Dot Badge'),
         Row(
           children: [
-            AppBadgeDotWidget()
-                .setColor(AppColors.of.primaryColor)
-                .build(context),
+            AppBadgeDotWidget(color: AppColors.of.primaryColor),
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: AppThemeExt.of.majorScale(2)),
-              child: AppBadgeDotWidget()
-                  .setColor(AppColors.of.errorColor)
-                  .build(context),
+              child: AppBadgeDotWidget(color: AppColors.of.errorColor),
             ),
-            AppBadgeDotWidget()
-                .setColor(AppColors.of.successColor)
-                .build(context),
+            AppBadgeDotWidget(color: AppColors.of.successColor),
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: AppThemeExt.of.majorScale(2)),
-              child: AppBadgeDotWidget()
-                  .setColor(AppColors.of.processInformColor)
-                  .build(context),
+              child: AppBadgeDotWidget(color: AppColors.of.processInformColor),
             ),
           ],
         ),
@@ -122,36 +114,36 @@ class BadgePage extends GetView<BadgeController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('State Tags').build(context),
+        const AppTextBody1Widget(text: 'State Tags'),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              AppStateTagWidget()
-                  .setTag('Success')
-                  .setAppTagBaseType(AppTagBaseType.success)
-                  .build(context),
+              const AppStateTagWidget(
+                tag: 'Success',
+                appTagBaseType: AppTagBaseType.success,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: AppThemeExt.of.majorScale(2)),
-                child: AppStateTagWidget()
-                    .setTag('Warning')
-                    .setAppTagBaseType(AppTagBaseType.warning)
-                    .build(context),
+                child: const AppStateTagWidget(
+                  tag: 'Warning',
+                  appTagBaseType: AppTagBaseType.warning,
+                ),
               ),
-              AppStateTagWidget()
-                  .setTag('Waiting')
-                  .setAppTagBaseType(AppTagBaseType.waiting)
-                  .build(context),
+              const AppStateTagWidget(
+                tag: 'Waiting',
+                appTagBaseType: AppTagBaseType.waiting,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: AppThemeExt.of.majorScale(2)),
-                child: AppStateTagWidget()
-                    .setTag('Cancel')
-                    .setAppTagBaseType(AppTagBaseType.cancel)
-                    .build(context),
+                child: const AppStateTagWidget(
+                  tag: 'Cancel',
+                  appTagBaseType: AppTagBaseType.cancel,
+                ),
               ),
-              AppStateTagWidget().setTag('Disabled').build(context),
+              const AppStateTagWidget(tag: 'Disabled'),
             ],
           ),
         ),

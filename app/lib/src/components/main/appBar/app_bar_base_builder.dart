@@ -12,41 +12,30 @@ part 'app_bar_leading_widget.dart';
 
 part 'app_bar_leading_avatar_widget.dart';
 
-abstract class AppBarBaseBuilder {
+abstract class AppBarBaseBuilder extends StatelessWidget {
   @protected
-  String? _headerPage;
+  final String? headerPage;
   @protected
-  Widget? _leading;
+  final Widget? leading;
   @protected
-  bool? _centerTitle;
+  final bool? centerTitle;
   @protected
-  List<Widget>? _actions;
+  final List<Widget>? actions;
   @protected
-  Color? _backgroundColor;
+  final Color? backgroundColor;
   @protected
-  PreferredSizeWidget? _bottom;
+  final PreferredSizeWidget? bottom;
 
-  AppBarBaseBuilder setHeaderPage(String? headerPage);
+  const AppBarBaseBuilder({
+    super.key,
+    this.headerPage,
+    this.leading,
+    this.centerTitle,
+    this.actions,
+    this.backgroundColor,
+    this.bottom,
+  });
 
-  AppBarBaseBuilder setLeading(Widget? leading) {
-    return this;
-  }
-
-  AppBarBaseBuilder setCenterTitle(bool? centerTitle) {
-    return this;
-  }
-
-  AppBarBaseBuilder setActions(List<Widget>? actions) {
-    return this;
-  }
-
-  AppBarBaseBuilder setBackgroundColor(Color? backgroundColor) {
-    return this;
-  }
-
-  AppBarBaseBuilder setBottom(PreferredSizeWidget? bottom) {
-    return this;
-  }
-
+  @override
   PreferredSizeWidget build(BuildContext context);
 }

@@ -1,55 +1,29 @@
 part of 'app_bar_base_builder.dart';
 
 class AppBarLeadingWidget extends AppBarBaseBuilder {
+  const AppBarLeadingWidget({
+    super.key,
+    super.actions,
+    super.backgroundColor,
+    super.bottom,
+    super.centerTitle,
+    super.headerPage,
+    super.leading,
+  });
+
   @override
   PreferredSizeWidget build(BuildContext context) {
     return AppBar(
-      leading: _leading ??
-          AppButtonAppBarWidget()
-              .setPrefixIcon(R.svgs.outline.appBar.arrowLineLeft.svg())
-              .setOnPressed(() => Get.back())
-              .build(context),
-      title: AppTextHeading5Widget().setText(_headerPage).build(context),
-      centerTitle: _centerTitle,
-      actions: _actions,
-      backgroundColor: _backgroundColor ?? AppColors.of.neutralColor[1],
-      bottom: _bottom,
+      leading: leading ??
+          AppButtonAppBarWidget(
+            prefixIcon: R.svgs.outline.appBar.arrowLineLeft.svg(),
+            onPressed: () => Get.back(),
+          ),
+      title: AppTextHeading5Widget(text: headerPage),
+      centerTitle: centerTitle,
+      actions: actions,
+      backgroundColor: backgroundColor ?? AppColors.of.neutralColor[1],
+      bottom: bottom,
     );
-  }
-
-  @override
-  AppBarBaseBuilder setActions(List<Widget>? actions) {
-    _actions = actions;
-    return this;
-  }
-
-  @override
-  AppBarBaseBuilder setBackgroundColor(Color? backgroundColor) {
-    _backgroundColor = backgroundColor;
-    return this;
-  }
-
-  @override
-  AppBarBaseBuilder setBottom(PreferredSizeWidget? bottom) {
-    _bottom = bottom;
-    return this;
-  }
-
-  @override
-  AppBarBaseBuilder setCenterTitle(bool? centerTitle) {
-    _centerTitle = centerTitle ?? true;
-    return this;
-  }
-
-  @override
-  AppBarBaseBuilder setHeaderPage(String? headerPage) {
-    _headerPage = headerPage;
-    return this;
-  }
-
-  @override
-  AppBarBaseBuilder setLeading(Widget? leading) {
-    _leading = leading;
-    return this;
   }
 }

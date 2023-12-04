@@ -14,74 +14,68 @@ part 'dialog_page.dart';
 
 class DialogController extends GetxController {
   void dialogSuccess() {
-    return AppDefaultDialogWidget()
-        .setTitle('Success!')
-        .setContent(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore')
-        .setPositiveText(R.strings.confirm)
-        .setAppDialogType(AppDialogType.success)
-        .setNegativeText(R.strings.close)
-        .buildDialog(Get.context!)
-        .show();
+    return AppDefaultDialogWidget(
+      title: 'Success!',
+      content:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+      positiveText: R.strings.confirm,
+      appDialogType: AppDialogType.success,
+      negativeText: R.strings.close,
+    ).show();
   }
 
   void dialogError() {
-    return AppDefaultDialogWidget()
-        .setTitle('Error!')
-        .setContent(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore')
-        .setPositiveText(R.strings.confirm)
-        .setAppDialogType(AppDialogType.error)
-        .setNegativeText(R.strings.close)
-        .buildDialog(Get.context!)
-        .show();
+    return AppDefaultDialogWidget(
+      title: 'Error!',
+      content:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+      positiveText: R.strings.confirm,
+      appDialogType: AppDialogType.error,
+      negativeText: R.strings.close,
+    ).show();
   }
 
   void dialogConfirm() {
-    return AppDefaultDialogWidget()
-        .setTitle('Confirm!')
-        .setContent(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore')
-        .setPositiveText(R.strings.confirm)
-        .setAppDialogType(AppDialogType.confirm)
-        .setNegativeText(R.strings.close)
-        .buildDialog(Get.context!)
-        .show();
+    return AppDefaultDialogWidget(
+      title: 'Confirm!',
+      content:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+      positiveText: R.strings.confirm,
+      appDialogType: AppDialogType.confirm,
+      negativeText: R.strings.close,
+    ).show();
   }
 
   void dialogScreenSuccess() {
-    return AppScreenDialogWidget()
-        .setTitle('Success!')
-        .setContent(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore')
-        .setPositiveText(R.strings.confirm)
-        .setAppDialogType(AppDialogType.success)
-        .setNegativeText(R.strings.close)
-        .buildDialog(Get.context!)
-        .show();
+    return AppScreenDialogWidget(
+      title: 'Success!',
+      content:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+      positiveText: R.strings.confirm,
+      appDialogType: AppDialogType.success,
+      negativeText: R.strings.close,
+    ).show();
   }
 
   void dialogScreenError() {
-    return AppScreenDialogWidget()
-        .setTitle('Error!')
-        .setContent(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore')
-        .setPositiveText(R.strings.confirm)
-        .setAppDialogType(AppDialogType.error)
-        .setNegativeText(R.strings.close)
-        .buildDialog(Get.context!)
-        .show();
+    return AppScreenDialogWidget(
+      title: 'Error!',
+      content:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+      positiveText: R.strings.confirm,
+      appDialogType: AppDialogType.error,
+      negativeText: R.strings.close,
+    ).show();
   }
 
   void dialogScreenConfirm() {
-    return AppScreenDialogWidget()
-        .setTitle('Confirm!')
-        .setContent(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore')
-        .setPositiveText(R.strings.confirm)
-        .setAppDialogType(AppDialogType.confirm)
-        .setNegativeText(R.strings.close)
-        .buildDialog(Get.context!)
-        .show();
+    return AppScreenDialogWidget(
+      title: 'Confirm!',
+      content:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+      positiveText: R.strings.confirm,
+      appDialogType: AppDialogType.confirm,
+      negativeText: R.strings.close,
+    ).show();
   }
 }

@@ -16,15 +16,14 @@ class AppTooltipWidget extends StatelessWidget {
       backgroundColor: AppColors.of.neutralColor,
       triggerMode: TooltipTriggerMode.tap,
       content: Padding(
-        padding: EdgeInsets.symmetric(
-            vertical: AppThemeExt.of.majorScale(2),
-            horizontal: AppThemeExt.of.majorScale(3)),
-        child: AppTextBody1Widget()
-            .setText(message)
-            .setTextStyle(AppTextStyleExt.of.textBody1r
-                ?.copyWith(color: AppColors.of.neutralColor[1]))
-            .build(context),
-      ),
+          padding: EdgeInsets.symmetric(
+              vertical: AppThemeExt.of.majorScale(2),
+              horizontal: AppThemeExt.of.majorScale(3)),
+          child: AppTextBody1Widget(
+            text: message,
+            textStyle: AppTextStyleExt.of.textBody1r
+                ?.copyWith(color: AppColors.of.neutralColor[1]),
+          )),
       child: child,
     );
   }

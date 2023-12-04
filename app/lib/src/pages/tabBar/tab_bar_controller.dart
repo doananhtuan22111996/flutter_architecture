@@ -14,46 +14,52 @@ part 'tab_bar_binding.dart';
 part 'tab_bar_page.dart';
 
 class TabBarController extends GetxController {
-  final List<AppTabOnlyTextWidget> mediumTabs = [
-    AppTabOnlyTextWidget().setLabel('Label 1').setAppTabSize(AppTabSize.medium),
-    AppTabOnlyTextWidget().setLabel('Label 2').setAppTabSize(AppTabSize.medium),
-    AppTabOnlyTextWidget().setLabel('Label 3').setAppTabSize(AppTabSize.medium),
+  final List<AppTabOnlyTextWidget> mediumTabs = const [
+    AppTabOnlyTextWidget(label: 'Label 1', appTabSize: AppTabSize.medium),
+    AppTabOnlyTextWidget(label: 'Label 2', appTabSize: AppTabSize.medium),
+    AppTabOnlyTextWidget(label: 'Label 3', appTabSize: AppTabSize.medium),
   ];
-  final List<AppTabOnlyTextWidget> largeTabs = [
-    AppTabOnlyTextWidget().setLabel('Label 1').setAppTabSize(AppTabSize.large),
-    AppTabOnlyTextWidget().setLabel('Label 2').setAppTabSize(AppTabSize.large),
-    AppTabOnlyTextWidget().setLabel('Label 3').setAppTabSize(AppTabSize.large),
+  final List<AppTabOnlyTextWidget> largeTabs = const [
+    AppTabOnlyTextWidget(label: 'Label 1', appTabSize: AppTabSize.large),
+    AppTabOnlyTextWidget(label: 'Label 2', appTabSize: AppTabSize.large),
+    AppTabOnlyTextWidget(label: 'Label 3', appTabSize: AppTabSize.large),
   ];
   final List<AppTabWithIconWidget> iconTabs = [
-    AppTabWithIconWidget()
-        .setLabel('Label 1')
-        .setIconSelected(R.svgs.filled.tab.bulb.svg())
-        .setIconUnselected(R.svgs.outline.tab.bulb.svg())
-        .setAppTabSize(AppTabSize.large),
-    AppTabWithIconWidget()
-        .setLabel('Label 2')
-        .setIconSelected(R.svgs.filled.tab.bulb.svg())
-        .setIconUnselected(R.svgs.outline.tab.bulb.svg())
-        .setAppTabSize(AppTabSize.large),
-    AppTabWithIconWidget()
-        .setLabel('Label 3')
-        .setIconSelected(R.svgs.filled.tab.bulb.svg())
-        .setIconUnselected(R.svgs.outline.tab.bulb.svg())
-        .setAppTabSize(AppTabSize.large),
+    AppTabWithIconWidget(
+      label: 'Label 1',
+      iconSelected: R.svgs.filled.tab.bulb.svg(),
+      iconUnselected: R.svgs.outline.tab.bulb.svg(),
+      appTabSize: AppTabSize.large,
+    ),
+    AppTabWithIconWidget(
+      label: 'Label 2',
+      iconSelected: R.svgs.filled.tab.bulb.svg(),
+      iconUnselected: R.svgs.outline.tab.bulb.svg(),
+      appTabSize: AppTabSize.large,
+    ),
+    AppTabWithIconWidget(
+      label: 'Label 3',
+      iconUnselected: R.svgs.outline.tab.bulb.svg(),
+      iconSelected: R.svgs.filled.tab.bulb.svg(),
+      appTabSize: AppTabSize.large,
+    ),
   ];
-  final List<AppTabWithNumberWidget> numberTabs = [
-    AppTabWithNumberWidget()
-        .setLabel('Label 1')
-        .setNumber(10)
-        .setAppTabSize(AppTabSize.large),
-    AppTabWithNumberWidget()
-        .setLabel('Label 2')
-        .setNumber(20)
-        .setAppTabSize(AppTabSize.large),
-    AppTabWithNumberWidget()
-        .setLabel('Label 3')
-        .setNumber(40)
-        .setAppTabSize(AppTabSize.large),
+  final List<AppTabWithNumberWidget> numberTabs = const [
+    AppTabWithNumberWidget(
+      label: 'Label 1',
+      number: 10,
+      appTabSize: AppTabSize.large,
+    ),
+    AppTabWithNumberWidget(
+      label: 'Label 2',
+      number: 20,
+      appTabSize: AppTabSize.large,
+    ),
+    AppTabWithNumberWidget(
+      label: 'Label 3',
+      number: 40,
+      appTabSize: AppTabSize.large,
+    ),
   ];
   RxInt mediumIndex = 0.obs;
   RxInt largeIndex = 0.obs;

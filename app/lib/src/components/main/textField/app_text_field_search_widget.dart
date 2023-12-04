@@ -1,17 +1,30 @@
 part of 'app_text_field_base_builder.dart';
 
-class AppTextFieldSearchWidget extends AppTextFieldWidget {
-  AppTextFieldSearchWidget({this.textNotifier});
+class AppTextFieldSearchWidget extends AppTextFieldBaseBuilder {
+  final ValueNotifier<String?>? textNotifier = ValueNotifier<String?>(null);
 
-  ValueNotifier<String?>? textNotifier;
+  AppTextFieldSearchWidget({
+    super.key,
+    required super.fieldKey,
+    super.maxLines = 1,
+    super.obscureText = true,
+    super.appTextFieldSize = AppTextFieldSize.medium,
+    super.hintText,
+    super.isDisabled,
+    super.onChanged,
+    super.textInputAction,
+    super.onFieldSubmitted,
+    super.validator,
+    super.suffixIcon,
+    super.maxLength,
+    super.inputFormatters,
+    super.keyboardType,
+  });
+
   final ValueNotifier<String?> _errorNotifier = ValueNotifier<String?>(null);
 
   @override
   Widget build(BuildContext context) {
-    textNotifier ??= ValueNotifier<String?>(null);
-    if (_appTextFieldSize == null) {
-      setAppTextFieldSize(AppTextFieldSize.medium);
-    }
     return _buildMain(
       prefixIcon: ValueListenableBuilder<String?>(
         valueListenable: _errorNotifier,
@@ -21,7 +34,7 @@ class AppTextFieldSearchWidget extends AppTextFieldWidget {
               colorFilter: ColorFilter.mode(_prefixColor!, BlendMode.srcIn)),
         ),
       ),
-      suffixIcon: _isDisabled == true || textNotifier == null
+      suffixIcon: isDisabled == true || textNotifier == null
           ? null
           : ValueListenableBuilder<String?>(
               valueListenable: textNotifier!,
@@ -37,15 +50,15 @@ class AppTextFieldSearchWidget extends AppTextFieldWidget {
     );
   }
 
-  Color? get _prefixColor => _isDisabled == true
+  Color? get _prefixColor => isDisabled == true
       ? AppColors.of.neutralColor[5]
       : _errorNotifier.value?.isNotEmpty == true
           ? AppColors.of.errorColor
           : AppColors.of.neutralColor;
 
-  EdgeInsets get _prefixPadding => _appTextFieldSize == AppTextFieldSize.large
+  EdgeInsets get _prefixPadding => appTextFieldSize == AppTextFieldSize.large
       ? EdgeInsets.all(AppThemeExt.of.majorScale(4))
-      : _appTextFieldSize == AppTextFieldSize.medium
+      : appTextFieldSize == AppTextFieldSize.medium
           ? EdgeInsets.all(AppThemeExt.of.majorScale(3))
           : EdgeInsets.all(AppThemeExt.of.majorScale(2));
 }

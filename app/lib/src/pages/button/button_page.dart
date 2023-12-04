@@ -9,11 +9,9 @@ class ButtonPage extends GetView<ButtonController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget()
-        .setAppBar(
-            AppBarWidget().setHeaderPage(R.strings.button).build(context))
-        .setBody(_body(context))
-        .build(context);
+    return AppMainPageWidget(
+        appBar: AppBarWidget(headerPage: R.strings.button).build(context),
+        body: _body(context));
   }
 
   Widget _body(BuildContext context) {
@@ -64,44 +62,44 @@ class ButtonPage extends GetView<ButtonController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Filled Button').build(context),
+        const AppTextBody1Widget(text: 'Filled Button'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonSize(AppButtonSize.large)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppFilledButtonWidget(
+          buttonText: R.strings.button,
+          appButtonSize: AppButtonSize.large,
+          onPressed: () => controller.toast(),
+        ).build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonSize(AppButtonSize.medium)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppFilledButtonWidget(
+          buttonText: R.strings.button,
+          appButtonSize: AppButtonSize.medium,
+          onPressed: () => controller.toast(),
+        ).build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonSize(AppButtonSize.small)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppFilledButtonWidget(
+          buttonText: R.strings.button,
+          appButtonSize: AppButtonSize.small,
+          onPressed: () => controller.toast(),
+        ).build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget()
-            .setButtonText(R.strings.button)
-            .setIsDisabled(true)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppFilledButtonWidget(
+          buttonText: R.strings.button,
+          isDisabled: true,
+          onPressed: () => controller.toast(),
+        ).build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget()
-            .setButtonText(R.strings.button)
-            .setPrefixIcon(const Icon(Icons.close))
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppFilledButtonWidget(
+          buttonText: R.strings.button,
+          prefixIcon: const Icon(Icons.close),
+          onPressed: () => controller.toast(),
+        ).build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget()
-            .setButtonText(R.strings.button)
-            .setIsDisabled(true)
-            .setPrefixIcon(const Icon(Icons.close))
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppFilledButtonWidget(
+          buttonText: R.strings.button,
+          isDisabled: true,
+          prefixIcon: const Icon(Icons.close),
+          onPressed: () => controller.toast(),
+        ).build(context),
       ],
     );
   }
@@ -110,44 +108,44 @@ class ButtonPage extends GetView<ButtonController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Outlined Button').build(context),
+        const AppTextBody1Widget(text: 'Outlined Button'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonSize(AppButtonSize.large)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppOutlinedButtonWidget(
+          buttonText: R.strings.button,
+          appButtonSize: AppButtonSize.large,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonSize(AppButtonSize.medium)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppOutlinedButtonWidget(
+          buttonText: R.strings.button,
+          appButtonSize: AppButtonSize.medium,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonSize(AppButtonSize.small)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppOutlinedButtonWidget(
+          buttonText: R.strings.button,
+          appButtonSize: AppButtonSize.small,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget()
-            .setButtonText(R.strings.button)
-            .setIsDisabled(true)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppOutlinedButtonWidget(
+          buttonText: R.strings.button,
+          isDisabled: true,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget()
-            .setButtonText(R.strings.button)
-            .setPrefixIcon(const Icon(Icons.close))
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppOutlinedButtonWidget(
+          buttonText: R.strings.button,
+          prefixIcon: const Icon(Icons.close),
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget()
-            .setButtonText(R.strings.button)
-            .setIsDisabled(true)
-            .setPrefixIcon(const Icon(Icons.close))
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppOutlinedButtonWidget(
+          buttonText: R.strings.button,
+          isDisabled: true,
+          prefixIcon: const Icon(Icons.close),
+          onPressed: () => controller.toast(),
+        ),
       ],
     );
   }
@@ -156,43 +154,43 @@ class ButtonPage extends GetView<ButtonController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Text Button').build(context),
+        const AppTextBody1Widget(text: 'Text Button'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonSize(AppButtonSize.large)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppTextButtonWidget(
+          buttonText: R.strings.button,
+          appButtonSize: AppButtonSize.large,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonSize(AppButtonSize.medium)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppTextButtonWidget(
+          buttonText: R.strings.button,
+          appButtonSize: AppButtonSize.medium,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonSize(AppButtonSize.small)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppTextButtonWidget(
+          buttonText: R.strings.button,
+          appButtonSize: AppButtonSize.small,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextButtonWidget()
-            .setButtonText(R.strings.button)
-            .setIsDisabled(true)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppTextButtonWidget(
+          buttonText: R.strings.button,
+          isDisabled: true,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextButtonWidget()
-            .setButtonText(R.strings.button)
-            .setPrefixIcon(const Icon(Icons.close))
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppTextButtonWidget(
+          buttonText: R.strings.button,
+          prefixIcon: const Icon(Icons.close),
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextButtonWidget()
-            .setButtonText(R.strings.button)
-            .setTextStyle(AppTextStyleExt.of.textBody1rUnderline)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppTextButtonWidget(
+          buttonText: R.strings.button,
+          textStyle: AppTextStyleExt.of.textBody1rUnderline,
+          onPressed: () => controller.toast(),
+        ),
       ],
     );
   }
@@ -201,7 +199,7 @@ class ButtonPage extends GetView<ButtonController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Circle Button').build(context),
+        const AppTextBody1Widget(text: 'Circle Button'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,92 +207,87 @@ class ButtonPage extends GetView<ButtonController> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppFilledButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.circle)
-                    .setAppButtonSize(AppButtonSize.large)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppFilledButtonWidget(
+                  buttonText: 'A',
+                  appButtonType: AppButtonType.circle,
+                  appButtonSize: AppButtonSize.large,
+                  onPressed: () => controller.toast(),
+                ).build(context),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.circle)
-                    .setAppButtonSize(AppButtonSize.medium)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppFilledButtonWidget(
+                    buttonText: 'A',
+                    appButtonType: AppButtonType.circle,
+                    appButtonSize: AppButtonSize.medium,
+                    onPressed: () => controller.toast()).build(context),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.circle)
-                    .setAppButtonSize(AppButtonSize.small)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppFilledButtonWidget(
+                    buttonText: 'A',
+                    appButtonType: AppButtonType.circle,
+                    appButtonSize: AppButtonSize.small,
+                    onPressed: () => controller.toast()).build(context),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.circle)
-                    .setIsDisabled(true)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppFilledButtonWidget(
+                    buttonText: 'A',
+                    appButtonType: AppButtonType.circle,
+                    isDisabled: true,
+                    onPressed: () => controller.toast()).build(context),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setAppButtonType(AppButtonType.circle)
-                    .setPrefixIcon(const Icon(Icons.close))
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppFilledButtonWidget(
+                    appButtonType: AppButtonType.circle,
+                    prefixIcon: const Icon(Icons.close),
+                    onPressed: () => controller.toast()).build(context),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setAppButtonType(AppButtonType.circle)
-                    .setIsDisabled(true)
-                    .setPrefixIcon(const Icon(Icons.close))
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppFilledButtonWidget(
+                    appButtonType: AppButtonType.circle,
+                    prefixIcon: const Icon(Icons.close),
+                    isDisabled: true,
+                    onPressed: () => controller.toast()).build(context),
               ],
             ),
             SizedBox(width: AppThemeExt.of.majorScale(2)),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppOutlinedButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.circle)
-                    .setAppButtonSize(AppButtonSize.large)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppOutlinedButtonWidget(
+                  buttonText: 'A',
+                  appButtonType: AppButtonType.circle,
+                  appButtonSize: AppButtonSize.large,
+                  onPressed: () => controller.toast(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppOutlinedButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.circle)
-                    .setAppButtonSize(AppButtonSize.medium)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppOutlinedButtonWidget(
+                  buttonText: 'A',
+                  appButtonType: AppButtonType.circle,
+                  appButtonSize: AppButtonSize.medium,
+                  onPressed: () => controller.toast(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppOutlinedButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.circle)
-                    .setAppButtonSize(AppButtonSize.small)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppOutlinedButtonWidget(
+                  buttonText: 'A',
+                  appButtonType: AppButtonType.circle,
+                  appButtonSize: AppButtonSize.small,
+                  onPressed: () => controller.toast(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppOutlinedButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.circle)
-                    .setIsDisabled(true)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppOutlinedButtonWidget(
+                  buttonText: 'A',
+                  appButtonType: AppButtonType.circle,
+                  isDisabled: true,
+                  onPressed: () => controller.toast(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppOutlinedButtonWidget()
-                    .setAppButtonType(AppButtonType.circle)
-                    .setPrefixIcon(const Icon(Icons.close))
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppOutlinedButtonWidget(
+                  appButtonType: AppButtonType.circle,
+                  prefixIcon: const Icon(Icons.close),
+                  onPressed: () => controller.toast(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppOutlinedButtonWidget()
-                    .setAppButtonType(AppButtonType.circle)
-                    .setPrefixIcon(const Icon(Icons.close))
-                    .setIsDisabled(true)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppOutlinedButtonWidget(
+                  appButtonType: AppButtonType.circle,
+                  prefixIcon: const Icon(Icons.close),
+                  isDisabled: true,
+                  onPressed: () => controller.toast(),
+                ),
               ],
             )
           ],
@@ -307,7 +300,7 @@ class ButtonPage extends GetView<ButtonController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Square Button').build(context),
+        const AppTextBody1Widget(text: 'Square Button'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -315,92 +308,92 @@ class ButtonPage extends GetView<ButtonController> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppFilledButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.square)
-                    .setAppButtonSize(AppButtonSize.large)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppFilledButtonWidget(
+                  buttonText: 'A',
+                  appButtonType: AppButtonType.square,
+                  appButtonSize: AppButtonSize.large,
+                  onPressed: () => controller.toast(),
+                ).build(context),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.square)
-                    .setAppButtonSize(AppButtonSize.medium)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppFilledButtonWidget(
+                  buttonText: 'A',
+                  appButtonType: AppButtonType.square,
+                  appButtonSize: AppButtonSize.medium,
+                  onPressed: () => controller.toast(),
+                ).build(context),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.square)
-                    .setAppButtonSize(AppButtonSize.small)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppFilledButtonWidget(
+                  buttonText: 'A',
+                  appButtonType: AppButtonType.square,
+                  appButtonSize: AppButtonSize.small,
+                  onPressed: () => controller.toast(),
+                ).build(context),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.square)
-                    .setIsDisabled(true)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppFilledButtonWidget(
+                  buttonText: 'A',
+                  appButtonType: AppButtonType.square,
+                  isDisabled: true,
+                  onPressed: () => controller.toast(),
+                ).build(context),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setAppButtonType(AppButtonType.square)
-                    .setPrefixIcon(const Icon(Icons.close))
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppFilledButtonWidget(
+                  appButtonType: AppButtonType.square,
+                  prefixIcon: const Icon(Icons.close),
+                  onPressed: () => controller.toast(),
+                ).build(context),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget()
-                    .setAppButtonType(AppButtonType.square)
-                    .setIsDisabled(true)
-                    .setPrefixIcon(const Icon(Icons.close))
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppFilledButtonWidget(
+                  appButtonType: AppButtonType.square,
+                  prefixIcon: const Icon(Icons.close),
+                  isDisabled: true,
+                  onPressed: () => controller.toast(),
+                ).build(context),
               ],
             ),
             SizedBox(width: AppThemeExt.of.majorScale(2)),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppOutlinedButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.square)
-                    .setAppButtonSize(AppButtonSize.large)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppOutlinedButtonWidget(
+                  buttonText: 'A',
+                  appButtonType: AppButtonType.square,
+                  appButtonSize: AppButtonSize.large,
+                  onPressed: () => controller.toast(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppOutlinedButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.square)
-                    .setAppButtonSize(AppButtonSize.medium)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppOutlinedButtonWidget(
+                  buttonText: 'A',
+                  appButtonType: AppButtonType.square,
+                  appButtonSize: AppButtonSize.medium,
+                  onPressed: () => controller.toast(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppOutlinedButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.square)
-                    .setAppButtonSize(AppButtonSize.small)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppOutlinedButtonWidget(
+                  buttonText: 'A',
+                  appButtonType: AppButtonType.square,
+                  appButtonSize: AppButtonSize.small,
+                  onPressed: () => controller.toast(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppOutlinedButtonWidget()
-                    .setButtonText('A')
-                    .setAppButtonType(AppButtonType.square)
-                    .setIsDisabled(true)
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppOutlinedButtonWidget(
+                  buttonText: 'A',
+                  appButtonType: AppButtonType.square,
+                  isDisabled: true,
+                  onPressed: () => controller.toast(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppOutlinedButtonWidget()
-                    .setAppButtonType(AppButtonType.square)
-                    .setPrefixIcon(const Icon(Icons.close))
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppOutlinedButtonWidget(
+                  appButtonType: AppButtonType.square,
+                  prefixIcon: const Icon(Icons.close),
+                  onPressed: () => controller.toast(),
+                ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppOutlinedButtonWidget()
-                    .setAppButtonType(AppButtonType.square)
-                    .setIsDisabled(true)
-                    .setPrefixIcon(const Icon(Icons.close))
-                    .setOnPressed(() => controller.toast())
-                    .build(context),
+                AppOutlinedButtonWidget(
+                  appButtonType: AppButtonType.square,
+                  isDisabled: true,
+                  prefixIcon: const Icon(Icons.close),
+                  onPressed: () => controller.toast(),
+                ),
               ],
             ),
           ],
@@ -413,50 +406,50 @@ class ButtonPage extends GetView<ButtonController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Danger Button').build(context),
+        const AppTextBody1Widget(text: 'Danger Button'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setAppButtonSize(AppButtonSize.large)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppFilledButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          appButtonSize: AppButtonSize.large,
+          onPressed: () => controller.toast(),
+        ).build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setAppButtonSize(AppButtonSize.medium)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppFilledButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          appButtonSize: AppButtonSize.medium,
+          onPressed: () => controller.toast(),
+        ).build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setAppButtonSize(AppButtonSize.small)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppFilledButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          appButtonSize: AppButtonSize.small,
+          onPressed: () => controller.toast(),
+        ).build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setIsDisabled(true)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppFilledButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          isDisabled: true,
+          onPressed: () => controller.toast(),
+        ).build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setPrefixIcon(const Icon(Icons.close))
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppFilledButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          prefixIcon: const Icon(Icons.close),
+          onPressed: () => controller.toast(),
+        ).build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setIsDisabled(true)
-            .setPrefixIcon(const Icon(Icons.close))
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppFilledButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          prefixIcon: const Icon(Icons.close),
+          isDisabled: true,
+          onPressed: () => controller.toast(),
+        ).build(context),
       ],
     );
   }
@@ -465,54 +458,54 @@ class ButtonPage extends GetView<ButtonController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget()
-            .setText('Outlined Danger Button')
-            .setMaxLines(1)
-            .setTextOverFlow(TextOverflow.ellipsis)
-            .build(context),
+        const AppTextBody1Widget(
+          text: 'Outlined Danger Button',
+          maxLines: 1,
+          textOverflow: TextOverflow.ellipsis,
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setAppButtonSize(AppButtonSize.large)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppOutlinedButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          appButtonSize: AppButtonSize.large,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setAppButtonSize(AppButtonSize.medium)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppOutlinedButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          appButtonSize: AppButtonSize.medium,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setAppButtonSize(AppButtonSize.small)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppOutlinedButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          appButtonSize: AppButtonSize.small,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setIsDisabled(true)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppOutlinedButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          isDisabled: true,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setPrefixIcon(const Icon(Icons.close))
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppOutlinedButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          prefixIcon: const Icon(Icons.close),
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setIsDisabled(true)
-            .setPrefixIcon(const Icon(Icons.close))
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppOutlinedButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          isDisabled: true,
+          prefixIcon: const Icon(Icons.close),
+          onPressed: () => controller.toast(),
+        ),
       ],
     );
   }
@@ -521,50 +514,50 @@ class ButtonPage extends GetView<ButtonController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Text Danger Button').build(context),
+        const AppTextBody1Widget(text: 'Text Danger Button'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setAppButtonSize(AppButtonSize.large)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppTextButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          appButtonSize: AppButtonSize.large,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setAppButtonSize(AppButtonSize.medium)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppTextButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          appButtonSize: AppButtonSize.medium,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setAppButtonSize(AppButtonSize.small)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppTextButtonWidget(
+          buttonText: R.strings.button,
+          appButtonSize: AppButtonSize.small,
+          appButtonType: AppButtonType.danger,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setIsDisabled(true)
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppTextButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          isDisabled: true,
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setPrefixIcon(const Icon(Icons.close))
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppTextButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          prefixIcon: const Icon(Icons.close),
+          onPressed: () => controller.toast(),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextButtonWidget()
-            .setButtonText(R.strings.button)
-            .setAppButtonType(AppButtonType.danger)
-            .setIsDisabled(true)
-            .setPrefixIcon(const Icon(Icons.close))
-            .setOnPressed(() => controller.toast())
-            .build(context),
+        AppTextButtonWidget(
+          buttonText: R.strings.button,
+          appButtonType: AppButtonType.danger,
+          isDisabled: true,
+          prefixIcon: const Icon(Icons.close),
+          onPressed: () => controller.toast(),
+        ),
       ],
     );
   }

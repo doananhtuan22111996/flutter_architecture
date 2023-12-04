@@ -57,7 +57,7 @@ void main(List<String>? args) async {
 
   if (runBuild.contains('build')) {
     print('command for build --> fvm flutter ${arguments.join(' ')}');
-    var process = await Process.start(
+    final process = await Process.start(
       'bash',
       ['-c', 'fvm flutter ${arguments.join(' ')}'],
       workingDirectory: './app',
@@ -68,6 +68,10 @@ void main(List<String>? args) async {
     process.stderr.transform(utf8.decoder).listen((data) {
       print(data);
     });
+    final exitCode = await process.exitCode;
+    if (exitCode != 0) {
+      throw Exception('Script failed with exit code: $exitCode') ;
+    }
   } else {
     print('command for run --> fvm flutter ${arguments.join(' ')}');
   }

@@ -9,11 +9,12 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget()
-        .setAppBar(
-            AppBarWidget().setHeaderPage(R.strings.homeView).build(context))
-        .setBody(_body(context))
-        .build(context);
+    return AppMainPageWidget(
+      appBar: AppBarWidget(
+        headerPage: R.strings.homeView,
+      ).build(context),
+      body: _body(context),
+    );
   }
 
   Widget _body(BuildContext context) {

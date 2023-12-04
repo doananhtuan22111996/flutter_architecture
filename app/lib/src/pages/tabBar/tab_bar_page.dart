@@ -9,10 +9,10 @@ class TabBarPage extends GetView<TabBarController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget()
-        .setAppBar(AppBarWidget().setHeaderPage('Tab Bar').build(context))
-        .setBody(_body(context))
-        .build(context);
+    return AppMainPageWidget(
+      appBar: const AppBarWidget(headerPage: 'Tab Bar').build(context),
+      body: _body(context),
+    );
   }
 
   Widget _body(BuildContext context) {
@@ -33,7 +33,7 @@ class TabBarPage extends GetView<TabBarController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Text Only Medium').build(context),
+        const AppTextBody1Widget(text: 'Text Only Medium'),
         Obx(
           () => AppTabBarWidget(
             tabs: controller.mediumTabs,
@@ -49,7 +49,7 @@ class TabBarPage extends GetView<TabBarController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Text Only Large').build(context),
+        const AppTextBody1Widget(text: 'Text Only Large'),
         Obx(
           () => AppTabBarWidget(
             tabs: controller.largeTabs,
@@ -65,7 +65,7 @@ class TabBarPage extends GetView<TabBarController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('With Icon Large').build(context),
+        const AppTextBody1Widget(text: 'With Icon Large'),
         Obx(
           () => AppTabBarWidget(
             tabs: controller.iconTabs,
@@ -81,7 +81,7 @@ class TabBarPage extends GetView<TabBarController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('With Number Large').build(context),
+        const AppTextBody1Widget(text: 'With Number Large'),
         Obx(
           () => AppTabBarWidget(
             tabs: controller.numberTabs,

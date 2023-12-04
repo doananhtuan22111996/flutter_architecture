@@ -9,11 +9,12 @@ class DatePickerPage extends GetView<DatePickerController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget()
-        .setAppBar(
-            AppBarWidget().setHeaderPage(R.strings.datePicker).build(context))
-        .setBody(_body(context))
-        .build(context);
+    return AppMainPageWidget(
+      appBar: AppBarWidget(
+        headerPage: R.strings.datePicker,
+      ).build(context),
+      body: _body(context),
+    );
   }
 
   Widget _body(BuildContext context) {
@@ -45,48 +46,47 @@ class DatePickerPage extends GetView<DatePickerController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppTextBody1Widget().setText('Date Picker').build(context),
+          const AppTextBody1Widget(text: 'Date Picker'),
           SizedBox(height: AppThemeExt.of.majorScale(2)),
-          AppDatePickerWidget()
-              .setAppDatePickerSize(AppDatePickerSize.small)
-              .setFieldKey('datePicker1')
-              .setOnDatePicked((datePicker) => controller.toastDate(datePicker))
-              .build(context),
+          AppDatePickerWidget(
+            fieldKey: 'datePicker1',
+            appDatePickerSize: AppDatePickerSize.small,
+            onDatePicked: (datePicker) => controller.toastDate(datePicker),
+          ),
           Padding(
             padding:
                 EdgeInsets.symmetric(vertical: AppThemeExt.of.majorScale(2)),
-            child: AppDatePickerWidget()
-                .setAppDatePickerSize(AppDatePickerSize.medium)
-                .setFieldKey('datePicker2')
-                .setOnDatePicked(
-                    (datePicker) => controller.toastDate(datePicker))
-                .build(context),
+            child: AppDatePickerWidget(
+              fieldKey: 'datePicker2',
+              appDatePickerSize: AppDatePickerSize.medium,
+              onDatePicked: (datePicker) => controller.toastDate(datePicker),
+            ),
           ),
-          AppDatePickerWidget()
-              .setAppDatePickerSize(AppDatePickerSize.large)
-              .setFieldKey('datePicker3')
-              .setOnDatePicked((datePicker) => controller.toastDate(datePicker))
-              .build(context),
+          AppDatePickerWidget(
+            fieldKey: 'datePicker3',
+            appDatePickerSize: AppDatePickerSize.large,
+            onDatePicked: (datePicker) => controller.toastDate(datePicker),
+          ),
           SizedBox(height: AppThemeExt.of.majorScale(2)),
-          AppDatePickerWidget()
-              .setAppDatePickerSize(AppDatePickerSize.small)
-              .setFieldKey('datePicker4')
-              .setIsDisabled(true)
-              .build(context),
+          AppDatePickerWidget(
+            fieldKey: 'datePicker4',
+            appDatePickerSize: AppDatePickerSize.small,
+            isDisabled: true,
+          ),
           Padding(
             padding:
                 EdgeInsets.symmetric(vertical: AppThemeExt.of.majorScale(2)),
-            child: AppDatePickerWidget()
-                .setAppDatePickerSize(AppDatePickerSize.medium)
-                .setFieldKey('datePicker5')
-                .setIsDisabled(true)
-                .build(context),
+            child: AppDatePickerWidget(
+              fieldKey: 'datePicker5',
+              appDatePickerSize: AppDatePickerSize.medium,
+              isDisabled: true,
+            ),
           ),
-          AppDatePickerWidget()
-              .setAppDatePickerSize(AppDatePickerSize.large)
-              .setFieldKey('datePicker6')
-              .setIsDisabled(true)
-              .build(context),
+          AppDatePickerWidget(
+            fieldKey: 'datePicker6',
+            appDatePickerSize: AppDatePickerSize.large,
+            isDisabled: true,
+          ),
         ],
       ),
     );
@@ -96,54 +96,54 @@ class DatePickerPage extends GetView<DatePickerController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Date Picker').build(context),
+        const AppTextBody1Widget(text: 'Date Picker'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppDateRangePickerWidget()
-            .setAppDatePickerSize(AppDatePickerSize.small)
-            .setFieldKey('dateRangePicker1')
-            .setOnDateRangePicked(
-                (dateRangePicker) => controller.toastDateRange(dateRangePicker))
-            .build(context),
+        AppDateRangePickerWidget(
+          fieldKey: 'dateRangePicker1',
+          appDatePickerSize: AppDatePickerSize.small,
+          onDateRangePicked: (dateRangePicker) =>
+              controller.toastDateRange(dateRangePicker),
+        ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: AppThemeExt.of.majorScale(2)),
-          child: AppDateRangePickerWidget()
-              .setAppDatePickerSize(AppDatePickerSize.medium)
-              .setFieldKey('dateRangePicker2')
-              .setOnDateRangePicked((dateRangePicker) =>
-                  controller.toastDateRange(dateRangePicker))
-              .build(context),
+          child: AppDateRangePickerWidget(
+            fieldKey: 'dateRangePicker2',
+            appDatePickerSize: AppDatePickerSize.medium,
+            onDateRangePicked: (dateRangePicker) =>
+                controller.toastDateRange(dateRangePicker),
+          ),
         ),
-        AppDateRangePickerWidget()
-            .setAppDatePickerSize(AppDatePickerSize.large)
-            .setFieldKey('dateRangePicker3')
-            .setOnDateRangePicked(
-                (dateRangePicker) => controller.toastDateRange(dateRangePicker))
-            .build(context),
+        AppDateRangePickerWidget(
+          fieldKey: 'dateRangePicker3',
+          appDatePickerSize: AppDatePickerSize.large,
+          onDateRangePicked: (dateRangePicker) =>
+              controller.toastDateRange(dateRangePicker),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppDateRangePickerWidget()
-            .setAppDatePickerSize(AppDatePickerSize.small)
-            .setFieldKey('dateRangePicker4')
-            .setInitialDateRange(DateTimeRange(
-                start: DateTime.now(), end: DateTime.now().addExt(5)))
-            .setIsDisabled(true)
-            .build(context),
+        AppDateRangePickerWidget(
+          fieldKey: 'dateRangePicker4',
+          appDatePickerSize: AppDatePickerSize.small,
+          initialDateRange: DateTimeRange(
+              start: DateTime.now(), end: DateTime.now().addExt(5)),
+          isDisabled: true,
+        ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: AppThemeExt.of.majorScale(2)),
-          child: AppDateRangePickerWidget()
-              .setAppDatePickerSize(AppDatePickerSize.medium)
-              .setFieldKey('dateRangePicker5')
-              .setInitialDateRange(DateTimeRange(
-                  start: DateTime.now(), end: DateTime.now().addExt(5)))
-              .setIsDisabled(true)
-              .build(context),
+          child: AppDateRangePickerWidget(
+            fieldKey: 'dateRangePicker5',
+            appDatePickerSize: AppDatePickerSize.medium,
+            initialDateRange: DateTimeRange(
+                start: DateTime.now(), end: DateTime.now().addExt(5)),
+            isDisabled: true,
+          ),
         ),
-        AppDateRangePickerWidget()
-            .setAppDatePickerSize(AppDatePickerSize.large)
-            .setFieldKey('dateRangePicker6')
-            .setInitialDateRange(DateTimeRange(
-                start: DateTime.now(), end: DateTime.now().addExt(5)))
-            .setIsDisabled(true)
-            .build(context),
+        AppDateRangePickerWidget(
+          fieldKey: 'dateRangePicker6',
+          appDatePickerSize: AppDatePickerSize.large,
+          initialDateRange: DateTimeRange(
+              start: DateTime.now(), end: DateTime.now().addExt(5)),
+          isDisabled: true,
+        ),
       ],
     );
   }
@@ -152,48 +152,46 @@ class DatePickerPage extends GetView<DatePickerController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppTextBody1Widget().setText('Time Picker').build(context),
+        const AppTextBody1Widget(text: 'Time Picker'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTimePickerWidget()
-            .setAppDatePickerSize(AppDatePickerSize.small)
-            .setFieldKey('timePicker1')
-            .setOnTimePicked((timePicked) => controller.toastTime(timePicked))
-            .build(context),
+        AppTimePickerWidget(
+          fieldKey: 'timePicker1',
+          appDatePickerSize: AppDatePickerSize.small,
+          onTimePicked: (timePicker) => controller.toastTime(timePicker),
+        ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: AppThemeExt.of.majorScale(2)),
-          child: AppTimePickerWidget()
-              .setAppDatePickerSize(AppDatePickerSize.medium)
-              .setFieldKey('timePicker2')
-              .setOnTimePicked((timePicked) => controller.toastTime(timePicked))
-              .build(context),
+          child: AppTimePickerWidget(
+            fieldKey: 'timePicker2',
+            appDatePickerSize: AppDatePickerSize.medium,
+            onTimePicked: (timePicker) => controller.toastTime(timePicker),
+          ),
         ),
-        AppTimePickerWidget()
-            .setAppDatePickerSize(AppDatePickerSize.large)
-            .setFieldKey('timePicker3')
-            .setOnTimePicked((timePicked) => controller.toastTime(timePicked))
-            .build(context),
+        AppTimePickerWidget(
+          fieldKey: 'timePicker3',
+          appDatePickerSize: AppDatePickerSize.large,
+          onTimePicked: (timePicker) => controller.toastTime(timePicker),
+        ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTimePickerWidget()
-            .setAppDatePickerSize(AppDatePickerSize.small)
-            .setFieldKey('timePicker4')
-            .setInitialTime(TimeOfDay.now())
-            .setIsDisabled(true)
-            .build(context),
+        AppTimePickerWidget(
+            fieldKey: 'timePicker4',
+            appDatePickerSize: AppDatePickerSize.small,
+            initialTime: TimeOfDay.now(),
+            isDisabled: true),
         Padding(
           padding: EdgeInsets.symmetric(vertical: AppThemeExt.of.majorScale(2)),
-          child: AppTimePickerWidget()
-              .setAppDatePickerSize(AppDatePickerSize.medium)
-              .setFieldKey('timePicker5')
-              .setInitialTime(TimeOfDay.now())
-              .setIsDisabled(true)
-              .build(context),
+          child: AppTimePickerWidget(
+            fieldKey: 'timePicker5',
+            appDatePickerSize: AppDatePickerSize.medium,
+            initialTime: TimeOfDay.now(),
+            isDisabled: true,
+          ),
         ),
-        AppTimePickerWidget()
-            .setAppDatePickerSize(AppDatePickerSize.large)
-            .setFieldKey('timePicker6')
-            .setInitialTime(TimeOfDay.now())
-            .setIsDisabled(true)
-            .build(context),
+        AppTimePickerWidget(
+            fieldKey: 'timePicker6',
+            appDatePickerSize: AppDatePickerSize.large,
+            initialTime: TimeOfDay.now(),
+            isDisabled: true),
       ],
     );
   }
