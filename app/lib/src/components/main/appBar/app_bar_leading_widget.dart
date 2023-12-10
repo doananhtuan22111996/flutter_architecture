@@ -6,10 +6,20 @@ class AppBarLeadingWidget extends AppBarBaseBuilder {
     super.actions,
     super.backgroundColor,
     super.bottom,
-    super.centerTitle,
     super.headerPage,
     super.leading,
-  });
+  }) : _centerTitle = false;
+
+  const AppBarLeadingWidget.centerTitle({
+    super.key,
+    super.actions,
+    super.backgroundColor,
+    super.bottom,
+    super.headerPage,
+    super.leading,
+  }) : _centerTitle = true;
+
+  final bool _centerTitle;
 
   @override
   PreferredSizeWidget build(BuildContext context) {
@@ -20,7 +30,7 @@ class AppBarLeadingWidget extends AppBarBaseBuilder {
             onPressed: () => Get.back(),
           ),
       title: AppTextHeading5Widget(text: headerPage),
-      centerTitle: centerTitle,
+      centerTitle: _centerTitle,
       actions: actions,
       backgroundColor: backgroundColor ?? AppColors.of.neutralColor[1],
       bottom: bottom,

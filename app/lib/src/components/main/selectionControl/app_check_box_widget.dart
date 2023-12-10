@@ -5,7 +5,15 @@ class AppCheckBoxWidget extends AppSelectionControlBaseBuilder {
     super.key,
     required super.fieldKey,
     required super.value,
-    super.label,
+    required super.label,
+    super.onValueChanged,
+    super.isDisabled,
+  });
+
+  const AppCheckBoxWidget.noLabel({
+    super.key,
+    required super.fieldKey,
+    required super.value,
     super.onValueChanged,
     super.isDisabled,
   });

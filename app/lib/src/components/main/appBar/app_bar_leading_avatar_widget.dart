@@ -5,10 +5,21 @@ class AppBarLeadingAvatarWidget extends AppBarBaseBuilder {
     super.key,
     super.actions,
     super.backgroundColor,
-    super.centerTitle,
     super.headerPage,
     super.leading,
-  });
+    super.bottom,
+  }) : _centerTitle = false;
+
+  const AppBarLeadingAvatarWidget.centerTitle({
+    super.key,
+    super.actions,
+    super.backgroundColor,
+    super.headerPage,
+    super.leading,
+    super.bottom,
+  }) : _centerTitle = true;
+
+  final bool _centerTitle;
 
   @override
   PreferredSizeWidget build(BuildContext context) {
@@ -27,8 +38,9 @@ class AppBarLeadingAvatarWidget extends AppBarBaseBuilder {
           Flexible(child: AppTextHeading5Widget(text: headerPage)),
         ],
       ),
-      centerTitle: centerTitle,
-      actions: actions ?? [const AppButtonAppBarWidget()],
+      centerTitle: _centerTitle,
+      actions: actions ??
+          [const AppButtonAppBarWidget(prefixIcon: Icon(Icons.more_horiz))],
       backgroundColor: backgroundColor ?? AppColors.of.neutralColor[1],
       bottom: bottom,
     );

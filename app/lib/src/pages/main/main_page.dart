@@ -12,15 +12,17 @@ class MainPage extends GetView<MainController> {
   }
 
   Widget _body(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppThemeExt.of.majorScale(4)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _ui(context),
-          _data(context),
-          _theme(context),
-        ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: AppThemeExt.of.majorScale(4)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _ui(context),
+            _data(context),
+            _theme(context),
+          ],
+        ),
       ),
     );
   }

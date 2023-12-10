@@ -5,8 +5,17 @@ class AppBasicRadioWidget<T> extends AppSelectionControlBaseBuilder<T> {
     super.key,
     required super.fieldKey,
     required super.value,
+    required super.label,
     super.radioGroupValue,
-    super.label,
+    super.onValueChanged,
+    super.isDisabled,
+  });
+
+  const AppBasicRadioWidget.noLabel({
+    super.key,
+    required super.fieldKey,
+    required super.value,
+    super.radioGroupValue,
     super.onValueChanged,
     super.isDisabled,
   });

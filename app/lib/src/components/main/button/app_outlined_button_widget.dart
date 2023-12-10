@@ -3,10 +3,20 @@ part of 'app_button_base_builder.dart';
 class AppOutlinedButtonWidget extends AppButtonBaseBuilder {
   const AppOutlinedButtonWidget({
     super.key,
+    required super.buttonText,
+    super.isDisabled,
+    super.onPressed,
+    super.textStyle,
+    super.appButtonSize,
+    super.appButtonType,
+  });
+
+  const AppOutlinedButtonWidget.icon({
+    super.key,
+    required super.prefixIcon,
     super.buttonText,
     super.isDisabled,
     super.onPressed,
-    super.prefixIcon,
     super.textStyle,
     super.appButtonSize,
     super.appButtonType,
@@ -14,7 +24,6 @@ class AppOutlinedButtonWidget extends AppButtonBaseBuilder {
 
   @override
   Widget build(BuildContext context) {
-    if (prefixIcon == null && buttonText == null) return const SizedBox();
     if (appButtonType == AppButtonType.circle) {
       return _circle(context);
     }
