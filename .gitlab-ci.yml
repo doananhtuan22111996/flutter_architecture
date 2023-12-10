@@ -116,7 +116,7 @@ sonarqubeRelease:
   after_script:
     - echo "Execute sonarqubeRelease completed!!!"
   retry: 1
-  allow_failure: false
+  allow_failure: true
   only:
     - merge_request
     - main

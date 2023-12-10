@@ -3,19 +3,13 @@ part of 'app_avatar_base_builder.dart';
 class AppAvatarFileWidget extends AppAvatarBaseBuilder {
   const AppAvatarFileWidget({
     super.key,
-    super.file,
+    required super.file,
     super.size,
     super.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (file == null) {
-      return SizedBox(
-        width: size?.value,
-        height: size?.value,
-      );
-    }
     return InkWell(
       onTap: onPressed,
       customBorder: const CircleBorder(),

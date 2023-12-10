@@ -18,8 +18,6 @@ abstract class AppBarBaseBuilder extends StatelessWidget {
   @protected
   final Widget? leading;
   @protected
-  final bool? centerTitle;
-  @protected
   final List<Widget>? actions;
   @protected
   final Color? backgroundColor;
@@ -30,7 +28,6 @@ abstract class AppBarBaseBuilder extends StatelessWidget {
     super.key,
     this.headerPage,
     this.leading,
-    this.centerTitle,
     this.actions,
     this.backgroundColor,
     this.bottom,

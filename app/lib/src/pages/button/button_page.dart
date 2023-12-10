@@ -88,13 +88,13 @@ class ButtonPage extends GetView<ButtonController> {
           onPressed: () => controller.toast(),
         ).build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget(
+        AppFilledButtonWidget.icon(
           buttonText: R.strings.button,
           prefixIcon: const Icon(Icons.close),
           onPressed: () => controller.toast(),
         ).build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget(
+        AppFilledButtonWidget.icon(
           buttonText: R.strings.button,
           isDisabled: true,
           prefixIcon: const Icon(Icons.close),
@@ -134,13 +134,13 @@ class ButtonPage extends GetView<ButtonController> {
           onPressed: () => controller.toast(),
         ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget(
+        AppOutlinedButtonWidget.icon(
           buttonText: R.strings.button,
           prefixIcon: const Icon(Icons.close),
           onPressed: () => controller.toast(),
         ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget(
+        AppOutlinedButtonWidget.icon(
           buttonText: R.strings.button,
           isDisabled: true,
           prefixIcon: const Icon(Icons.close),
@@ -180,7 +180,7 @@ class ButtonPage extends GetView<ButtonController> {
           onPressed: () => controller.toast(),
         ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextButtonWidget(
+        AppTextButtonWidget.icon(
           buttonText: R.strings.button,
           prefixIcon: const Icon(Icons.close),
           onPressed: () => controller.toast(),
@@ -232,12 +232,12 @@ class ButtonPage extends GetView<ButtonController> {
                     isDisabled: true,
                     onPressed: () => controller.toast()).build(context),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget(
+                AppFilledButtonWidget.icon(
                     appButtonType: AppButtonType.circle,
                     prefixIcon: const Icon(Icons.close),
                     onPressed: () => controller.toast()).build(context),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget(
+                AppFilledButtonWidget.icon(
                     appButtonType: AppButtonType.circle,
                     prefixIcon: const Icon(Icons.close),
                     isDisabled: true,
@@ -276,13 +276,13 @@ class ButtonPage extends GetView<ButtonController> {
                   onPressed: () => controller.toast(),
                 ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppOutlinedButtonWidget(
+                AppOutlinedButtonWidget.icon(
                   appButtonType: AppButtonType.circle,
                   prefixIcon: const Icon(Icons.close),
                   onPressed: () => controller.toast(),
                 ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppOutlinedButtonWidget(
+                AppOutlinedButtonWidget.icon(
                   appButtonType: AppButtonType.circle,
                   prefixIcon: const Icon(Icons.close),
                   isDisabled: true,
@@ -336,13 +336,13 @@ class ButtonPage extends GetView<ButtonController> {
                   onPressed: () => controller.toast(),
                 ).build(context),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget(
+                AppFilledButtonWidget.icon(
                   appButtonType: AppButtonType.square,
                   prefixIcon: const Icon(Icons.close),
                   onPressed: () => controller.toast(),
                 ).build(context),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppFilledButtonWidget(
+                AppFilledButtonWidget.icon(
                   appButtonType: AppButtonType.square,
                   prefixIcon: const Icon(Icons.close),
                   isDisabled: true,
@@ -382,13 +382,13 @@ class ButtonPage extends GetView<ButtonController> {
                   onPressed: () => controller.toast(),
                 ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppOutlinedButtonWidget(
+                AppOutlinedButtonWidget.icon(
                   appButtonType: AppButtonType.square,
                   prefixIcon: const Icon(Icons.close),
                   onPressed: () => controller.toast(),
                 ),
                 SizedBox(height: AppThemeExt.of.majorScale(2)),
-                AppOutlinedButtonWidget(
+                AppOutlinedButtonWidget.icon(
                   appButtonType: AppButtonType.square,
                   isDisabled: true,
                   prefixIcon: const Icon(Icons.close),
@@ -436,14 +436,14 @@ class ButtonPage extends GetView<ButtonController> {
           onPressed: () => controller.toast(),
         ).build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget(
+        AppFilledButtonWidget.icon(
           buttonText: R.strings.button,
           appButtonType: AppButtonType.danger,
           prefixIcon: const Icon(Icons.close),
           onPressed: () => controller.toast(),
         ).build(context),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppFilledButtonWidget(
+        AppFilledButtonWidget.icon(
           buttonText: R.strings.button,
           appButtonType: AppButtonType.danger,
           prefixIcon: const Icon(Icons.close),
@@ -492,14 +492,14 @@ class ButtonPage extends GetView<ButtonController> {
           onPressed: () => controller.toast(),
         ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget(
+        AppOutlinedButtonWidget.icon(
           buttonText: R.strings.button,
           appButtonType: AppButtonType.danger,
           prefixIcon: const Icon(Icons.close),
           onPressed: () => controller.toast(),
         ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppOutlinedButtonWidget(
+        AppOutlinedButtonWidget.icon(
           buttonText: R.strings.button,
           appButtonType: AppButtonType.danger,
           isDisabled: true,
@@ -544,14 +544,14 @@ class ButtonPage extends GetView<ButtonController> {
           onPressed: () => controller.toast(),
         ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextButtonWidget(
+        AppTextButtonWidget.icon(
           buttonText: R.strings.button,
           appButtonType: AppButtonType.danger,
           prefixIcon: const Icon(Icons.close),
           onPressed: () => controller.toast(),
         ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        AppTextButtonWidget(
+        AppTextButtonWidget.icon(
           buttonText: R.strings.button,
           appButtonType: AppButtonType.danger,
           isDisabled: true,

@@ -3,10 +3,20 @@ part of 'app_button_base_builder.dart';
 class AppTextButtonWidget extends AppButtonBaseBuilder {
   const AppTextButtonWidget({
     super.key,
-    super.buttonText,
+    required super.buttonText,
     super.isDisabled,
     super.onPressed,
-    super.prefixIcon,
+    super.textStyle,
+    super.appButtonSize,
+    super.appButtonType,
+  });
+
+  const AppTextButtonWidget.icon({
+    super.key,
+    required super.buttonText,
+    required super.prefixIcon,
+    super.isDisabled,
+    super.onPressed,
     super.textStyle,
     super.appButtonSize,
     super.appButtonType,
@@ -14,7 +24,6 @@ class AppTextButtonWidget extends AppButtonBaseBuilder {
 
   @override
   Widget build(BuildContext context) {
-    if (prefixIcon == null && buttonText == null) return const SizedBox();
     return _standard(context);
   }
 

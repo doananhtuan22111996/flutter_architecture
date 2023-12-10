@@ -45,7 +45,7 @@ class HospitalLocalPage extends GetWidget<HospitalLocalController> {
                             textOverflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        AppOutlinedButtonWidget(
+                        AppOutlinedButtonWidget.icon(
                           prefixIcon: const Icon(Icons.close),
                           appButtonType: AppButtonType.circle,
                           onPressed: () => controller.onRequestDeleteAt(

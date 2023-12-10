@@ -1,16 +1,11 @@
 part of 'app_avatar_base_builder.dart';
 
 class AppAvatarSvgWidget extends AppAvatarBaseBuilder {
-  const AppAvatarSvgWidget({super.key, super.svg, super.size, super.onPressed});
+  const AppAvatarSvgWidget(
+      {super.key, required super.svg, super.size, super.onPressed});
 
   @override
   Widget build(BuildContext context) {
-    if (svg == null) {
-      return SizedBox(
-        width: size?.value,
-        height: size?.value,
-      );
-    }
     return InkWell(
       onTap: onPressed,
       customBorder: const CircleBorder(),

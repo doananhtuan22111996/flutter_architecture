@@ -2,17 +2,10 @@ part of 'app_avatar_base_builder.dart';
 
 class AppAvatarTextWidget extends AppAvatarBaseBuilder {
   const AppAvatarTextWidget(
-      {super.key, super.text, super.size, super.onPressed});
+      {super.key, required super.text, super.size, super.onPressed});
 
   @override
   Widget build(BuildContext context) {
-    if (text == null) {
-      return SizedBox(
-        width: size?.value,
-        height: size?.value,
-      );
-    }
-
     Widget textW = AppTextBody2Widget(text: text);
     if (size == AppAvatarSize.small) {
       textW = AppTextBody3Widget(text: text);

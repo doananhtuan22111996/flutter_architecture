@@ -69,9 +69,9 @@ class SelectionControlPage extends GetWidget<SelectionControlController> {
       children: [
         const AppTextHeading4Widget(text: 'Checkbox No Label'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        const AppCheckBoxWidget(fieldKey: 'checkBox4', value: true),
-        const AppCheckBoxWidget(fieldKey: 'checkBox5', value: false),
-        const AppCheckBoxWidget(
+        const AppCheckBoxWidget.noLabel(fieldKey: 'checkBox4', value: true),
+        const AppCheckBoxWidget.noLabel(fieldKey: 'checkBox5', value: false),
+        const AppCheckBoxWidget.noLabel(
           fieldKey: 'checkBox6',
           value: false,
           isDisabled: true,
@@ -108,9 +108,9 @@ class SelectionControlPage extends GetWidget<SelectionControlController> {
       children: [
         const AppTextHeading4Widget(text: 'Radio No Label'),
         SizedBox(height: AppThemeExt.of.majorScale(2)),
-        const AppBasicRadioWidget(fieldKey: 'radio1', value: true),
-        const AppBasicRadioWidget(fieldKey: 'radio2', value: false),
-        const AppBasicRadioWidget(
+        const AppBasicRadioWidget.noLabel(fieldKey: 'radio1', value: true),
+        const AppBasicRadioWidget.noLabel(fieldKey: 'radio2', value: false),
+        const AppBasicRadioWidget.noLabel(
             fieldKey: 'radio3', value: false, isDisabled: true),
       ],
     );
