@@ -1,6 +1,7 @@
 import 'package:app/src/pages/badge/badge_controller.dart';
 import 'package:app/src/pages/home/home_controller.dart';
 import 'package:app/src/pages/tabBar/tab_bar_controller.dart';
+import 'package:app/src/pages/toast/toast_controller.dart';
 import 'package:app/src/pages/tooltip/tooltip_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

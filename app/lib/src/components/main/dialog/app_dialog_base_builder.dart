@@ -20,8 +20,6 @@ enum AppDialogType {
 }
 
 abstract class AppDialogBaseBuilder extends Dialog {
-  // @protected
-  // final Dialog? dialog;
   @protected
   final String? title;
   @protected
@@ -39,7 +37,6 @@ abstract class AppDialogBaseBuilder extends Dialog {
 
   const AppDialogBaseBuilder({
     super.key,
-    // this.dialog,
     this.title,
     this.content,
     this.positiveText,
@@ -49,7 +46,6 @@ abstract class AppDialogBaseBuilder extends Dialog {
     this.onNegative,
   });
 
-  // AppDialogBaseBuilder buildDialog(BuildContext context);
 
   void show() {
     if (Get.isDialogOpen == true) return;

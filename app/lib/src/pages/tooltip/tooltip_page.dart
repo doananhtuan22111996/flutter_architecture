@@ -18,7 +18,7 @@ class TooltipPage extends GetWidget<TooltipController> {
   Widget _body(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(AppThemeExt.of.majorScale(4)),
-      child: AppTooltipWidget(
+      child: const AppTooltipWidget(
         message:
             'This is message a long. Message will show full content when hovering. This is message a long.',
         child: AppOutlinedButtonWidget(

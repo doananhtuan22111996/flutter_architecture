@@ -66,6 +66,11 @@ class MainPage extends GetView<MainController> {
                   buttonText: 'Badge',
                   onPressed: () => BadgePage.open(),
                 ),
+                SizedBox(height: AppThemeExt.of.majorScale(2)),
+                AppFilledButtonWidget(
+                  buttonText: 'Toast',
+                  onPressed: () => ToastPage.open(),
+                ),
               ],
             ),
             Column(

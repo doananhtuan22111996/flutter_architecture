@@ -72,6 +72,7 @@ flutter:
     - assets/svgs/solid/progress/
     - assets/svgs/solid/textField/
     - assets/svgs/solid/datePicker/
+    - assets/svgs/solid/toast/
 
     # To add assets to your package, add an assets section, like this:
     # assets:
