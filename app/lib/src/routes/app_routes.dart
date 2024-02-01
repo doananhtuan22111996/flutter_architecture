@@ -20,4 +20,5 @@ class Routes {
   static const tabBar = '/tab-bar';
   static const badge = '/badge';
   static const tooltip = '/tooltip';
+  static const toast = '/toast';
 }
