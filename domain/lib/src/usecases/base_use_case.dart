@@ -1,5 +1,7 @@
 import '../../domain.dart';
 
+part 'app_use_case.dart';
+
 part 'hospital_remote_use_case.dart';
 
 part 'hospital_local_use_case.dart';

@@ -9,6 +9,8 @@ part 'app_result_model.dart';
 
 part 'token_model.dart';
 
+part 'language_model.dart';
+
 part 'hospital_model.dart';
 
 part 'doctor_model.dart';

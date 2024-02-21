@@ -5,7 +5,7 @@ abstract class HospitalLocalUseCase {
 }
 
 class HospitalLocalUseCaseImpl extends HospitalLocalUseCase {
-  late final AppRepository _repo;
+  late final AppFeatureRepository _repo;
 
   HospitalLocalUseCaseImpl(this._repo);
 

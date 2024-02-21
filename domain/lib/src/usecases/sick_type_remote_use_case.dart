@@ -6,7 +6,7 @@ abstract class SickTypeRemoteUseCase {
 }
 
 class SickTypeRemoteUseCaseImpl extends SickTypeRemoteUseCase {
-  late final AppRepository _repo;
+  late final AppFeatureRepository _repo;
 
   SickTypeRemoteUseCaseImpl(this._repo);
 

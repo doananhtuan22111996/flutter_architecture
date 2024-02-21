@@ -6,19 +6,22 @@ import 'package:hive/hive.dart';
 
 import 'local/app_shared_pref.dart';
 import 'network/network_service.dart';
+import 'repositories/app_feature_repository_impl.dart';
 import 'repositories/app_repository_impl.dart';
 import 'sources/local/base_local_data_source.dart';
 import 'sources/remote/base_remote_data_source.dart';
 
 class DataProvider {
-  static Future<void> inject() async {
-    final sharePref = Get.put<AppSharedPref>(AppSharedPrefImpl());
+  static Future<void> serviceInject() async {
+    final sharePref =
+        Get.put<AppSharedPref>(AppSharedPrefImpl(), permanent: true);
     await sharePref.onInit();
-    Get.put<NetworkService>(NetworkServiceImpl());
-    Get.put<AppHiveDb>(AppHiveDb());
+    Get.put<NetworkService>(NetworkServiceImpl(), permanent: true);
+    Get.put<AppHiveDb>(AppHiveDb(), permanent: true);
+  }
 
+  static Future<void> inject() async {
     await _DataSourceProvider.inject();
-
     _RepoProvider.inject();
   }
 }
@@ -32,20 +35,21 @@ class _DataSourceProvider {
     final sickTypeDao = SickTypeDao.instance;
     sickTypeDao.setBox(await Hive.openBox(sickTypeDao.boxName));
 
+    Get.lazyPut<AppLocalDataSource>(() => AppLocalDataSourceImpl(Get.find()));
     Get.lazyPut<AppNetworkRemoteDataSource>(
       () => AppNetworkRemoteDataSourceImpl(Get.find()),
     );
-
-    Get.lazyPut<AppLocalDataSource>(
-      () => AppLocalDataSourceImpl(hospitalDao, doctorDao, sickTypeDao),
+    Get.lazyPut<AppFeatureLocalDataSource>(
+      () => AppFeatureLocalDataSourceImpl(hospitalDao, doctorDao, sickTypeDao),
     );
   }
 }
 
 class _RepoProvider {
   static void inject() {
-    Get.lazyPut<AppRepository>(
-      () => AppRepositoryImpl(Get.find(), Get.find()),
+    Get.lazyPut<AppRepository>(() => AppRepositoryImpl(Get.find()));
+    Get.lazyPut<AppFeatureRepository>(
+      () => AppFeatureRepositoryImpl(Get.find(), Get.find()),
     );
   }
 }

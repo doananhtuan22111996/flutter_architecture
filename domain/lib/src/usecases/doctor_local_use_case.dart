@@ -5,7 +5,7 @@ abstract class DoctorLocalUseCase {
 }
 
 class DoctorLocalUseCaseImpl extends DoctorLocalUseCase {
-  late final AppRepository _repo;
+  late final AppFeatureRepository _repo;
 
   DoctorLocalUseCaseImpl(this._repo);
 
