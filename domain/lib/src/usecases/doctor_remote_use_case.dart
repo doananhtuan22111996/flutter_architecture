@@ -6,7 +6,7 @@ abstract class DoctorRemoteUseCase {
 }
 
 class DoctorRemoteUseCaseImpl extends DoctorRemoteUseCase {
-  late final AppRepository _repo;
+  late final AppFeatureRepository _repo;
 
   DoctorRemoteUseCaseImpl(this._repo);
 

@@ -1,3 +1,5 @@
+import 'package:data/data.dart';
+import 'package:domain/domain.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -27,6 +29,11 @@ Future<void> main() async {
   await GetStorage.init();
   await Hive.initFlutter();
   Fsplash.remove();
+
+  // Init all dependencies before render main app
+  await DataProvider.serviceInject();
+  await DataProvider.inject();
+  DomainProvider.inject();
   runApp(const MyApp());
 }
 
@@ -53,7 +60,8 @@ class MyApp extends StatelessWidget {
       darkTheme: AppThemeData.darkTheme,
       getPages: AppPages.routes,
       initialRoute: Routes.main,
-      initialBinding: AppBinding(),
+      // This is Getx's error. Actually [initialBinding] run after [initialRoute] so throw dependency not found
+      // initialBinding: AppBinding(),
       smartManagement: SmartManagement.full,
       builder: AppLoadingOverlayWidget.init(),
     );

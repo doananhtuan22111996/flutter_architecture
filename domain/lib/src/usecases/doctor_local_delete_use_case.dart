@@ -5,7 +5,7 @@ abstract class DoctorLocalDeleteUseCase {
 }
 
 class DoctorLocalDeleteUseCaseImpl extends DoctorLocalDeleteUseCase {
-  late final AppRepository _repo;
+  late final AppFeatureRepository _repo;
 
   DoctorLocalDeleteUseCaseImpl(this._repo);
 

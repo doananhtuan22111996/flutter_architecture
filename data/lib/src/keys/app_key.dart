@@ -1,7 +1,7 @@
 class AppPrefKey {
   static const String token = 'token';
   static const String refreshToken = 'refreshToken';
-  static const String language = 'language';
+  static const String languageCode = 'languageCode';
   static const String theme = 'theme';
 }
 

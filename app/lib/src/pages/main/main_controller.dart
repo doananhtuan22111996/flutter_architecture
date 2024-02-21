@@ -1,8 +1,10 @@
+import 'package:app/src/components/main/toast/app_toast_base_builder.dart';
 import 'package:app/src/pages/badge/badge_controller.dart';
 import 'package:app/src/pages/home/home_controller.dart';
 import 'package:app/src/pages/tabBar/tab_bar_controller.dart';
 import 'package:app/src/pages/toast/toast_controller.dart';
 import 'package:app/src/pages/tooltip/tooltip_controller.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:app/src/components/main/appBar/app_bar_base_builder.dart';
@@ -26,20 +28,59 @@ part 'main_binding.dart';
 part 'main_page.dart';
 
 class MainController extends GetxController {
-  Rxn<String> lnCode = Rxn<String>();
+  late final AppUseCase _appUseCase;
+
+  MainController(this._appUseCase);
+
+  final List<LanguageModel> languages = [
+    LanguageModel(
+        countryCode: 'EN', langCode: 'en', name: R.strings.englishLanguage),
+    LanguageModel(
+        countryCode: 'VN', langCode: 'vi', name: R.strings.vietNamLanguage)
+  ];
+
+  Rx<String> langCode = Rx<String>('en');
   RxBool isDarkMode = false.obs;
 
-  void executeGetLanguage() {
-    // lnCode.value = _authUseCase.languageCode();
+  @override
+  void onInit() {
+    super.onInit();
+    executeGetLanguage();
+  }
+
+  void executeGetLanguage() async {
+    try {
+      final langCode = await _appUseCase.getLanguageCode();
+      final deviceLangCode = Get.deviceLocale!.languageCode;
+      executeUpdateLanguage(langCode.isEmpty ? deviceLangCode : langCode);
+    } on AppException catch (e) {
+      AppToastWidget(
+              title: 'Multiple Languages',
+              message: e.message,
+              appToastType: AppToastType.error)
+          .show();
+    }
+  }
+
+  void executeUpdateLanguage(String langCode) async {
+    try {
+      this.langCode.value = langCode;
+      final languageModel =
+          languages.firstWhere((element) => element.langCode == langCode);
+      await _appUseCase.setLanguageCode(languageModel.langCode);
+      Get.updateLocale(
+          Locale(languageModel.langCode, languageModel.countryCode));
+    } on AppException catch (e) {
+      AppToastWidget(
+              title: 'Multiple Languages',
+              message: e.message,
+              appToastType: AppToastType.error)
+          .show();
+    }
   }
 
   void executeGetTheme() {
     // isDarkMode.value = _authUseCase.isDarkTheme();
-  }
-
-  void executeUpdateLanguage(String code) {
-    lnCode.value = code;
-    // _authUseCase.saveLanguageCode(code);
   }
 
   void executeChangeThemeMode(ThemeMode themeMode) {

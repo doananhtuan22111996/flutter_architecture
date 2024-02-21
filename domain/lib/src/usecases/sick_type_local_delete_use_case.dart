@@ -5,7 +5,7 @@ abstract class SickTypeLocalDeleteUseCase {
 }
 
 class SickTypeLocalDeleteUseCaseImpl extends SickTypeLocalDeleteUseCase {
-  late final AppRepository _repo;
+  late final AppFeatureRepository _repo;
 
   SickTypeLocalDeleteUseCaseImpl(this._repo);
 

@@ -4,6 +4,7 @@ import 'usecases/base_use_case.dart';
 
 class DomainProvider {
   static void inject() {
+    Get.put<AppUseCase>(AppUseCaseImpl(Get.find()));
     Get.put<HospitalRemoteUseCase>(HospitalRemoteUseCaseImpl(Get.find()));
     Get.put<HospitalLocalUseCase>(HospitalLocalUseCaseImpl(Get.find()));
     Get.put<HospitalLocalDeleteUseCase>(

@@ -5,7 +5,7 @@ abstract class SickTypeLocalUseCase {
 }
 
 class SickTypeLocalUseCaseImpl extends SickTypeLocalUseCase {
-  late final AppRepository _repo;
+  late final AppFeatureRepository _repo;
 
   SickTypeLocalUseCaseImpl(this._repo);
 

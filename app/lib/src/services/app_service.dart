@@ -1,91 +1,45 @@
-// import 'package:flutter/material.dart';
+// import 'dart:ui';
+
 // import 'package:get/get.dart';
-// import 'package:get_storage/get_storage.dart';
+// import 'package:resources/resources.dart';
 
-// import '../app/config/theme/app_theme.dart';
-// import '../app/config/translations/strings_enum.dart';
-// import '../data/local/app_pref_key.dart';
-// import '../data/local/app_shared_pref.dart';
-// import 'environment_service.dart';
+// class LocalizationService extends Translations {
+// // locale sẽ được get mỗi khi mới mở app (phụ thuộc vào locale hệ thống hoặc bạn có thể cache lại locale mà người dùng đã setting và set nó ở đây)
+//   static final locale = _getLocaleFromLanguage();
 
-// part 'localization_service.dart';
+// // fallbackLocale là locale default nếu locale được set không nằm trong những Locale support
+//   static final fallbackLocale = Locale('en', 'US');
 
-// part 'theme_service.dart';
+// // language code của những locale được support
+//   static final langCodes = [
+//     'en',
+//     'vi',
+//   ];
 
-// abstract class AppService extends GetxService {
-//   LocalizationService get localization;
+// // các Locale được support
+//   static final locales = [
+//     const Locale('en', 'US'),
+//     const Locale('vi', 'VN'),
+//   ];
 
-//   ThemeService get theme;
-
-//   String languageCode();
-
-//   void saveLanguageCode(String code);
-
-//   bool isDarkTheme();
-
-//   void changeThemeMode(ThemeMode themeMode);
-
-//   Future<bool> isLoggedIn();
-
-//   void forceLogout();
-// }
-
-// class AppServiceImpl extends AppService {
-//   late final AppSharedPref _appSharedPref;
-//   late final LocalizationService _localization;
-//   late final ThemeService _theme;
-//   late final EnvironmentService _env;
-
-//   @override
-//   void onInit() {
-//     super.onInit();
-//     _localization = Get.put<LocalizationService>(_LocalizationServiceImpl());
-//     _appSharedPref = Get.put<AppSharedPref>(AppSharedPrefImpl());
-//     _theme = Get.put<ThemeService>(ThemeServiceImpl());
+// // function change language nếu bạn không muốn phụ thuộc vào ngôn ngữ hệ thống
+//   static void changeLocale(String langCode) {
+//     final locale = _getLocaleFromLanguage(langCode: langCode);
+//     Get.updateLocale(locale);
 //   }
 
-//   @override
-//   LocalizationService get localization => _localization;
 
-//   @override
-//   ThemeService get theme => _theme;
-
-//   @override
-//   String languageCode() {
-//     return _localization.defaultLanguage?.languageCode ?? 'en';
+//   static Locale _getLocaleFromLanguage({String? langCode}) {
+//     var lang = langCode ?? Get.deviceLocale!.languageCode;
+//     for (int i = 0; i < langCodes.length; i++) {
+//       if (lang == langCodes[i]) return locales[i];
+//     }
+//     return Get.locale;
 //   }
-
+  
 //   @override
-//   void saveLanguageCode(String code) {
-//     _localization.saveLocalization(code);
-//     _localization.changeLocalization(code);
-//   }
-
-//   @override
-//   bool isDarkTheme() {
-//     return _theme.themeMode == ThemeMode.dark;
-//   }
-
-//   @override
-//   void changeThemeMode(ThemeMode themeMode) {
-//     _theme.saveTheme(themeMode == ThemeMode.dark);
-//     _theme.changeThemeMode(themeMode);
-//     _theme.changeTheme(
-//       themeMode == ThemeMode.dark
-//           ? AppThemeData.darkThemeData
-//           : AppThemeData.lightThemeData,
-//     );
-//   }
-
-//   @override
-//   Future<bool> isLoggedIn() async {
-//     return (await _appSharedPref.getValue(AppPrefKey.token, '')).isNotEmpty;
-//   }
-
-//   // TODO handle force logout
-//   @override
-//   void forceLogout() async {
-//     await _appSharedPref.deleteValue(AppPrefKey.token);
-//     await _appSharedPref.deleteValue(AppPrefKey.refreshToken);
-//   }
+//   Map<String, Map<String, String>> get keys => {
+//         'en_US': ,
+//         'vi_VN': vi,
+//       };
 // }

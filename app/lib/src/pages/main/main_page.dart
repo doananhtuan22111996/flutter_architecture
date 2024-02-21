@@ -154,17 +154,16 @@ class MainPage extends GetView<MainController> {
         Obx(
           () => ToggleButtons(
             isSelected: [
-              controller.lnCode.value == 'vi',
-              controller.lnCode.value == 'en'
+              controller.langCode.value == 'en',
+              controller.langCode.value == 'vi',
             ],
             onPressed: (int index) async {
-              final code = index == 0 ? 'vi' : 'en';
-              controller.executeUpdateLanguage(code);
+              final langCode = index == 0 ? 'en' : 'vi';
+              controller.executeUpdateLanguage(langCode);
             },
-            children: [
-              AppTextBody1Widget(text: R.strings.vietNamLanguage),
-              AppTextBody1Widget(text: R.strings.englishLanguage),
-            ],
+            children: controller.languages
+                .map((e) => AppTextBody1Widget(text: e.name))
+                .toList(),
           ),
         ),
         SizedBox(height: AppThemeExt.of.majorScale(2)),

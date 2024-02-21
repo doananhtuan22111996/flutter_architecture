@@ -5,7 +5,7 @@ abstract class HospitalLocalDeleteAtUseCase {
 }
 
 class HospitalLocalDeleteAtUseCaseImpl extends HospitalLocalDeleteAtUseCase {
-  late final AppRepository _repo;
+  late final AppFeatureRepository _repo;
 
   HospitalLocalDeleteAtUseCaseImpl(this._repo);
 
