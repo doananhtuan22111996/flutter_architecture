@@ -88,47 +88,21 @@ class AppFeatureRepositoryImpl extends AppFeatureRepository {
   }
 
   @override
-  Future<AppObjResultModel<EmptyModel>> removeDoctors() async {
+  Future<void> removeDoctors() async {
     try {
-      final AppObjResultRaw<EmptyRaw> local =
-          await _localDataSource.removeDoctors();
-      return local.raw2Model();
+      await _localDataSource.removeDoctors();
     } on LocalException {
       rethrow;
     }
   }
 
   @override
-  Future<AppObjResultModel<EmptyModel>> removeHospitals() async {
-    try {
-      final AppObjResultRaw<EmptyRaw> local =
-          await _localDataSource.removeHospitals();
-      return local.raw2Model();
-    } on LocalException {
-      rethrow;
-    }
-  }
+  Future<void> removeHospitals() => _localDataSource.removeHospitals();
 
   @override
-  Future<AppObjResultModel<EmptyModel>> removeSickTypes() async {
-    try {
-      final AppObjResultRaw<EmptyRaw> local =
-          await _localDataSource.removeSickTypes();
-      return local.raw2Model();
-    } on LocalException {
-      rethrow;
-    }
-  }
+  Future<void> removeSickTypes() => _localDataSource.removeSickTypes();
 
   @override
-  Future<AppObjResultModel<EmptyModel>> removeHospitalAt(
-      {required String id}) async {
-    try {
-      final AppObjResultRaw<EmptyRaw> local =
-          await _localDataSource.removeHospitalAt(id: id);
-      return local.raw2Model();
-    } on LocalException {
-      rethrow;
-    }
-  }
+  Future<void> removeHospitalAt({required String id}) =>
+      _localDataSource.removeHospitalAt(id: id);
 }

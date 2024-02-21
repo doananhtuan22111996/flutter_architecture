@@ -18,5 +18,3 @@ part 'doctor_model.dart';
 part 'sick_type_model.dart';
 
 abstract class BaseModel {}
-
-class EmptyModel extends BaseModel {}
