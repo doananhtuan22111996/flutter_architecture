@@ -60,7 +60,7 @@ samples, guidance on mobile development, and a full API reference.
 
 #### Data Layer
 
-    - Network - Dio: Authentication, RefershToken, Error Exception 
+    - Network - Dio: Authentication, RefreshToken, Error Exception 
     - Database: Hive
     - Local storage: GetStorage, EncriptSharePreference
 
