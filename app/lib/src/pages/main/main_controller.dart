@@ -1,4 +1,5 @@
 import 'package:app/src/components/main/toast/app_toast_base_builder.dart';
+import 'package:app/src/exts/app_exts.dart';
 import 'package:app/src/pages/badge/badge_controller.dart';
 import 'package:app/src/pages/home/home_controller.dart';
 import 'package:app/src/pages/tabBar/tab_bar_controller.dart';
@@ -34,18 +35,28 @@ class MainController extends GetxController {
 
   final List<LanguageModel> languages = [
     LanguageModel(
-        countryCode: 'EN', langCode: 'en', name: R.strings.englishLanguage),
+      countryCode: AppLanguageKey.en.countryCode,
+      langCode: AppLanguageKey.en.langCode,
+      name: R.strings.englishLanguage,
+    ),
     LanguageModel(
-        countryCode: 'VN', langCode: 'vi', name: R.strings.vietNamLanguage)
+      countryCode: AppLanguageKey.vi.countryCode,
+      langCode: AppLanguageKey.vi.langCode,
+      name: R.strings.vietNamLanguage,
+    )
   ];
 
-  Rx<String> langCode = Rx<String>('en');
-  RxBool isDarkMode = false.obs;
+  final List<String> themes = [ThemeMode.light.name, ThemeMode.dark.name];
+
+  Rx<String> langCode = Rx<String>(Get.deviceLocale!.languageCode);
+  Rx<String> theme = Rx<String>(
+      Get.isDarkMode == true ? ThemeMode.dark.name : ThemeMode.light.name);
 
   @override
   void onInit() {
     super.onInit();
     executeGetLanguage();
+    executeGetTheme();
   }
 
   void executeGetLanguage() async {
@@ -79,12 +90,37 @@ class MainController extends GetxController {
     }
   }
 
-  void executeGetTheme() {
-    // isDarkMode.value = _authUseCase.isDarkTheme();
+  void executeGetTheme() async {
+    try {
+      final theme = await _appUseCase.getThemeMode();
+      final deviceTheme =
+          Get.isDarkMode ? ThemeMode.dark.name : ThemeMode.light.name;
+      executeUpdateTheme(theme.isEmpty ? deviceTheme : theme);
+    } on AppException catch (e) {
+      AppToastWidget(
+              title: 'Theme Mode',
+              message: e.message,
+              appToastType: AppToastType.error)
+          .show();
+    }
   }
 
-  void executeChangeThemeMode(ThemeMode themeMode) {
-    isDarkMode.value = themeMode == ThemeMode.dark;
-    // _authUseCase.changeThemeMode(themeMode);
+  void executeUpdateTheme(String theme) async {
+    try {
+      this.theme.value = theme;
+      final themeMode =
+          ThemeMode.values.firstWhere((element) => element.name == theme);
+      await _appUseCase.setThemeMode(theme);
+      Get.changeThemeMode(themeMode);
+      Get.changeTheme(themeMode == ThemeMode.dark
+          ? AppThemeData.darkTheme
+          : AppThemeData.lightTheme);
+    } on AppException catch (e) {
+      AppToastWidget(
+              title: 'Theme Mode',
+              message: e.message,
+              appToastType: AppToastType.error)
+          .show();
+    }
   }
 }

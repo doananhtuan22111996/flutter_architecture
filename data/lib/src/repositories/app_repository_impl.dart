@@ -12,4 +12,10 @@ class AppRepositoryImpl extends AppRepository {
   @override
   Future<void> setLanguageCode(String langCode) =>
       _localDataSource.setLanguageCode(langCode);
+
+  @override
+  Future<String> getThemeMode() => _localDataSource.getThemeMode();
+
+  @override
+  Future<void> setThemeMode(String mode) => _localDataSource.setThemeMode(mode);
 }

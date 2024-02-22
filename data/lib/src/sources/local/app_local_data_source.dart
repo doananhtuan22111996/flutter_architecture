@@ -4,6 +4,10 @@ abstract class AppLocalDataSource {
   Future<String> getLanguageCode();
 
   Future<void> setLanguageCode(String langCode);
+
+  Future<String> getThemeMode();
+
+  Future<void> setThemeMode(String mode);
 }
 
 class AppLocalDataSourceImpl extends AppLocalDataSource {
@@ -12,10 +16,10 @@ class AppLocalDataSourceImpl extends AppLocalDataSource {
   AppLocalDataSourceImpl(this._pref);
 
   @override
-  Future<String> getLanguageCode() async {
+  Future<String> getLanguageCode() {
     try {
       final langCode = _pref.getString(AppPrefKey.languageCode, '');
-      return langCode;
+      return Future.value(langCode);
     } catch (_) {
       throw LocalException(
           code: Code.code999, message: 'Get langCode failure!');
@@ -29,6 +33,25 @@ class AppLocalDataSourceImpl extends AppLocalDataSource {
     } catch (_) {
       throw LocalException(
           code: Code.code999, message: 'Set langCode failure!');
+    }
+  }
+
+  @override
+  Future<String> getThemeMode() {
+    try {
+      final theme = _pref.getString(AppPrefKey.theme, '');
+      return Future.value(theme);
+    } catch (_) {
+      throw LocalException(code: Code.code999, message: 'Get theme failure!');
+    }
+  }
+
+  @override
+  Future<void> setThemeMode(String mode) async {
+    try {
+      await _pref.setString(AppPrefKey.theme, mode);
+    } catch (_) {
+      throw LocalException(code: Code.code999, message: 'Set theme failure!');
     }
   }
 }
