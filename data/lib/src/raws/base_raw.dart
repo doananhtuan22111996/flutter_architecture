@@ -23,11 +23,3 @@ abstract class BaseRaw<BM extends BaseModel> {
 
   BM raw2Model();
 }
-
-class EmptyRaw extends BaseRaw<EmptyModel> {
-  @override
-  String get key => '';
-
-  @override
-  EmptyModel raw2Model() => EmptyModel();
-}

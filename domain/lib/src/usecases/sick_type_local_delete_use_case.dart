@@ -1,7 +1,7 @@
 part of 'base_use_case.dart';
 
 abstract class SickTypeLocalDeleteUseCase {
-  Future<AppObjResultModel<EmptyModel>> execute();
+  Future<void> execute();
 }
 
 class SickTypeLocalDeleteUseCaseImpl extends SickTypeLocalDeleteUseCase {
@@ -10,5 +10,5 @@ class SickTypeLocalDeleteUseCaseImpl extends SickTypeLocalDeleteUseCase {
   SickTypeLocalDeleteUseCaseImpl(this._repo);
 
   @override
-  Future<AppObjResultModel<EmptyModel>> execute() => _repo.removeSickTypes();
+  Future<void> execute() => _repo.removeSickTypes();
 }

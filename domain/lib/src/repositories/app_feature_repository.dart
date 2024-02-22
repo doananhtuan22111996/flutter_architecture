@@ -17,11 +17,11 @@ abstract class AppFeatureRepository {
 
   Future<AppListResultModel<SickTypeModel>> getLocalSickType();
 
-  Future<AppObjResultModel<EmptyModel>> removeHospitals();
+  Future<void> removeHospitals();
 
-  Future<AppObjResultModel<EmptyModel>> removeHospitalAt({required String id});
+  Future<void> removeHospitalAt({required String id});
 
-  Future<AppObjResultModel<EmptyModel>> removeDoctors();
+  Future<void> removeDoctors();
 
-  Future<AppObjResultModel<EmptyModel>> removeSickTypes();
+  Future<void> removeSickTypes();
 }

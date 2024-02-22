@@ -7,13 +7,13 @@ abstract class AppFeatureLocalDataSource {
 
   Future<AppListResultRaw<SickTypeRaw>> getSickTypes();
 
-  Future<AppObjResultRaw<EmptyRaw>> removeHospitals();
+  Future<void> removeHospitals();
 
-  Future<AppObjResultRaw<EmptyRaw>> removeHospitalAt({required String id});
+  Future<void> removeHospitalAt({required String id});
 
-  Future<AppObjResultRaw<EmptyRaw>> removeDoctors();
+  Future<void> removeDoctors();
 
-  Future<AppObjResultRaw<EmptyRaw>> removeSickTypes();
+  Future<void> removeSickTypes();
 
   Future<void> insertHospitals(List<HospitalRaw> hospitals);
 
@@ -121,10 +121,9 @@ class AppFeatureLocalDataSourceImpl extends AppFeatureLocalDataSource {
   }
 
   @override
-  Future<AppObjResultRaw<EmptyRaw>> removeDoctors() async {
+  Future<void> removeDoctors() async {
     try {
       await _doctorDao.clear();
-      return Future.value(AppObjResultRaw(netData: EmptyRaw()));
     } on Exception catch (e) {
       throw LocalException(
         code: Code.code999,
@@ -135,10 +134,9 @@ class AppFeatureLocalDataSourceImpl extends AppFeatureLocalDataSource {
   }
 
   @override
-  Future<AppObjResultRaw<EmptyRaw>> removeHospitals() async {
+  Future<void> removeHospitals() async {
     try {
       await _hospitalDao.clear();
-      return Future.value(AppObjResultRaw(netData: EmptyRaw()));
     } on Exception catch (e) {
       throw LocalException(
         code: Code.code999,
@@ -149,10 +147,9 @@ class AppFeatureLocalDataSourceImpl extends AppFeatureLocalDataSource {
   }
 
   @override
-  Future<AppObjResultRaw<EmptyRaw>> removeSickTypes() async {
+  Future<void> removeSickTypes() async {
     try {
       await _sickTypeDao.clear();
-      return Future.value(AppObjResultRaw(netData: EmptyRaw()));
     } on Exception catch (e) {
       throw LocalException(
         code: Code.code999,
@@ -163,12 +160,10 @@ class AppFeatureLocalDataSourceImpl extends AppFeatureLocalDataSource {
   }
 
   @override
-  Future<AppObjResultRaw<EmptyRaw>> removeHospitalAt(
-      {required String id}) async {
+  Future<void> removeHospitalAt({required String id}) async {
     try {
       final index = _hospitalDao.getAt(id);
       await _hospitalDao.deleteAt(index);
-      return Future.value(AppObjResultRaw(netData: EmptyRaw()));
     } on Exception catch (e) {
       throw LocalException(
         code: Code.code999,

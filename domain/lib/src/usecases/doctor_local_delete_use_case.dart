@@ -1,7 +1,7 @@
 part of 'base_use_case.dart';
 
 abstract class DoctorLocalDeleteUseCase {
-  Future<AppObjResultModel<EmptyModel>> execute();
+  Future<void> execute();
 }
 
 class DoctorLocalDeleteUseCaseImpl extends DoctorLocalDeleteUseCase {
@@ -10,5 +10,5 @@ class DoctorLocalDeleteUseCaseImpl extends DoctorLocalDeleteUseCase {
   DoctorLocalDeleteUseCaseImpl(this._repo);
 
   @override
-  Future<AppObjResultModel<EmptyModel>> execute() => _repo.removeDoctors();
+  Future<void> execute() => _repo.removeDoctors();
 }
