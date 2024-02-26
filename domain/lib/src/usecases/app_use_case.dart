@@ -4,6 +4,10 @@ abstract class AppUseCase {
   Future<String> getLanguageCode();
 
   Future<void> setLanguageCode(String langCode);
+
+  Future<String> getThemeMode();
+
+  Future<void> setThemeMode(String mode);
 }
 
 class AppUseCaseImpl extends AppUseCase {
@@ -17,4 +21,10 @@ class AppUseCaseImpl extends AppUseCase {
   @override
   Future<void> setLanguageCode(String langCode) =>
       _repo.setLanguageCode(langCode);
+
+  @override
+  Future<String> getThemeMode() => _repo.getThemeMode();
+
+  @override
+  Future<void> setThemeMode(String mode) => _repo.setThemeMode(mode);
 }

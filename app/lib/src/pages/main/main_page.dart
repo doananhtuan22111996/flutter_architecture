@@ -154,11 +154,13 @@ class MainPage extends GetView<MainController> {
         Obx(
           () => ToggleButtons(
             isSelected: [
-              controller.langCode.value == 'en',
-              controller.langCode.value == 'vi',
+              controller.langCode.value == AppLanguageKey.en.langCode,
+              controller.langCode.value == AppLanguageKey.vi.langCode,
             ],
             onPressed: (int index) async {
-              final langCode = index == 0 ? 'en' : 'vi';
+              final langCode = index == 0
+                  ? AppLanguageKey.en.langCode
+                  : AppLanguageKey.vi.langCode;
               controller.executeUpdateLanguage(langCode);
             },
             children: controller.languages
@@ -171,16 +173,17 @@ class MainPage extends GetView<MainController> {
         Obx(
           () => ToggleButtons(
             isSelected: [
-              !controller.isDarkMode.value,
-              controller.isDarkMode.value
+              controller.theme.value == ThemeMode.light.name,
+              controller.theme.value == ThemeMode.dark.name,
             ],
-            children: const [
-              Icon(Icons.light_mode),
-              Icon(Icons.dark_mode),
-            ],
+            children: controller.themes
+                .map((e) => e == ThemeMode.light.name
+                    ? const Icon(Icons.light_mode)
+                    : const Icon(Icons.dark_mode))
+                .toList(),
             onPressed: (int index) {
-              controller.executeChangeThemeMode(
-                index == 0 ? ThemeMode.light : ThemeMode.dark,
+              controller.executeUpdateTheme(
+                index == 0 ? ThemeMode.light.name : ThemeMode.dark.name,
               );
             },
           ),

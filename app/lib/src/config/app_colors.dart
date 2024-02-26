@@ -114,9 +114,9 @@ class AppLightColors implements AppColors {
 }
 
 class AppDarkColors implements AppColors {
-  static const int _primaryValue = 0xFF00A499;
-  static const int _secondaryValue = 0xFFFFB81C;
-  static const int _errorValue = 0xFFF5222D;
+  static const int _primaryValue = 0xFFBB86FC;
+  static const int _secondaryValue = 0xFF03DAC5;
+  static const int _errorValue = 0xFFCF6679;
   static const int _neutralValue = 0xFF000D0B;
   static const int _processInformValue = 0xFF0089B6;
   static const int _successColorValue = 0xFF00A100;
@@ -129,7 +129,7 @@ class AppDarkColors implements AppColors {
   MaterialColor get primaryColor => const MaterialColor(
         _primaryValue,
         <int, Color>{
-          6: Color(0xFF00867D),
+          6: Color(0xFF985EFF),
           5: Color(_primaryValue),
         },
       );
@@ -181,9 +181,9 @@ class AppDarkColors implements AppColors {
   MaterialColor get secondaryColor => const MaterialColor(
         _secondaryValue,
         <int, Color>{
-          6: Color(0xFFCC9619),
+          6: Color(0xFF019592),
           5: Color(_secondaryValue),
-          1: Color(0xFFFFF8E8),
+          1: Color(0xFF70EFDE),
         },
       );
 

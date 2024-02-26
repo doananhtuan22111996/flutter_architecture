@@ -15,16 +15,19 @@ part 'app_button_style.dart';
 class AppThemeData {
   AppThemeData._();
 
-  static ThemeData lightTheme = themeData(AppColors(Brightness.light));
-  static ThemeData darkTheme = themeData(AppColors(Brightness.dark));
+  static ThemeData lightTheme = themeData(Brightness.light);
+  static ThemeData darkTheme = themeData(Brightness.dark);
 
-  static ThemeData themeData(AppColors appColor) {
+  static ThemeData themeData(Brightness brightness) {
+    final appColor = AppColors(brightness);
+
     /// NOTE:
     /// Use Default MaterialDesign FontFamily (Roboto)
     /// Only modify them color
     return ThemeData(
       // Use Material Design version 3
       useMaterial3: true,
+      brightness: brightness,
       textTheme: _AppTextStyle.textTheme(appColor),
       filledButtonTheme:
           FilledButtonThemeData(style: AppButtonStyle.filledButtonStyle),

@@ -58,6 +58,7 @@ class MyApp extends StatelessWidget {
       ],
       theme: AppThemeData.lightTheme,
       darkTheme: AppThemeData.darkTheme,
+      themeMode: ThemeMode.system,
       getPages: AppPages.routes,
       initialRoute: Routes.main,
       // This is Getx's error. Actually [initialBinding] run after [initialRoute] so throw dependency not found
