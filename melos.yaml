@@ -25,17 +25,6 @@ scripts:
     run: melos exec --fail-fast --scope="*resource*" --flutter -- dart pub outdated
     description: Outdated Resources module.
 
-  unused-string-resource:
-    run: melos exec --fail-fast --scope="*resources*" --flutter -- flutter pub run dart_code_metric:metrics check-unused-l10n lib
-    description: Unused strings Resources module.
-
-  analyze-resource:
-    run: melos exec --fail-fast --scope="*resources*" --flutter -- flutter pub run dart_code_metric:metrics analyze lib
-    description: Analyze Resources module.
-
-  unused-file-resource:
-    run: melos exec --fail-fast --scope="*resources*" --flutter -- flutter pub run dart_code_metric:metrics check-unused-files lib
-    description: Unused files Resources module.
   ## End Resources
 
   ## Data
@@ -43,30 +32,15 @@ scripts:
     run: melos exec --fail-fast --scope="*data*" --flutter -- flutter packages pub run build_runner build --delete-conflicting-outputs
     description: Generates data.
 
-  analyze-data:
-    run: melos exec --fail-fast --scope="*data*" --flutter -- flutter pub run dart_code_metric:metrics analyze lib
-    description: Analyze Data module.
-
   outdated-data:
     run: melos exec --fail-fast --scope="*data*" --flutter -- dart pub outdated
     description: Outdated Data module.
 
-  unused-file-data:
-    run: melos exec --fail-fast --scope="*data*" --flutter -- flutter pub run dart_code_metric:metrics check-unused-files lib
-    description: Unused files Data module.
   ## End Data
 
   outdated-app:
     run: melos exec --fail-fast --scope="*app*" --flutter -- dart pub outdated
     description: Outdated App module.
-
-  analyze-app:
-    run: melos exec --fail-fast --scope="*app*" --flutter -- flutter pub run dart_code_metric:metrics analyze lib
-    description: Analyze App module.
-
-  unused-file-app:
-    run: melos exec --fail-fast --scope="*app*" --flutter -- flutter pub run dart_code_metric:metrics check-unused-files lib
-    description: Unused files App module.
 
   ## Domain
   build-domain:
@@ -76,14 +50,6 @@ scripts:
   outdated-domain:
     run: melos exec --fail-fast --scope="*domain*" --flutter -- dart pub outdated
     description: Outdated Domain module.
-
-  analyze-domain:
-    run: melos exec --fail-fast --scope="*domain*" --flutter -- flutter pub run dart_code_metric:metrics analyze lib
-    description: Analyze Domain module.
-
-  unused-file-domain:
-    run: melos exec --fail-fast --scope="*domain*" --flutter -- flutter pub run dart_code_metric:metrics check-unused-files lib
-    description: Unused files Domain module.
 
   ## End Domain
 
@@ -106,7 +72,4 @@ scripts:
     run: melos exec --fail-fast --scope="*utilities*" --flutter -- dart pub outdated
     description: Outdated Utilities module.
 
-  analyze-utilities:
-    run: melos exec --fail-fast --scope="*utilities*" --flutter -- flutter pub run dart_code_metric:metrics analyze lib
-    description: Analyze Utilities module.
   ## End Utilities

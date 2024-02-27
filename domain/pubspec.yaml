@@ -1,10 +1,10 @@
 name: domain
 description: Domain Module
-version: 0.0.1
+version: 0.0.2
 publish_to: "none"
 
 environment:
-  sdk: ">=2.19.2 <4.0.0"
+  sdk: ">=3.3.0 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -12,17 +12,17 @@ dependencies:
     sdk: flutter
   utilities:
     path: ../utilities
-  get: ^4.6.5
+  get: ^4.6.6
   json_annotation: ^4.8.1
-  copy_with_extension: ^5.0.3
+  copy_with_extension: ^5.0.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.2
+  flutter_lints: ^3.0.1
   json_serializable: ^6.7.1
-  copy_with_extension_gen: ^5.0.3
-  build_runner: ^2.4.6
+  copy_with_extension_gen: ^5.0.4
+  build_runner: ^2.4.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
