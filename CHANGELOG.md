@@ -1,4 +1,22 @@
 
+<a name="dev/2.1.0/1"></a>
+## [dev/2.1.0/1](https://gitlab.geekup.io/gu_mobile/flutter/skeleton.git/compare/dev/2.0.0/3...dev/2.1.0/1) (2024-02-27)
+
+### Merge Requests
+
+* Merge branch 'upgrade-version' into 'main'
+* Merge branch 'template-chglog' into 'main'
+* Merge branch 'documents' into 'main'
+* Merge branch 'theme' into 'main'
+* Merge branch 'refactor' into 'main'
+* Merge branch 'languages' into 'main'
+* Merge branch 'uikit/toast' into 'main'
+* Merge branch 'version/2.0.3' into 'main'
+* Merge branch 'version/2.0.2' into 'main'
+* Merge branch 'version/2.0.1' into 'main'
+* Merge branch 'version/2.0.0' into 'main'
+
+
 <a name="dev/2.0.0/3"></a>
 ## [dev/2.0.0/3](https://gitlab.geekup.io/gu_mobile/flutter/skeleton.git/compare/prod/2.0.0/1...dev/2.0.0/3) (2023-07-11)
 
@@ -58,11 +76,6 @@
 * Add Components + Theme colors + Utils
 * Add Components
 
-### Merge_squash
-
-* update CI Gitlap - Runner
-* release v1.0.5
-
 ### Refactor
 
 * Sonar version v1.0.6 for review
@@ -78,14 +91,6 @@
 
 <a name="v1.0.5"></a>
 ## [v1.0.5](https://gitlab.geekup.io/gu_mobile/flutter/skeleton.git/compare/v1.0.4...v1.0.5) (2022-09-25)
-
-### Merge_squad
-
-* fix issue sonar scanner
-
-### Merge_squad_request
-
-* Setup CI .gitlab-ci.yml file with SonarQube
 
 ### Refactor
 
@@ -149,10 +154,6 @@
 
 <a name="v1.0.0"></a>
 ## v1.0.0 (2022-07-26)
-
-### Changelog
-
-* init changelog.md
 
 ### Feat
 
