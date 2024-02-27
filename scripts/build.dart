@@ -55,25 +55,21 @@ void main(List<String>? args) async {
     ];
   }
 
-  if (runBuild.contains('build')) {
-    print('command for build --> fvm flutter ${arguments.join(' ')}');
-    final process = await Process.start(
-      'bash',
-      ['-c', 'fvm flutter ${arguments.join(' ')}'],
-      workingDirectory: './app',
-    );
-    process.stdout.transform(utf8.decoder).listen((data) {
-      print(data);
-    });
-    process.stderr.transform(utf8.decoder).listen((data) {
-      print(data);
-    });
-    final exitCode = await process.exitCode;
-    if (exitCode != 0) {
-      throw Exception('Script failed with exit code: $exitCode') ;
-    }
-  } else {
-    print('command for run --> fvm flutter ${arguments.join(' ')}');
+  print('CMD: fvm flutter ${arguments.join(' ')}');
+  final process = await Process.start(
+    'bash',
+    ['-c', 'fvm flutter ${arguments.join(' ')}'],
+    workingDirectory: './app',
+  );
+  process.stdout.transform(utf8.decoder).listen((data) {
+    print(data);
+  });
+  process.stderr.transform(utf8.decoder).listen((data) {
+    print(data);
+  });
+  final exitCode = await process.exitCode;
+  if (exitCode != 0) {
+    throw Exception('Script failed with exit code: $exitCode');
   }
 }
 
