@@ -44,9 +44,3 @@ build-android-aab:
 	@melos gen-env $(flavor)
 	dart run scripts/build.dart $(flavor) build aab $(buildName) $(buildNumber)
 
-unused:
-	@melos unused-string-resource
-	@melos unused-file-app
-	@melos unused-file-domain
-	@melos unused-file-data
-	@melos unused-file-resource
