@@ -10,11 +10,12 @@ scripts:
     description: Generates assets resource.
 
   gen-app-icon:
-    run: melos exec --fail-fast --scope="*resources*" --flutter -- flutter pub run flutter_launcher_icons
+    run: melos exec --fail-fast --scope="*resources*" --flutter -- fvm flutter pub run flutter_launcher_icons --module app
     description: Generates Resources resource app icon.
 
+    ## TODO change [flavors, module] if need
   gen-app-splash:
-    run: melos exec --fail-fast --scope="*resources*" --flutter -- flutter pub run flutter_native_splash:create --flavor $1
+    run: melos exec --fail-fast --scope="*resources*" --flutter -- fvm flutter pub run flutter_native_splash:create --flavors dev,prod --module app
     description: Generates Resources resource splash screen.
 
   gen-strings:
