@@ -14,7 +14,7 @@ pub-get:
 
 build-init: 
 	@melos gen-app-icon
-	@melos gen-app-splash $(flavor)
+	@melos gen-app-splash
 	
 build-runner: 
 	@melos build-domain
