@@ -134,7 +134,7 @@ class MainPage extends GetView<MainController> {
             ),
             AppFilledButtonWidget(
               buttonText: 'Page View',
-              onPressed: () => HomePage.open,
+              onPressed: () => HomePage.open(),
             ),
           ],
         ),

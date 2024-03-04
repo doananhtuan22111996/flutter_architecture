@@ -88,7 +88,7 @@ samples, guidance on mobile development, and a full API reference.
 - PreBuild: 
   - `make pre-bootstrap`
   - `make pub-get`
-  - `make build-init flavor=dev` and `make build-init flavor=prod`
+  - `make build-init`
   - `make build-runner`
 - Get Command for run: `make run flavor=[dev|staging|prod]` -> Copy command show in console
 - Run Project: 
@@ -112,10 +112,8 @@ _If you can not install Melos, Fvm on Windown. You need to follow step by step t
     - cd resources
     - flutter pub get
     - flutter packages pub run build_runner build --delete-conflicting-outputs
-    - flutter pub run flutter_launcher_icons
-    - flutter pub run flutter_native_splash:create --flavor dev
-    - flutter pub run flutter_native_splash:create --flavor staging
-    - flutter pub run flutter_native_splash:create --flavor prod
+    - flutter pub run flutter_launcher_icons --module app
+    - flutter pub run flutter_native_splash:create --flavors dev,staging,prod --module app
     - flutter pub run intl_utils:generate
     - cd resources && flutter pub get
 - **domain package**
@@ -139,4 +137,17 @@ _If you can not install Melos, Fvm on Windown. You need to follow step by step t
     - cd ..
     - dart run scripts/build.dart [dev|staging|prod] -> Run complete and copy command on console
     - cd app
-    - parse command and run
+    - paste command and run
+
+## Guideline Run WidgetBook
+
+- Widget Book is a web platform to build UIkit. It runs quickly on web instead of run by the mobile platform.
+- Run Project: 
+  - One time: `make denied` (Mac OS)
+  - PreBuild: 
+    - `make pre-bootstrap`
+    - `make pub-get`
+    - `make build-init`
+    - `make build-runner` 
+  - `make widget-book`
+

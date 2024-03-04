@@ -9,11 +9,12 @@ scripts:
     run: melos exec --fail-fast --scope="*resources*" --flutter -- fvm flutter packages pub run build_runner build --delete-conflicting-outputs
     description: Generates assets resource.
 
+    ## Can change [module] if need
   gen-app-icon:
     run: melos exec --fail-fast --scope="*resources*" --flutter -- fvm flutter pub run flutter_launcher_icons --module app
     description: Generates Resources resource app icon.
 
-    ## TODO change [flavors, module] if need
+    ## Can change [flavors, module] if need
   gen-app-splash:
     run: melos exec --fail-fast --scope="*resources*" --flutter -- fvm flutter pub run flutter_native_splash:create --flavors dev,prod --module app
     description: Generates Resources resource splash screen.
@@ -46,4 +47,8 @@ scripts:
   gen-env:
     run: melos exec --fail-fast --scope="*configs*" "dart run lib/src/env.json.dart $1"
     description: Generates env file
+  
+  gen-web:
+    run: melos exec --fail-fast --scope="*configs*" "dart run lib/src/web.json.dart"
+    description: Generates web file
   ## End Configs
