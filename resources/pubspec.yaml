@@ -15,12 +15,12 @@ dependencies:
   intl_utils: ^2.8.7
   flutter_launcher_icons:
     git:
-      url: https://github.com/product-mobile/flutter_launcher_icons.git
-      ref: support-module
+      url: https://github.com/gu-product-mobile/flutter_launcher_icons.git
+      ref: module
   flutter_native_splash:
     git:
-      url: https://github.com/product-mobile/flutter_native_splash.git
-      ref: support-module
+      url: https://github.com/gu-product-mobile/flutter_native_splash.git
+      ref: module
 
 dev_dependencies:
   flutter_test:
