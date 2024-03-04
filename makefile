@@ -44,3 +44,7 @@ build-android-aab:
 	@melos gen-env $(flavor)
 	dart run scripts/build.dart $(flavor) build aab $(buildName) $(buildNumber)
 
+## TODO [remove] command below when create new project.
+widget-book:
+	@melos gen-web
+	dart run scripts/build_widget_book.dart

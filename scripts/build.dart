@@ -52,6 +52,8 @@ void main(List<String>? args) async {
       '--flavor',
       args?.first ?? '',
       dartDefine,
+      '-d',
+      target
     ];
   }
 

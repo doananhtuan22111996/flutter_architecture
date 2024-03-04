@@ -1,8 +1,7 @@
+import 'package:configs/configs.dart';
 import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -15,6 +14,11 @@ import 'src/components/main/loading/app_loading_overlay_indicator.dart';
 import 'src/config/app_theme.dart';
 import 'src/routes/app_pages.dart';
 
+// TODO [remove] this file when create new project.
+/// The Widget book only use for skeleton or component library on Web. The Web platform run faster than Android and IOS.
+/// It'll remove for new project.
+/// Only [Dev] environment
+ 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Fsplash.preserve(widgetsBinding: WidgetsBinding.instance);
@@ -32,13 +36,14 @@ Future<void> main() async {
 }
 
 Future<void> _configFirebase() async {
-  await Firebase.initializeApp();
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-  if (kDebugMode) {
-    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
-  } else {
-    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-  }
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: BuildConfig.apiKey,
+      appId: BuildConfig.appId,
+      messagingSenderId: BuildConfig.messagingSenderId,
+      projectId: BuildConfig.projectId,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
