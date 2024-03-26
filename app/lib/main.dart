@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:resources/resources.dart';
 import 'package:utilities/utilities.dart';
@@ -20,7 +19,6 @@ Future<void> main() async {
   Fsplash.preserve(widgetsBinding: WidgetsBinding.instance);
   await _configFirebase();
   Fcryptography.enable();
-  await GetStorage.init();
   await Hive.initFlutter();
   Fsplash.remove();
 

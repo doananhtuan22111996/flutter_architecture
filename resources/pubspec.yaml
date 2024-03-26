@@ -28,7 +28,6 @@ dev_dependencies:
   flutter_lints: ^3.0.1
   build_runner: ^2.4.8
   flutter_gen_runner: ^5.4.0
-  melos: ^4.1.0
 
 flutter_gen:
   output: lib/src/generated/assets
