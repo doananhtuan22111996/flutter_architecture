@@ -5,7 +5,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:resources/resources.dart';
 import 'package:utilities/utilities.dart';
@@ -18,13 +17,12 @@ import 'src/routes/app_pages.dart';
 /// The Widget book only use for skeleton or component library on Web. The Web platform run faster than Android and IOS.
 /// It'll remove for new project.
 /// Only [Dev] environment
- 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Fsplash.preserve(widgetsBinding: WidgetsBinding.instance);
   await _configFirebase();
   Fcryptography.enable();
-  await GetStorage.init();
   await Hive.initFlutter();
   Fsplash.remove();
 

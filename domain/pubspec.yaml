@@ -10,8 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  utilities:
-    path: ../utilities
   get: ^4.6.6
   json_annotation: ^4.8.1
   copy_with_extension: ^5.0.4

@@ -42,16 +42,14 @@ dependencies:
   utilities:
     path: ../utilities
 
-  # Override packages
-  hive: any
-  hive_flutter: any
-  get: any
-  get_storage: any
+  get: ^4.6.6
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
-  firebase_core: ^2.25.4
-  firebase_auth: ^4.17.5
-  firebase_analytics: ^10.8.6
-  firebase_crashlytics: ^3.4.15
+  firebase_core: ^2.27.1
+  firebase_auth: ^4.17.9
+  firebase_analytics: ^10.8.10
+  firebase_crashlytics: ^3.4.19
 
   flutter_loadingindicator: ^1.0.1
   flutter_slidable: ^3.0.1

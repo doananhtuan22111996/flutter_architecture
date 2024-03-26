@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   intl: ^0.18.1
-  logger: ^2.0.2+1
+  logger: ^2.2.0
   path_provider: ^2.1.2
   email_validator: ^2.1.17
   cryptography: ^2.7.0
