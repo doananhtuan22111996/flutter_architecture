@@ -6,7 +6,8 @@ import 'package:app/src/config/app_theme.dart';
 import 'package:app/src/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:resources/resources.dart';
+
+import '../../exts/R.dart';
 
 part 'dialog_binding.dart';
 

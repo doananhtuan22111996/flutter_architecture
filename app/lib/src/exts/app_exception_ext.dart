@@ -1,4 +1,12 @@
-part of 'app_exts.dart';
+import 'dart:io';
+
+import 'package:domain/domain.dart';
+import 'package:get/get.dart';
+import 'package:utilities/utilities.dart';
+
+import '../components/main/dialog/app_dialog_base_builder.dart';
+import '../routes/app_pages.dart';
+import 'R.dart';
 
 class AppExceptionExt {
   late final AppException? appException;

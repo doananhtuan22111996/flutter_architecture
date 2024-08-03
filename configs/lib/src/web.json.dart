@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:recase/recase.dart';
 
@@ -7,6 +8,7 @@ import 'package:recase/recase.dart';
 /// Config env for web.
 
 const _webJsonConfigFilePath = '.env/config.web.json';
+const _appLibRootPath = '../app/lib';
 const _buildConfigClassFilePath = 'lib/src/generated/build_config.g.dart';
 
 void main(List<String>? args) {
@@ -32,9 +34,10 @@ Map<String, dynamic> readJsonFile(String filePath) {
 }
 
 void genDartNDefineFile(devConfigJson) {
-  _DartDefineGenerator(
-          outputFilePath: _buildConfigClassFilePath, configJson: devConfigJson)
-      .execute();
+  final dartDefineGenerator = _DartDefineGenerator(
+      outputFilePath: _buildConfigClassFilePath, configJson: devConfigJson);
+  dartDefineGenerator.execute();
+  dartDefineGenerator.executeFirebaseOptionsFile();
 }
 
 abstract class _FileGenerator {
@@ -97,6 +100,22 @@ class _DartDefineGenerator extends _FileGenerator {
     }
     return true;
   }
+
+  void executeFirebaseOptionsFile() async {
+    if (configJson.containsKey('firebaseOptions') == false) {
+      return;
+    }
+    const fileName = "firebase_options.dart";
+    try {
+      // split key will change because it depend [storeFile] dir
+      Uint8List bytes = base64.decode(configJson['firebaseOptions']);
+      File file = File('$_appLibRootPath/$fileName');
+      await file.writeAsBytes(bytes);
+    } catch (e) {
+      throw Exception(
+          'executeFirebaseOptionsFile - ${e.toString()} --- $fileName');
+    }
+  }
 }
 
 class _SampleEnvGenerator extends _FileGenerator {
@@ -114,12 +133,8 @@ class _SampleEnvGenerator extends _FileGenerator {
     return """
     {
       "apiDomain": "Todo input here!",
-      "secureStorageName": "Todo input here!",
-      "basicToken": "Todo input here!",
-      "apiKey": "Todo input here!",
-      "appId": "Todo input here!",
-      "messagingSenderId": "Todo input here!",
-      "projectId": "Todo input here!"
+      "secureStorageName": "Todo input here! name for share preference",
+      "firebaseOptions": "the file for config firebase platform"
     }
     """;
   }

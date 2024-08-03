@@ -1,8 +1,8 @@
-style: gitlab
+style: github
 template: CHANGELOG.tpl.md
 info:
   title: CHANGELOG
-  repository_url: https://gitlab.geekup.io/gu_mobile/flutter/skeleton.git
+  repository_url: https://github.com/doananhtuan22111996/flutter_architecture
 options:
   commits:
     filters:

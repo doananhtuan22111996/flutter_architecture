@@ -6,6 +6,7 @@ import 'package:recase/recase.dart';
 
 const _devJsonConfigFilePath = '.env/config.dev.json';
 const _prodJsonConfigFilePath = '.env/config.prod.json';
+const _appLibRootPath = '../app/lib';
 const _androidRootPath = '../app/android';
 const _androidSrcPath = '../app/android/app/src';
 const _keyStoreAndroidFilePath = '../app/android/key.properties';
@@ -102,7 +103,8 @@ void genCertificateFile(Map<String, dynamic> certificateJson) {
     excludeKeys: ['exportOptions'],
   );
   iOSCertificateGenerator.execute();
-  iOSCertificateGenerator.executeExportOptionsFile();
+  // TODO if support for IOS -> Please open line code below
+  // iOSCertificateGenerator.executeExportOptionsFile();
 }
 
 void genNativeDefineFile(Map<String, dynamic> nativeDefineJson) {
@@ -117,9 +119,10 @@ void genNativeDefineFile(Map<String, dynamic> nativeDefineJson) {
 }
 
 void genDartNDefineFile(devConfigJson) {
-  _DartDefineGenerator(
-          outputFilePath: _buildConfigClassFilePath, configJson: devConfigJson)
-      .execute();
+  final dartDefineGenerator = _DartDefineGenerator(
+      outputFilePath: _buildConfigClassFilePath, configJson: devConfigJson);
+  dartDefineGenerator.execute();
+  dartDefineGenerator.executeFirebaseOptionsFile();
 }
 
 abstract class _FileGenerator {
@@ -290,11 +293,28 @@ class _DartDefineGenerator extends _FileGenerator {
 
   @override
   bool validate() {
-    if (!configJson.containsKey('flavor')) {
+    if (!configJson.containsKey('flavor') ||
+        !configJson.containsKey('firebaseOptions')) {
       throw Exception(
           'Please update config file - flavor is required in dartDefine');
     }
     return true;
+  }
+
+  void executeFirebaseOptionsFile() async {
+    if (configJson.containsKey('firebaseOptions') == false) {
+      return;
+    }
+    const fileName = "firebase_options.dart";
+    try {
+      // split key will change because it depend [storeFile] dir
+      Uint8List bytes = base64.decode(configJson['firebaseOptions']);
+      File file = File('$_appLibRootPath/$fileName');
+      await file.writeAsBytes(bytes);
+    } catch (e) {
+      throw Exception(
+          'executeFirebaseOptionsFile - ${e.toString()} --- $fileName');
+    }
   }
 
   String get flavor => validate() ? configJson['flavor'] : '';
@@ -316,37 +336,38 @@ class _SampleEnvGenerator extends _FileGenerator {
     {
       "certificate": {
         "android": {
-          "folder": "",
-          "storePassword": "",
-          "keyPassword": "",
-          "keyAlias": "",
-          "storeFile": "",
-          "storeKey": "",
-          "googleJson: ""
+          "folder": "Android flavor folder (dev, staging, prod)",
+          "storePassword": "keyPassword",
+          "keyPassword": "keyPassword",
+          "keyAlias": "keyAlias",
+          "storeFile": "path store file",
+          "storeKey": "convert store file to base64",
+          "googleJson": "convert google file to base64"
         },
         "iOS": {
           "development": {
             "codeSignIdentity": "iPhone Developer",
-            "developmentTeam": "",
+            "developmentTeam": "developmentTeam",
             "provisioningProfileSpecifier": "Sample Dev Provisioning",
-            "exportOptions": "Sample Dev Provisioning"
+            "exportOptions": "Sample Dev Provisioning (convert exportOptions file to Base64)"
           },
           "distribution": {
             "codeSignIdentity": "iPhone Distribution",
-            "developmentTeam": "",
+            "developmentTeam": "developmentTeam",
             "provisioningProfileSpecifier": "Sample Dev App Store Provisioning",
-            "exportOptions": "Sample Dev Provisioning"
+            "exportOptions": "Sample Dev Provisioning (convert exportOptions file to Base64)"
           }
         }
       },
       "dartDefine": {
         "flavor": "dev",
         "apiDomain": "https://sample.io",
-        "secureStorageName": "sample"
+        "secureStorageName": "the name for share preference"
+        "firebaseOptions": "the file for config firebase platform"
       },
       "nativeDefine": {
         "appName": "Sample",
-        "appBundleId": "io.geekup.sample"
+        "appBundleId": "io.root.sample"
       }
     }
     """;

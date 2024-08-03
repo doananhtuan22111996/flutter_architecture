@@ -52,8 +52,8 @@ void main(List<String>? args) async {
       '--flavor',
       args?.first ?? '',
       dartDefine,
-      '-d',
-      target
+      // '-d',
+      // target
     ];
   }
 
@@ -82,7 +82,11 @@ String _readDartDefine(Map<String, dynamic> configJson) {
   Map<String, dynamic> dartDefineJson = configJson['dartDefine'];
   String dartDefine = '';
   dartDefineJson.forEach((key, value) {
-    dartDefine += '--dart-define $key=$value ';
+    if (key != "firebaseOptions" &&
+        key != "secureStorageName" &&
+        key != "flavor") {
+      dartDefine += '--dart-define $key=$value ';
+    }
   });
   return dartDefine.trim();
 }

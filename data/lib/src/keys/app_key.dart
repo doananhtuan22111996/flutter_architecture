@@ -13,7 +13,5 @@ class AppNetworkKey {
 }
 
 class AppBoxKey {
-  static const String hospital = 'hospital_box';
-  static const String doctor = 'doctor_box';
-  static const String sickType = 'sickType_box';
+  static const String user = 'user_box';
 }

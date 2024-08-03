@@ -59,14 +59,9 @@ class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
   Map<String, String> _headerToken() {
     final token = _pref.getString(AppPrefKey.token, '');
     return token.isEmpty
-        ? _basicToken
+        ? {AppNetworkKey.authorization: 'Token is empty'}
         : {AppNetworkKey.authorization: '${AppNetworkKey.bearer} $token'};
   }
-
-  Map<String, String> get _basicToken => {
-        AppNetworkKey.authorization:
-            '${AppNetworkKey.basic} ${base64.encode(utf8.encode(BuildConfig.basicToken))}',
-      };
 
   Future<bool> _refreshToken() async {
     final newDio = NetworkService.newDio();
@@ -75,13 +70,12 @@ class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
       final response = await newDio.get(
         ApiProvider.refreshToken,
         queryParameters: {AppPrefKey.refreshToken: refreshToken},
-        options: Options(headers: _basicToken),
       );
       final AppResponse appResponse = AppResponse.fromJson(response.data);
 
       if (HttpStatus(response.statusCode).isOk) {
         final tokenVo = TokenRaw.fromJson(appResponse.data);
-        await _pref.setString(AppPrefKey.token, tokenVo.accessToken);
+        await _pref.setString(AppPrefKey.token, tokenVo.token);
         await _pref.setString(AppPrefKey.refreshToken, tokenVo.refreshToken);
       }
       newDio.close(force: true);

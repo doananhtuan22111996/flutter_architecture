@@ -56,6 +56,7 @@ class AppTabWithNumberWidget extends AppTabBaseBuilder {
     return AppTabWithNumberWidget(
       key: super.key,
       label: label ?? super.label,
+      number: number ?? super.number,
       appTabSize: appTabSize ?? super.appTabSize,
       isSelected: isSelected ?? super.isSelected,
     );

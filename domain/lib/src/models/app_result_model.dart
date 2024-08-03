@@ -1,16 +1,33 @@
 part of 'base_model.dart';
 
-class AppListResultModel<BM extends BaseModel> {
-  AppListResultModel(
-      {required this.netData, this.hasMore = false, this.total = 0});
+@CopyWith()
+class MetadataModel extends BaseModel {
+  final bool status;
+  final String? message;
+  final int? limit;
+  final int? page;
+  final int? total;
 
-  final List<BM>? netData;
-  final bool hasMore;
-  final int total;
+  MetadataModel({
+    this.status = false,
+    this.message,
+    this.limit,
+    this.page,
+    this.total,
+  });
+}
+
+@CopyWith()
+class AppListResultModel<BM extends BaseModel> {
+  AppListResultModel({this.metadata, required this.netData});
+
+  final MetadataModel? metadata;
+  final List<BM> netData;
 }
 
 class AppObjResultModel<BM extends BaseModel> {
-  AppObjResultModel({required this.netData});
+  AppObjResultModel({this.metadata, required this.netData});
 
+  final MetadataModel? metadata;
   final BM? netData;
 }

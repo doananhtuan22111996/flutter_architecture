@@ -5,10 +5,7 @@ class Routes {
 
   static const main = '/main';
   static const home = '/home';
-  static const hospital = '/hospital';
-  static const hospitalLocal = '/hospital-local';
-  static const doctor = '/doctor';
-  static const sickType = '/sick-type';
+  static const login = '/login';
   static const button = '/button';
   static const text = '/text';
   static const avatar = '/avatar';

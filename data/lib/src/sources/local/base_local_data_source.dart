@@ -8,4 +8,6 @@ import '../../raws/base_raw.dart';
 
 part 'app_local_data_source.dart';
 
-part 'app_feature_local_data_source.dart';
+part 'login_local_data_source.dart';
+
+part 'paging_local_data_source.dart';

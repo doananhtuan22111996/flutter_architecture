@@ -4,11 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-part 'hospital_dao.dart';
-
-part 'doctor_dao.dart';
-
-part 'sick_type_dao.dart';
+part 'user_dao.dart';
 
 abstract class BaseDao<BV extends BaseRaw> {
   @protected

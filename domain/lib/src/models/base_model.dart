@@ -1,5 +1,4 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'base_model.g.dart';
 
@@ -11,10 +10,6 @@ part 'token_model.dart';
 
 part 'language_model.dart';
 
-part 'hospital_model.dart';
-
-part 'doctor_model.dart';
-
-part 'sick_type_model.dart';
+part 'user_model.dart';
 
 abstract class BaseModel {}

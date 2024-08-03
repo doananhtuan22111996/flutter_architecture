@@ -10,15 +10,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  recase: ^4.1.0
-  package_info_plus: ^6.0.0
-  device_info_plus: ^10.0.1
-  android_id: ^0.3.6
+  recase: 4.1.0
+  package_info_plus: 8.0.1
+  device_info_plus: 10.1.1
+  android_id: 0.4.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.1
+  flutter_lints: 4.0.0
   
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

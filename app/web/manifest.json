@@ -4,7 +4,7 @@
     "start_url": ".",
     "display": "Storybook",
     "background_color": "#FFFFFFFF",
-    "theme_color": "#FFFFFF",
+    "theme_color": "#FFFFFFFF",
     "description": "Storybook components for skeleton",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,

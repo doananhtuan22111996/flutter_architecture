@@ -4,8 +4,7 @@ import 'package:app/src/pages/button/button_controller.dart';
 import 'package:app/src/pages/datePicker/date_picker_controller.dart';
 import 'package:app/src/pages/dialog/dialog_controller.dart';
 import 'package:app/src/pages/home/home_controller.dart';
-import 'package:app/src/pages/hospital/hospital_controller.dart';
-import 'package:app/src/pages/hospitalLocal/hospital_local_controller.dart';
+import 'package:app/src/pages/login/login_controller.dart';
 import 'package:app/src/pages/main/main_controller.dart';
 import 'package:app/src/pages/progress/progress_controller.dart';
 import 'package:app/src/pages/selectionControl/selection_control_controller.dart';
@@ -36,14 +35,9 @@ class AppPages {
       binding: HomeBinding(),
     ),
     GetPage(
-      name: Routes.hospital,
-      page: () => const HospitalPage(),
-      binding: HospitalBinding(),
-    ),
-    GetPage(
-      name: Routes.hospitalLocal,
-      page: () => const HospitalLocalPage(),
-      binding: HospitalLocalBinding(),
+      name: Routes.login,
+      page: () => const LoginPage(),
+      binding: LoginBinding(),
     ),
     GetPage(
       name: Routes.button,

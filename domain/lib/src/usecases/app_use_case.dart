@@ -1,5 +1,6 @@
 part of 'base_use_case.dart';
 
+// TODO refactor this class
 abstract class AppUseCase {
   Future<String> getLanguageCode();
 

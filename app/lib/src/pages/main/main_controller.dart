@@ -1,7 +1,8 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 import 'package:app/src/components/main/toast/app_toast_base_builder.dart';
-import 'package:app/src/exts/app_exts.dart';
 import 'package:app/src/pages/badge/badge_controller.dart';
-import 'package:app/src/pages/home/home_controller.dart';
+import 'package:app/src/pages/login/login_controller.dart';
 import 'package:app/src/pages/tabBar/tab_bar_controller.dart';
 import 'package:app/src/pages/toast/toast_controller.dart';
 import 'package:app/src/pages/tooltip/tooltip_controller.dart';
@@ -17,12 +18,11 @@ import 'package:app/src/pages/avatar/avatar_controller.dart';
 import 'package:app/src/pages/button/button_controller.dart';
 import 'package:app/src/pages/datePicker/date_picker_controller.dart';
 import 'package:app/src/pages/dialog/dialog_controller.dart';
-import 'package:app/src/pages/hospital/hospital_controller.dart';
-import 'package:app/src/pages/hospitalLocal/hospital_local_controller.dart';
 import 'package:app/src/pages/progress/progress_controller.dart';
 import 'package:app/src/pages/selectionControl/selection_control_controller.dart';
 import 'package:app/src/pages/textField/text_field_controller.dart';
-import 'package:resources/resources.dart';
+
+import '../../exts/R.dart';
 
 part 'main_binding.dart';
 

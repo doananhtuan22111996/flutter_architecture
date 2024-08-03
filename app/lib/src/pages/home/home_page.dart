@@ -1,7 +1,7 @@
 part of 'home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   static void open() {
     Get.toNamed(Routes.home);
@@ -23,9 +23,8 @@ class HomePage extends GetView<HomeController> {
         tabs: [...controller.numberTabs],
         index: controller.numberIndex.value,
         pages: const [
-          DoctorView(),
-          HospitalView(),
-          SickTypeView(),
+          PagingView(),
+          PagingLocalView(),
         ],
         onTap: (index) => controller.numberIndex.value = index,
       ),

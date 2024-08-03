@@ -3,6 +3,12 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'base_param.g.dart';
 
-part 'app_param.dart';
+part 'list_param.dart';
 
 part 'login_param.dart';
+
+part 'paging_param.dart';
+
+part 'paging_remove_param.dart';
+
+abstract class BaseParam {}

@@ -1,3 +1,4 @@
+import 'package:configs/configs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AppSharedPref {
@@ -32,7 +33,7 @@ class AppSharedPrefImpl extends AppSharedPref {
 
   @override
   Future<void> onInit() async {
-    SharedPreferences.setPrefix('skeleton');
+    SharedPreferences.setPrefix(BuildConfig.secureStorageName);
     _storage = await SharedPreferences.getInstance();
   }
 

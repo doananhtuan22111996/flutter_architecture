@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:app/src/components/main/button/app_button_base_builder.dart';
 import 'package:app/src/config/app_theme.dart';
-import 'package:resources/resources.dart';
+
+import '../../../exts/R.dart';
 
 part 'app_toast_widget.dart';
 

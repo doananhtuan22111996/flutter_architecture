@@ -39,7 +39,9 @@ String _readDartDefine(Map<String, dynamic> configJson) {
   Map<String, dynamic> dartDefineJson = configJson;
   String dartDefine = '';
   dartDefineJson.forEach((key, value) {
-    dartDefine += '--dart-define $key=$value ';
+    if (key != "firebaseOptions") {
+      dartDefine += '--dart-define $key=$value ';
+    }
   });
   return dartDefine.trim();
 }

@@ -1,26 +1,24 @@
 part of 'base_raw.dart';
 
 class AppListResultRaw<BR extends BaseRaw> {
-  AppListResultRaw(
-      {required this.netData, this.hasMore = false, this.total = 0});
+  AppListResultRaw({this.metadata, required this.netData});
 
-  final List<BR>? netData;
-  final bool hasMore;
-  final int total;
+  final MetadataRaw? metadata;
+  final List<BR> netData;
 
   AppListResultModel<BM> raw2Model<BM extends BaseModel>() =>
       AppListResultModel(
-        netData: netData?.map((e) => e.raw2Model() as BM).toList(),
-        hasMore: hasMore,
-        total: total,
+        netData: netData.map((e) => e.raw2Model() as BM).toList(),
+        metadata: metadata?.raw2Model(),
       );
 }
 
 class AppObjResultRaw<BR extends BaseRaw> {
-  AppObjResultRaw({required this.netData});
+  AppObjResultRaw({this.metadata, required this.netData});
 
+  final MetadataRaw? metadata;
   final BR? netData;
 
-  AppObjResultModel<BM> raw2Model<BM extends BaseModel>() =>
-      AppObjResultModel(netData: netData?.raw2Model() as BM?);
+  AppObjResultModel<BM> raw2Model<BM extends BaseModel>() => AppObjResultModel(
+      metadata: metadata?.raw2Model(), netData: netData?.raw2Model() as BM?);
 }

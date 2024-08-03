@@ -1,29 +1,28 @@
-name: skeleton
+name: Root
 
 packages:
   - "*"
 
 scripts:
-  ## Resources
-  build-resources:
-    run: melos exec --fail-fast --scope="*resources*" --flutter -- fvm flutter packages pub run build_runner build --delete-conflicting-outputs
-    description: Generates assets resource.
-
-    ## Can change [module] if need
+  ## App
+  ## Can change [module] if need
   gen-app-icon:
-    run: melos exec --fail-fast --scope="*resources*" --flutter -- fvm flutter pub run flutter_launcher_icons --module app
-    description: Generates Resources resource app icon.
+    run: melos exec --fail-fast --scope="*app*" --flutter -- fvm flutter pub run flutter_launcher_icons
+    description: Generates App resource app icon.
 
     ## Can change [flavors, module] if need
   gen-app-splash:
-    run: melos exec --fail-fast --scope="*resources*" --flutter -- fvm flutter pub run flutter_native_splash:create --flavors dev,prod --module app
-    description: Generates Resources resource splash screen.
+    run: melos exec --fail-fast --scope="*app*" --flutter -- fvm flutter pub run flutter_native_splash:create --flavors dev,prod
+    description: Generates App resource splash screen.
+
+  build-resources:
+    run: melos exec --fail-fast --scope="*app*" --flutter -- fvm flutter packages pub run build_runner build --delete-conflicting-outputs
+    description: Generates assets resource.
 
   gen-strings:
-    run: melos exec --fail-fast --scope="*resources*" --flutter -- fvm flutter pub run intl_utils:generate
+    run: melos exec --fail-fast --scope="*app*" --flutter -- fvm flutter pub run intl_utils:generate
     description: Generates strings resource.
-
-  ## End Resources
+  ## End App
 
   ## Data
   build-data:
@@ -44,10 +43,14 @@ scripts:
     run: melos exec --fail-fast --scope="*configs*" "dart run lib/src/env.json.dart create"
     description: Create sample env file
 
+  create-env-web:
+    run: melos exec --fail-fast --scope="*configs*" "dart run lib/src/web.json.dart create"
+    description: Create sample env file for web
+
   gen-env:
     run: melos exec --fail-fast --scope="*configs*" "dart run lib/src/env.json.dart $1"
     description: Generates env file
-  
+
   gen-web:
     run: melos exec --fail-fast --scope="*configs*" "dart run lib/src/web.json.dart"
     description: Generates web file

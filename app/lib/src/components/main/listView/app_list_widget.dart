@@ -9,8 +9,8 @@ class AppListWidget<BM extends BaseModel, BC extends AppListController<BM>>
     this.reverse = false,
     this.scrollController,
     this.physics = const AlwaysScrollableScrollPhysics(),
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Widget Function(BuildContext, BM model, int index) childWidget;
   final Axis scrollDirection;

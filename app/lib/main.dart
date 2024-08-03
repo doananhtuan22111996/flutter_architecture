@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:resources/resources.dart';
 import 'package:utilities/utilities.dart';
 
+import 'firebase_options.dart';
 import 'src/components/main/loading/app_loading_overlay_indicator.dart';
 import 'src/config/app_theme.dart';
+import 'src/exts/R.dart';
+import 'src/exts/fsplash.dart';
 import 'src/routes/app_pages.dart';
 
 Future<void> main() async {
@@ -30,7 +32,9 @@ Future<void> main() async {
 }
 
 Future<void> _configFirebase() async {
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   if (kDebugMode) {
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);

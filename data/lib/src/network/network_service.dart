@@ -6,6 +6,7 @@ import 'package:data/src/local/app_shared_pref.dart';
 import 'package:data/src/raws/base_raw.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -57,8 +58,8 @@ class NetworkServiceImpl extends NetworkService {
             ? appResponse
             : throw NetworkException(
                 code: response.statusCode,
-                message: appResponse.meta?.message,
-                errorCode: appResponse.meta?.errorCode,
+                message: appResponse.metadata?.message,
+                errorCode: ErrorCode.networkServiceError,
               );
       }
       if (clientRequest is ClientRequestData) {
@@ -74,13 +75,15 @@ class NetworkServiceImpl extends NetworkService {
           onSendProgress: clientRequest.onSendProgress,
           onReceiveProgress: clientRequest.onReceiveProgress,
         );
-        final appResponse = AppResponse.fromJson(response.data);
+        final appResponse = AppResponse.fromJson(response.data is String
+            ? jsonDecode(response.data)
+            : response.data);
         return HttpStatus(response.statusCode).isOk
             ? appResponse
             : throw NetworkException(
                 code: response.statusCode,
-                message: appResponse.meta?.message,
-                errorCode: appResponse.meta?.errorCode,
+                message: appResponse.metadata?.message,
+                errorCode: ErrorCode.networkServiceError,
               );
       }
       return throw NetworkException(
@@ -89,7 +92,7 @@ class NetworkServiceImpl extends NetworkService {
         errorCode: ErrorCode.networkServiceError,
       );
     } on DioException catch (e) {
-      Metadata? meta = AppResponse.fromJson(e.response?.data).meta;
+      MetadataRaw? meta = AppResponse.fromJson(e.response?.data).metadata;
       throw NetworkException(
         code: e.response?.statusCode,
         message: meta?.message,

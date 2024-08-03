@@ -1,7 +1,7 @@
 part of 'main_controller.dart';
 
 class MainPage extends GetView<MainController> {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class MainPage extends GetView<MainController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _ui(context),
-            _data(context),
+            if (!kIsWeb) _data(context),
             _theme(context),
           ],
         ),
@@ -121,20 +121,8 @@ class MainPage extends GetView<MainController> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             AppFilledButtonWidget(
-              buttonText: 'Network',
-              onPressed: () => HospitalPage.open(),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: AppThemeExt.of.majorScale(2)),
-              child: AppFilledButtonWidget(
-                buttonText: 'Database',
-                onPressed: () => HospitalLocalPage.open(),
-              ),
-            ),
-            AppFilledButtonWidget(
-              buttonText: 'Page View',
-              onPressed: () => HomePage.open(),
+              buttonText: 'Workflow',
+              onPressed: () => LoginPage.open(),
             ),
           ],
         ),
